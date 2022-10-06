@@ -1,7 +1,4 @@
-import React, { FC } from 'react';
-import CardShoes from './card-shoes';
-
-interface newMaleShoesProps {
+export interface Product {
   shoes: {
     id: string | undefined;
     slug: string;
@@ -70,14 +67,3 @@ interface newMaleShoesProps {
     flexzone360?: boolean;
   }[];
 }
-
-const ListShoes: FC<newMaleShoesProps> = ({ shoes }) => {
-  return (
-    <div className="grid grid-cols-1 grid-flow-row justify-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4">
-      {shoes &&
-        shoes.map((shoes) => <CardShoes shoes={shoes} key={shoes.id} />)}
-    </div>
-  );
-};
-
-export default ListShoes;

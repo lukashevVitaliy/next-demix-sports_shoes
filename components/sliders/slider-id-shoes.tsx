@@ -45,7 +45,7 @@ const SliderIdShoes = () => {
           <Swiper
             freeMode={true}
             id="shoes-slider-thumbs"
-            onSwiper={setThumbsSwiper}
+            onSwiper={() => setThumbsSwiper}
             direction="vertical"
             slidesPerView={3}
             navigation={{

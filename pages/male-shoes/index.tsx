@@ -6,10 +6,11 @@ import Layout from '../../components/layout';
 import ListShoes from '../../components/list-shoes';
 import SortPanel from '../../components/sort-panel';
 import FiltersMenu from '../../components/filter-menu';
+import { products } from '../../utils/products';
 
 const MaleShoesPage: NextPage = () => {
   const [activeMenuFilters, setActiveMenuFilters] = useState(false);
-  console.log(activeMenuFilters);
+  const maleShoes = products.shoes.filter((x) => x.gender === 'Мужчины');
 
   return (
     <Layout title="Обувь для мужчин">
@@ -24,7 +25,7 @@ const MaleShoesPage: NextPage = () => {
           activeMenuFilters={activeMenuFilters}
           setActiveMenuFilters={setActiveMenuFilters}
         />
-        <ListShoes />
+        <ListShoes shoes={maleShoes} />
         <Pagination />
       </div>
     </Layout>

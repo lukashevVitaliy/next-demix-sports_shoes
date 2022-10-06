@@ -1,19 +1,21 @@
-import { v4 as uuidv4 } from 'uuid';
+import { Product } from './models';
 
-export const data = {
+export const products: Product = {
   shoes: [
     {
-      id: uuidv4(),
+      id: '01',
       slug: 'КРОССОВКИ ВЫСОКИЕ МУЖСКИЕ UNITY MID 2',
       name: 'КРОССОВКИ ВЫСОКИЕ МУЖСКИЕ UNITY MID 2',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: '',
-      rating: '',
+      rating: '★★★★★',
       colors: [
         {
           name: 'охра',
+          colorSheme1: '#CC7722',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/UNITY_MID_2/ohra/1.jpg',
             '/assets/image/shoes/male/UNITY_MID_2/ohra/2.jpg',
@@ -60,6 +62,8 @@ export const data = {
         },
         {
           name: 'темно-коричневый',
+          colorSheme1: '#654321',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/UNITY_MID_2/dark-brown/1.jpg',
             '/assets/image/shoes/male/UNITY_MID_2/dark-brown/2.jpg',
@@ -106,6 +110,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/UNITY_MID_2/black/1.jpg',
             '/assets/image/shoes/male/UNITY_MID_2/black/2.jpg',
@@ -191,17 +197,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '02',
       slug: 'КРОССОВКИ МУЖСКИЕ TSUNAMI 4 NY',
       name: 'КРОССОВКИ МУЖСКИЕ TSUNAMI 4 NY',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/TSUNAMI_4_NY/black/1.jpg',
             '/assets/image/shoes/male/TSUNAMI_4_NY/black/2.jpg',
@@ -286,17 +294,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '03',
       slug: 'КРОССОВКИ ВЫСОКИЕ МУЖСКИЕ ALPHA CUSHFOAM MID',
       name: 'КРОССОВКИ ВЫСОКИЕ МУЖСКИЕ ALPHA CUSHFOAM MID',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: '',
-      rating: '',
+      rating: '★★★★★',
       colors: [
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/ALPHA_CUSHFOAM_MID/black/1.jpg',
             '/assets/image/shoes/male/ALPHA_CUSHFOAM_MID/black/2.jpg',
@@ -390,17 +400,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '04',
       slug: 'КРОССОВКИ МУЖСКИЕ ALPHA CUSHFOAM',
       name: 'КРОССОВКИ МУЖСКИЕ ALPHA CUSHFOAM',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★',
       colors: [
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/ALPHA_CUSHFOAM/black/1.jpg',
             '/assets/image/shoes/male/ALPHA_CUSHFOAM/black/2.jpg',
@@ -451,6 +463,8 @@ export const data = {
         },
         {
           name: 'серый',
+          colorSheme1: '#808080',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/ALPHA_CUSHFOAM/gray/1.jpg',
             '/assets/image/shoes/male/ALPHA_CUSHFOAM/gray/2.jpg',
@@ -544,17 +558,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '05',
       slug: 'КРОССОВКИ МУЖСКИЕ UCRAZY ENRBLAST',
       name: 'КРОССОВКИ МУЖСКИЕ UCRAZY ENRBLAST',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'бордовый',
+          colorSheme1: '#9B2D30',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/UCRAZY_ENRBLAST/maroon/1.jpg',
             '/assets/image/shoes/male/UCRAZY_ENRBLAST/maroon/2.jpg',
@@ -605,6 +621,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/UCRAZY_ENRBLAST/black/1.jpg',
             '/assets/image/shoes/male/UCRAZY_ENRBLAST/black/2.jpg',
@@ -654,7 +672,9 @@ export const data = {
           ],
         },
         {
-          name: 'blue',
+          name: 'Синий',
+          colorSheme1: '#0000FF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/UCRAZY_ENRBLAST/blue/1.jpg',
             '/assets/image/shoes/male/UCRAZY_ENRBLAST/blue/2.jpg',
@@ -747,17 +767,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '06',
       slug: 'КРОССОВКИ МУЖСКИЕ SPRINTER VIBE',
       name: 'КРОССОВКИ МУЖСКИЕ SPRINTER VIBE',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★',
       colors: [
         {
           name: 'бежевый',
+          colorSheme1: '#F5F5DC',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SPRINTER_VIBE/beige/1.jpg',
             '/assets/image/shoes/male/SPRINTER_VIBE/beige/2.jpg',
@@ -808,6 +830,8 @@ export const data = {
         },
         {
           name: 'белый, чёрный',
+          colorSheme1: '#FFFFFF',
+          colorSheme2: '#000000',
           images: [
             '/assets/image/shoes/male/SPRINTER_VIBE/white-black/1.jpg',
             '/assets/image/shoes/male/SPRINTER_VIBE/white-black/2.jpg',
@@ -857,7 +881,9 @@ export const data = {
           ],
         },
         {
-          name: '',
+          name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SPRINTER_VIBE/black/1.jpg',
             '/assets/image/shoes/male/SPRINTER_VIBE/black/2.jpg',
@@ -948,17 +974,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '07',
       slug: 'КРОССОВКИ ВЫСОКИЕ МУЖСКИЕ SPRINTER VIBE MID',
       name: 'КРОССОВКИ ВЫСОКИЕ МУЖСКИЕ SPRINTER VIBE MID',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: '',
-      rating: '',
+      rating: '★★★★★',
       colors: [
         {
           name: 'черный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SPRINTER_VIBE_MID/black/1.jpg',
             '/assets/image/shoes/male/SPRINTER_VIBE_MID/black/2.jpg',
@@ -1008,6 +1036,8 @@ export const data = {
         },
         {
           name: '',
+          colorSheme1: '#CC7722',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SPRINTER_VIBE_MID/ohra/1.jpg',
             '/assets/image/shoes/male/SPRINTER_VIBE_MID/ohra/2.jpg',
@@ -1099,17 +1129,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '08',
       slug: 'КЕДЫ ВЫСОКИЕ МУЖСКИЕ COURTMAX MID',
       name: 'КЕДЫ ВЫСОКИЕ МУЖСКИЕ COURTMAX MID',
       category: 'КЕДЫ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '-16%',
       rating: '★★★★',
       colors: [
         {
           name: 'белый',
+          colorSheme1: '#FFFFFF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/COURTMAX_MID/white/1.jpg',
             '/assets/image/shoes/male/COURTMAX_MID/white/2.jpg',
@@ -1160,6 +1192,8 @@ export const data = {
         },
         {
           name: 'черный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/COURTMAX_MID/black/1.jpg',
             '/assets/image/shoes/male/COURTMAX_MID/black/2.jpg',
@@ -1210,6 +1244,8 @@ export const data = {
         },
         {
           name: 'темно-коричневый',
+          colorSheme1: '#654321',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/COURTMAX_MID/dark-brown/1.jpg',
             '/assets/image/shoes/male/COURTMAX_MID/dark-brown/2.jpg',
@@ -1299,17 +1335,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '09',
       slug: 'БУТСЫ МУЖСКИЕ EXPONENTA 3 TF',
       name: 'БУТСЫ МУЖСКИЕ EXPONENTA 3 TF',
       category: 'БУТСЫ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: '',
-      rating: '',
+      rating: '★★★★★',
       colors: [
         {
           name: 'красный, черный',
+          colorSheme1: '#FF0000',
+          colorSheme2: '#000000',
           images: [
             '/assets/image/shoes/male/EXPONENTA_3_TF/red-black/1.jpg',
             '/assets/image/shoes/male/EXPONENTA_3_TF/red-black/2.jpg',
@@ -1398,17 +1436,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '10',
       slug: 'КЕДЫ МУЖСКИЕ COURTMAX',
       name: 'КЕДЫ МУЖСКИЕ COURTMAX',
       category: 'КЕДЫ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '-12%',
       rating: '★★★★',
       colors: [
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/COURTMAX/black/1.jpg',
             '/assets/image/shoes/male/COURTMAX/black/2.jpg',
@@ -1458,7 +1498,9 @@ export const data = {
           ],
         },
         {
-          name: '',
+          name: 'белый',
+          colorSheme1: '#FFFFFF	',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/COURTMAX/white/1.jpg',
             '/assets/image/shoes/male/COURTMAX/white/2.jpg',
@@ -1508,8 +1550,8 @@ export const data = {
           ],
         },
       ],
-      priceNew: 5199,
-      priceOld: 4599,
+      priceNew: 4599,
+      priceOld: 5199,
       currency: '₽',
       description: {
         title_1: 'ОПИСАНИЕ',
@@ -1549,17 +1591,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '11',
       slug: 'БУТСЫ МУЖСКИЕ EXPONENTA 3 FG',
       name: 'БУТСЫ МУЖСКИЕ EXPONENTA 3 FG',
       category: 'БУТСЫ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: '',
-      rating: '',
+      rating: '★★★★★',
       colors: [
         {
           name: 'красный, черный',
+          colorSheme1: '#FF0000',
+          colorSheme2: '#000000',
           images: [
             '/assets/image/shoes/male/EXPONENTA_3_FG/red-black/1.jpg',
             '/assets/image/shoes/male/EXPONENTA_3_FG/red-black/2.jpg',
@@ -1650,17 +1694,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '12',
       slug: 'КРОССОВКИ ВЫСОКИЕ МУЖСКИЕ SINISTER 2',
       name: 'КРОССОВКИ ВЫСОКИЕ МУЖСКИЕ SINISTER 2',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: '',
-      rating: '',
+      rating: '★★★★★',
       colors: [
         {
           name: 'темно-синий',
+          colorSheme1: '#002137',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SINISTER_2/dark_blue/1.jpg',
             '/assets/image/shoes/male/SINISTER_2/dark_blue/2.jpg',
@@ -1711,6 +1757,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000	',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SINISTER_2/black/1.jpg',
             '/assets/image/shoes/male/SINISTER_2/black/2.jpg',
@@ -1804,17 +1852,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '13',
       slug: 'КРОССОВКИ МУЖСКИЕ SPECTRE ENRBLAST 3',
       name: 'КРОССОВКИ МУЖСКИЕ SPECTRE ENRBLAST 3',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'черный',
+          colorSheme1: '#000000	',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SPECTRE_ENRBLAST_3/black/1.jpg',
             '/assets/image/shoes/male/SPECTRE_ENRBLAST_3/black/2.jpg',
@@ -1919,17 +1969,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '14',
       slug: 'КРОССОВКИ МУЖСКИЕ ATLANTA 2',
       name: 'КРОССОВКИ МУЖСКИЕ ATLANTA 2',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'бежевый',
+          colorSheme1: '#F5F5DC',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/ATLANTA_2/beige/1.jpg',
             '/assets/image/shoes/male/ATLANTA_2/beige/2.jpg',
@@ -2021,17 +2073,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '15',
       slug: 'КРОССОВКИ МУЖСКИЕ BURN 2',
       name: 'КРОССОВКИ МУЖСКИЕ BURN 2',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★',
       colors: [
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/BURN_2/black/1.jpg',
             '/assets/image/shoes/male/BURN_2/black/2.jpg',
@@ -2082,6 +2136,8 @@ export const data = {
         },
         {
           name: 'темно-синий',
+          colorSheme1: '#002137',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male',
             '/assets/image/shoes/male',
@@ -2174,17 +2230,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '16',
       slug: 'КРОССОВКИ МУЖСКИЕ MULTIRUN',
       name: 'КРОССОВКИ МУЖСКИЕ MULTIRUN',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★',
       colors: [
         {
           name: 'графитовый',
+          colorSheme1: '#474A51',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/MULTIRUN/graphite/1.jpg',
             '/assets/image/shoes/male/MULTIRUN/graphite/2.jpg',
@@ -2235,6 +2293,8 @@ export const data = {
         },
         {
           name: 'красный',
+          colorSheme1: '#FF0000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/MULTIRUN/red/1.jpg',
             '/assets/image/shoes/male/MULTIRUN/red/2.jpg',
@@ -2285,6 +2345,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/MULTIRUN/black/1.jpg',
             '/assets/image/shoes/male/MULTIRUN/black/2.jpg',
@@ -2384,17 +2446,19 @@ export const data = {
       flexzone360: true,
     },
     {
-      id: uuidv4(),
+      id: '17',
       slug: 'КРОССОВКИ МУЖСКИЕ MAGUS TR',
       name: 'КРОССОВКИ МУЖСКИЕ MAGUS TR',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'красный',
+          colorSheme1: '#FF0000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/MAGUS_TR/red/1.jpg',
             '/assets/image/shoes/male/MAGUS_TR/red/2.jpg',
@@ -2445,6 +2509,8 @@ export const data = {
         },
         {
           name: 'черный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/MAGUS_TR/black/1.jpg',
             '/assets/image/shoes/male/MAGUS_TR/black/2.jpg',
@@ -2536,17 +2602,19 @@ export const data = {
       flexzone360: true,
     },
     {
-      id: uuidv4(),
+      id: '18',
       slug: 'КРОССОВКИ МУЖСКИЕ SPORT 3',
       name: 'КРОССОВКИ МУЖСКИЕ SPORT 3',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '-17%',
       rating: '★★★★',
       colors: [
         {
           name: 'красный',
+          colorSheme1: '#FF0000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SPORT_3/red/1.jpg',
             '/assets/image/shoes/male/SPORT_3/red/2.jpg',
@@ -2597,6 +2665,8 @@ export const data = {
         },
         {
           name: 'черный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SPORT_3/black/1.jpg',
             '/assets/image/shoes/male/SPORT_3/black/2.jpg',
@@ -2646,8 +2716,8 @@ export const data = {
           ],
         },
       ],
-      priceNew: 4599,
-      priceOld: 3799,
+      priceNew: 3799,
+      priceOld: 4599,
       currency: '₽',
       description: {
         title_1: 'ОПИСАНИЕ',
@@ -2694,17 +2764,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '19',
       slug: 'БУТСЫ МУЖСКИЕ SALA BASE 2',
       name: 'БУТСЫ МУЖСКИЕ SALA BASE 2',
       category: 'БУТСЫ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: 'чёрный',
       rating: '★★★★',
       colors: [
         {
           name: '',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SALA_BASE_2/black/1.jpg',
             '/assets/image/shoes/male/SALA_BASE_2/black/2.jpg',
@@ -2755,6 +2827,8 @@ export const data = {
         },
         {
           name: 'жёлтый',
+          colorSheme1: '#FFFF00',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SALA_BASE_2/yellow/1.jpg',
             '/assets/image/shoes/male/SALA_BASE_2/yellow/2.jpg',
@@ -2846,17 +2920,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '20',
       slug: 'БУТСЫ МУЖСКИЕ ДЛЯ ЗАЛА SALA PRO',
       name: 'БУТСЫ МУЖСКИЕ ДЛЯ ЗАЛА SALA PRO',
       category: 'БУТСЫ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★',
       colors: [
         {
           name: 'сапфировый',
+          colorSheme1: '#082567',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/SALA_PRO/sapphire/1.jpg',
             '/assets/image/shoes/male/SALA_PRO/sapphire/2.jpg',
@@ -2907,6 +2983,8 @@ export const data = {
         },
         {
           name: 'синий, белый',
+          colorSheme1: '#0000FF',
+          colorSheme2: '#FFFFFF',
           images: [
             '/assets/image/shoes/male/SALA_PRO/blue-white/1.jpg',
             '/assets/image/shoes/male/SALA_PRO/blue-white/2.jpg',
@@ -2957,6 +3035,8 @@ export const data = {
         },
         {
           name: 'красный, синий',
+          colorSheme1: '#FF0000',
+          colorSheme2: '#0000FF',
           images: [
             '/assets/image/shoes/male/SALA_PRO/red-blue/1.jpg',
             '/assets/image/shoes/male/SALA_PRO/red-blue/2.jpg',
@@ -3051,17 +3131,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '21',
       slug: 'КРОССОВКИ МУЖСКИЕ FLOW',
       name: 'КРОССОВКИ МУЖСКИЕ FLOW',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★',
       colors: [
         {
           name: 'темно-синий',
+          colorSheme1: '#002137',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/FLOW/dark-blue/1.jpg',
             '/assets/image/shoes/male/FLOW/dark-blue/2.jpg',
@@ -3154,17 +3236,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '22',
       slug: 'БУТСЫ МУЖСКИЕ EXPONENTA 2 TF',
       name: 'БУТСЫ МУЖСКИЕ EXPONENTA 2 TF',
       category: 'БУТСЫ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '-40%',
       rating: '★★★★',
       colors: [
         {
           name: 'синий, черный',
+          colorSheme1: '#0000FF',
+          colorSheme2: '#000000',
           images: [
             '/assets/image/shoes/male/EXPONENTA_2_TF/blue-black/1.jpg',
             '/assets/image/shoes/male/EXPONENTA_2_TF/blue-black/2.jpg',
@@ -3214,8 +3298,8 @@ export const data = {
           ],
         },
       ],
-      priceNew: 5499,
-      priceOld: 3299,
+      priceNew: 3299,
+      priceOld: 5499,
       currency: '₽',
       description: {
         title_1: 'ОПИСАНИЕ',
@@ -3256,17 +3340,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '23',
       slug: 'БУТСЫ МУЖСКИЕ GOAL FG',
       name: 'БУТСЫ МУЖСКИЕ GOAL FG',
       category: 'БУТСЫ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★',
       colors: [
         {
           name: 'черный, желтый',
+          colorSheme1: '#000000',
+          colorSheme2: '#FFFF00',
           images: [
             '/assets/image/shoes/male/GOAL_FG/black-yellow/1.jpg',
             '/assets/image/shoes/male/GOAL_FG/black-yellow/2.jpg',
@@ -3358,17 +3444,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '24',
       slug: 'КРОССОВКИ МУЖСКИЕ LIGHT TRAIL PRO',
       name: 'КРОССОВКИ МУЖСКИЕ LIGHT TRAIL PRO',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★',
       colors: [
         {
           name: 'черный, красный',
+          colorSheme1: '#000000',
+          colorSheme2: '#FF0000',
           images: [
             '/assets/image/shoes/male/LIGHT_TRAIL_PRO/black-red/1.jpg',
             '/assets/image/shoes/male/LIGHT_TRAIL_PRO/black-red/2.jpg',
@@ -3467,17 +3555,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '25',
       slug: 'КРОССОВКИ МУЖСКИЕ SPEED TRAIL 2',
       name: 'КРОССОВКИ МУЖСКИЕ SPEED TRAIL 2',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: ' черный, серый',
+          colorSheme1: '#000000',
+          colorSheme2: '#808080',
           images: [
             '/assets/image/shoes/male/SPEED_TRAIL_2/black-gray/1.jpg',
             '/assets/image/shoes/male/SPEED_TRAIL_2/black-gray/2.jpg',
@@ -3577,17 +3667,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '26',
       slug: 'КРОССОВКИ МУЖСКИЕ LARUS 2 NY',
       name: 'КРОССОВКИ МУЖСКИЕ LARUS 2 NY',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'темно-синий',
+          colorSheme1: '#002137',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/LARUS_2_NY/dark-blue/1.jpg',
             '/assets/image/shoes/male/LARUS_2_NY/dark-blue/2.jpg',
@@ -3680,17 +3772,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '27',
       slug: 'КРОССОВКИ МУЖСКИЕ LARUS 2 SUMMER',
       name: 'КРОССОВКИ МУЖСКИЕ LARUS 2 SUMMER',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '-35%',
       rating: '★★★★',
       colors: [
         {
           name: 'синий',
+          colorSheme1: '#0000FF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/LARUS_2_SUMMER/blue/1.jpg',
             '/assets/image/shoes/male/LARUS_2_SUMMER/blue/2.jpg',
@@ -3787,17 +3881,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '28',
       slug: 'БУТСЫ МУЖСКИЕ ARMANDO LEATHER TF',
       name: 'БУТСЫ МУЖСКИЕ ARMANDO LEATHER TF',
       category: 'БУТСЫ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: '',
-      rating: 'чёрный',
+      rating: '★★★★★',
       colors: [
         {
-          name: '',
+          name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/ARMANDO_LEATHER_TF/black/1.jpg',
             '/assets/image/shoes/male/ARMANDO_LEATHER_TF/black/2.jpg',
@@ -3890,17 +3986,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '29',
       slug: 'КРОССОВКИ МУЖСКИЕ CLASICO LEA M',
       name: 'КРОССОВКИ МУЖСКИЕ CLASICO LEA M',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★',
       colors: [
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/CLASICO_LEA_M/black/1.jpg',
             '/assets/image/shoes/male/CLASICO_LEA_M/black/2.jpg',
@@ -3992,17 +4090,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '30',
       slug: 'КЕДЫ МУЖСКИЕ BOARD 4',
       name: 'КЕДЫ МУЖСКИЕ BOARD 4',
       category: 'КЕДЫ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/BOARD_4/black/1.jpg',
             '/assets/image/shoes/male/BOARD_4/black/2.jpg',
@@ -4053,6 +4153,8 @@ export const data = {
         },
         {
           name: 'тёмно-красный',
+          colorSheme1: '#8B0000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/BOARD_4/dark-red/1.jpg',
             '/assets/image/shoes/male/BOARD_4/dark-red/2.jpg',
@@ -4142,17 +4244,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '31',
       slug: 'КРОССОВКИ МУЖСКИЕ HONOR CNVS',
       name: 'КРОССОВКИ МУЖСКИЕ HONOR CNVS',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'темно-синий',
+          colorSheme1: '#002137',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/HONOR_CNVS/dark-blue/1.jpg',
             '/assets/image/shoes/male/HONOR_CNVS/dark-blue/2.jpg',
@@ -4203,6 +4307,8 @@ export const data = {
         },
         {
           name: 'бежевый',
+          colorSheme1: '#F5F5DC',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/HONOR_CNVS/beige/1.jpg',
             '/assets/image/shoes/male/HONOR_CNVS/beige/2.jpg',
@@ -4294,17 +4400,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '32',
       slug: 'КРОССОВКИ МУЖСКИЕ DEMIX D-COURT 2',
       name: 'КРОССОВКИ МУЖСКИЕ DEMIX D-COURT 2',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: 'синий',
       rating: '★★★★★',
       colors: [
         {
           name: 'синий',
+          colorSheme1: '#0000FF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/DEMIX_D-COURT_2/blue/1.jpg',
             '/assets/image/shoes/male/DEMIX_D-COURT_2/blue/2.jpg',
@@ -4355,6 +4463,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/DEMIX_D-COURT_2/black/1.jpg',
             '/assets/image/shoes/male/DEMIX_D-COURT_2/black/2.jpg',
@@ -4446,17 +4556,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '33',
       slug: 'КРОССОВКИ МУЖСКИЕ DEMIX FRONTLINE',
       name: 'КРОССОВКИ МУЖСКИЕ DEMIX FRONTLINE',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: '',
-      rating: '',
+      rating: '★★★★★',
       colors: [
         {
           name: 'черный, серый',
+          colorSheme1: '#000000',
+          colorSheme2: '#808080',
           images: [
             '/assets/image/shoes/male/DEMIX_FRONTLINE/black-gray/1.jpg',
             '/assets/image/shoes/male/DEMIX_FRONTLINE/black-gray/2.jpg',
@@ -4547,17 +4659,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '34',
       slug: 'КРОССОВКИ МУЖСКИЕ STRONGER TR',
       name: 'КРОССОВКИ МУЖСКИЕ STRONGER TR',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'черный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/STRONGER_TR/black/1.jpg',
             '/assets/image/shoes/male/STRONGER_TR/black/2.jpg',
@@ -4608,6 +4722,8 @@ export const data = {
         },
         {
           name: 'хаки',
+          colorSheme1: '#806B2A',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/male/STRONGER_TR/hacks/1.jpg',
             '/assets/image/shoes/male/STRONGER_TR/hacks/2.jpg',
@@ -4703,17 +4819,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '35',
       slug: 'КРОССОВКИ ЖЕНСКИЕ PULSAR ENRBLAST',
       name: 'КРОССОВКИ ЖЕНСКИЕ PULSAR ENRBLAST',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'белый',
+          colorSheme1: '#FFFFFF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/PULSAR_ENRBLAST/white/1.jpg',
             '/assets/image/shoes/female/PULSAR_ENRBLAST/white/2.jpg',
@@ -4756,6 +4874,8 @@ export const data = {
         },
         {
           name: 'черный, синий',
+          colorSheme1: '#000000',
+          colorSheme2: '#0000FF',
           images: [
             '/assets/image/shoes/female/PULSAR_ENRBLAST/black-blue/1.jpg',
             '/assets/image/shoes/female/PULSAR_ENRBLAST/black-blue/2.jpg',
@@ -4798,6 +4918,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/PULSAR_ENRBLAST/black-pink/1.jpg',
             '/assets/image/shoes/female/PULSAR_ENRBLAST/black-pink/2.jpg',
@@ -4883,17 +5005,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '36',
       slug: 'КРОССОВКИ ЖЕНСКИЕ UCRAZY ENRBLAST',
       name: 'КРОССОВКИ ЖЕНСКИЕ UCRAZY ENRBLAST',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'черный, серый',
+          colorSheme1: '#000000',
+          colorSheme2: '#808080',
           images: [
             '/assets/image/shoes/female/UCRAZY_ENRBLAST/black-gray/1.jpg',
             '/assets/image/shoes/female/UCRAZY_ENRBLAST/black-gray/2.jpg',
@@ -4936,6 +5060,8 @@ export const data = {
         },
         {
           name: 'мятный',
+          colorSheme1: '#3EB489',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/UCRAZY_ENRBLAST/mint/1.jpg',
             '/assets/image/shoes/female/UCRAZY_ENRBLAST/mint/2.jpg',
@@ -4978,6 +5104,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/UCRAZY_ENRBLAST/black/1.jpg',
             '/assets/image/shoes/female/UCRAZY_ENRBLAST/black/2.jpg',
@@ -5063,17 +5191,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '37',
       slug: 'КРОССОВКИ ЖЕНСКИЕ ALPHA CUSHFOAM',
       name: 'КРОССОВКИ ЖЕНСКИЕ ALPHA CUSHFOAM',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '',
       colors: [
         {
           name: 'сливовый',
+          colorSheme1: '#660066',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/ALPHA_CUSHFOAM/plum/1.jpg',
             '/assets/image/shoes/female/ALPHA_CUSHFOAM/plum/2.jpg',
@@ -5158,17 +5288,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '38',
       slug: 'КРОССОВКИ ВЫСОКИЕ ЖЕНСКИЕ ALPHA CUSHFOAM MID',
       name: 'КРОССОВКИ ВЫСОКИЕ ЖЕНСКИЕ ALPHA CUSHFOAM MID',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '',
       colors: [
         {
           name: 'черный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/ALPHA_CUSHFOAM_MID/black/1.jpg',
             '/assets/image/shoes/female/ALPHA_CUSHFOAM_MID/black/2.jpg',
@@ -5252,17 +5384,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '39',
       slug: 'КРОССОВКИ ЖЕНСКИЕ MAGUS TR',
       name: 'КРОССОВКИ ЖЕНСКИЕ MAGUS TR',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '',
       colors: [
         {
           name: 'голубой',
+          colorSheme1: '#42AAFF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/MAGUS_TR/blue/1.jpg',
             '/assets/image/shoes/female/MAGUS_TR/blue/2.jpg',
@@ -5305,6 +5439,8 @@ export const data = {
         },
         {
           name: 'черный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/MAGUS_TR/black/1.jpg',
             '/assets/image/shoes/female/MAGUS_TR/black/2.jpg',
@@ -5388,17 +5524,19 @@ export const data = {
       flexzone360: true,
     },
     {
-      id: uuidv4(),
+      id: '40',
       slug: 'КРОССОВКИ ЖЕНСКИЕ MULTIRUN',
       name: 'КРОССОВКИ ЖЕНСКИЕ MULTIRUN',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '',
       colors: [
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/MULTIRUN/black/1.jpg',
             '/assets/image/shoes/female/MULTIRUN/black/2.jpg',
@@ -5441,6 +5579,8 @@ export const data = {
         },
         {
           name: 'фуксия',
+          colorSheme1: '#F754E1',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/MULTIRUN/fuchsia/1.jpg',
             '/assets/image/shoes/female/MULTIRUN/fuchsia/2.jpg',
@@ -5532,17 +5672,19 @@ export const data = {
       flexzone360: true,
     },
     {
-      id: uuidv4(),
+      id: '41',
       slug: 'КЕДЫ ЖЕНСКИЕ JESS 2',
       name: 'КЕДЫ ЖЕНСКИЕ JESS 2',
       category: 'КЕДЫ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'светло-бежевый',
+          colorSheme1: '#F5F5DC',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/JESS_2/light-beige/1.jpg',
             '/assets/image/shoes/female/JESS_2/light-beige/2.jpg',
@@ -5585,6 +5727,8 @@ export const data = {
         },
         {
           name: 'белый',
+          colorSheme1: '#FFFFFF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/JESS_2/white/1.jpg',
             '/assets/image/shoes/female/JESS_2/white/2.jpg',
@@ -5665,17 +5809,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '42',
       slug: 'КЕДЫ ЖЕНСКИЕ SAINT TROPEZ 2',
       name: 'КЕДЫ ЖЕНСКИЕ SAINT TROPEZ 2',
       category: 'КЕДЫ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '-50%',
       rating: '★★★★★',
       colors: [
         {
           name: 'мятный',
+          colorSheme1: '#3EB489',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/SAINT_TROPEZ_2/mint/1.jpg',
             '/assets/image/shoes/female/SAINT_TROPEZ_2/mint/2.jpg',
@@ -5718,6 +5864,8 @@ export const data = {
         },
         {
           name: 'лавандовый',
+          colorSheme1: '#E6E6FA',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/SAINT_TROPEZ_2/lavender/1.jpg',
             '/assets/image/shoes/female/SAINT_TROPEZ_2/lavender/2.jpg',
@@ -5759,7 +5907,9 @@ export const data = {
           ],
         },
         {
-          name: '',
+          name: 'светло-бежевый',
+          colorSheme1: '#F5F5DC',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/SAINT_TROPEZ_2/light-beige/1.jpg',
             '/assets/image/shoes/female/SAINT_TROPEZ_2/light-beige/2.jpg',
@@ -5844,17 +5994,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '43',
       slug: 'КРОССОВКИ ЖЕНСКИЕ PHOENIX CUSHFOAM 2',
       name: 'КРОССОВКИ ЖЕНСКИЕ PHOENIX CUSHFOAM 2',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'синий',
+          colorSheme1: '#0000FF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/PHOENIX_CUSHFOAM_2/blue/1.jpg',
             '/assets/image/shoes/female/PHOENIX_CUSHFOAM_2/blue/2.jpg',
@@ -5897,6 +6049,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/PHOENIX_CUSHFOAM_2/black/1.jpg',
             '/assets/image/shoes/female/PHOENIX_CUSHFOAM_2/black/2.jpg',
@@ -5988,17 +6142,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '44',
       slug: 'КРОССОВКИ ЖЕНСКИЕ BURN 2',
       name: 'КРОССОВКИ ЖЕНСКИЕ BURN 2',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'белый',
+          colorSheme1: '#FFFFFF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/BURN_2/white/1.jpg',
             '/assets/image/shoes/female/BURN_2/white/2.jpg',
@@ -6041,6 +6197,8 @@ export const data = {
         },
         {
           name: 'светло-бежевый',
+          colorSheme1: '#F5F5DC',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/BURN_2/light-beige/1.jpg',
             '/assets/image/shoes/female/BURN_2/light-beige/2.jpg',
@@ -6083,6 +6241,8 @@ export const data = {
         },
         {
           name: 'голубой',
+          colorSheme1: '#42AAFF',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/BURN_2/light-blue/1.jpg',
             '/assets/image/shoes/female/BURN_2/light-blue/2.jpg',
@@ -6125,6 +6285,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/BURN_2/black/1.jpg',
             '/assets/image/shoes/female/BURN_2/black/2.jpg',
@@ -6209,17 +6371,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '45',
       slug: 'КРОССОВКИ ЖЕНСКИЕ UNITY FUR WTR W',
       name: 'КРОССОВКИ ЖЕНСКИЕ UNITY FUR WTR W',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'охра',
+          colorSheme1: '#CC7722',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/UNITY_FUR_WTR_W/ohra/1.jpg',
             '/assets/image/shoes/female/UNITY_FUR_WTR_W/ohra/2.jpg',
@@ -6262,6 +6426,8 @@ export const data = {
         },
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/UNITY_FUR_WTR_W/black/1.jpg',
             '/assets/image/shoes/female/UNITY_FUR_WTR_W/black/2.jpg',
@@ -6304,6 +6470,8 @@ export const data = {
         },
         {
           name: 'кофейный',
+          colorSheme1: '#442D25',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/UNITY_FUR_WTR_W/coffee/1.jpg',
             '/assets/image/shoes/female/UNITY_FUR_WTR_W/coffee/2.jpg',
@@ -6393,17 +6561,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '46',
       slug: 'КРОССОВКИ ЖЕНСКИЕ NOVA MID WTR W',
       name: 'КРОССОВКИ ЖЕНСКИЕ NOVA MID WTR W',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'чёрный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/NOVA_MID_WTR_W/black/1.jpg',
             '/assets/image/shoes/female/NOVA_MID_WTR_W/black/2.jpg',
@@ -6493,17 +6663,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '47',
       slug: 'КРОССОВКИ ЖЕНСКИЕ DEMIX FRONTLINE W',
       name: 'КРОССОВКИ ЖЕНСКИЕ DEMIX FRONTLINE W',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: true,
+      novelty: true,
       discount: '',
-      rating: '',
+      rating: '★★★★★',
       colors: [
         {
           name: 'светло-желтый',
+          colorSheme1: '#FFFF99',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/DEMIX_FRONTLINE_W/light-yellow/1.jpg',
             '/assets/image/shoes/female/DEMIX_FRONTLINE_W/light-yellow/2.jpg',
@@ -6584,17 +6756,19 @@ export const data = {
       flexzone360: false,
     },
     {
-      id: uuidv4(),
+      id: '48',
       slug: 'КРОССОВКИ ЖЕНСКИЕ SPEED TRAIL 2',
       name: 'КРОССОВКИ ЖЕНСКИЕ SPEED TRAIL 2',
       category: 'КРОССОВКИ',
       stockAvailability: true,
-      new: false,
+      novelty: false,
       discount: '',
       rating: '★★★★★',
       colors: [
         {
           name: 'черный',
+          colorSheme1: '#000000',
+          colorSheme2: '',
           images: [
             '/assets/image/shoes/female/SPEED_TRAIL_2/black/1.jpg',
             '/assets/image/shoes/female/SPEED_TRAIL_2/black/2.jpg',

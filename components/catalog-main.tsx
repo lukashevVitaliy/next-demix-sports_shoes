@@ -6,7 +6,7 @@ export default function CatalogMain() {
   return (
     <div className="container mx-auto px-4 my-10">
       <div className="grid grid-cols-1 items-center justify-between gap-10 sm:grid-cols-2">
-        <Link href="#">
+        <Link href="/male-shoes">
           <a className="relative grayscale hover:scale-95 hover:grayscale-0 transition-all">
             <Image
               src="/assets/image/photo_site/gender-bnr_male.jpg"
