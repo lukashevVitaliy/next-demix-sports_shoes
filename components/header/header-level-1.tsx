@@ -33,7 +33,7 @@ export default function HeaderLevel_1() {
             <a className="relative">
               <GiShoppingCart className="w-6 h-6 text-gray-600" />
               {cart.cartItems.length > 0 && (
-                <span className="absolute -top-1 -right-2.5 rounded-full bg-black/70 px-1.5 py-0.5  text-xs font-bold text-gray-200">
+                <span className="absolute -top-1 -right-3.5 rounded-full bg-white px-2 py-0.5  text-xs font-bold text-gray-600">
                   {cart.cartItems.reduce(
                     (a: number, c: number): number => a + c.quantity,
                     0

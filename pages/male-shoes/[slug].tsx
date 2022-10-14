@@ -150,6 +150,7 @@ const MaleShoesItemPage = () => {
         payload: { ...product, quantity, activeSizes },
       });
     }
+    router.push('/cart');
   };
 
   return (

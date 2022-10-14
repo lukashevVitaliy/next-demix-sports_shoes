@@ -1,11 +1,22 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
 import Breadcrumbs from '../components/breadcrumbs';
 import Layout from '../components/layout';
+import { Store } from '../utils/store';
+import { FaTrashAlt } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 const CartPage: NextPage = () => {
+  const { state, dispatch } = useContext(Store);
+  const { cartItems } = state.cart;
+  const router = useRouter();
+
+  const removeItemHandler = (item) => {
+    dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+  };
+
   return (
     <Layout title="Корзина товаров">
       <Breadcrumbs title="Корзина товаров" path="/cart" title2="" />
@@ -16,118 +27,190 @@ const CartPage: NextPage = () => {
         </button>
       </div>
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 gap-x-20 gap-y-5 justify-between md:grid-cols-4">
-          <div className="col-span-3">
-            <table className="w-full">
-              <thead className="h-10 border-b-2 border-lime-400 text-sm text-gray-400 tracking-wider uppercase">
-                <tr className="">
-                  <th className=""></th>
-                  <th>Название</th>
-                  <th>Цвет</th>
-                  <th>Размер</th>
-                  <th>Количество</th>
-                  <th>Цена</th>
-                  <th className="w-10"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className=" h-32 border-b text-xs uppercase tracking text-center ">
-                  <td className="text-left">
-                    <Link href="#">
-                      <a className="flex w-[100px]">
-                        <Image
-                          src="/assets/image/shoes/male/ATLANTA_2/beige/1.jpg"
-                          width={100}
-                          height={100}
-                          alt="item shoes"
-                          className="rounded-tl-[25%] rounded-br-[25%]"
-                        />
-                      </a>
-                    </Link>
-                  </td>
-                  <td>КРОССОВКИ МУЖСКИЕ LARUS 2 NY</td>
-                  <td>темно-синий</td>
-                  <td>43</td>
-                  <td>1</td>
-                  <td>4 599</td>
-                  <td>x</td>
-                </tr>
-                <tr className=" h-32 border-b text-xs uppercase tracking text-center ">
-                  <td className="text-left">
-                    <Link href="#">
-                      <a className="flex w-[100px]">
-                        <Image
-                          src="/assets/image/shoes/male/ATLANTA_2/beige/1.jpg"
-                          width={100}
-                          height={100}
-                          alt="item shoes"
-                          className="rounded-tl-[25%] rounded-br-[25%]"
-                        />
-                      </a>
-                    </Link>
-                  </td>
-                  <td>КРОССОВКИ МУЖСКИЕ LARUS 2 NY</td>
-                  <td>темно-синий</td>
-                  <td>43</td>
-                  <td>1</td>
-                  <td>4 599</td>
-                  <td>x</td>
-                </tr>
-                <tr className=" h-32 border-b text-xs uppercase tracking text-center ">
-                  <td className="text-left">
-                    <Link href="#">
-                      <a className="flex w-[100px]">
-                        <Image
-                          src="/assets/image/shoes/male/ATLANTA_2/beige/1.jpg"
-                          width={100}
-                          height={100}
-                          alt="item shoes"
-                          className="rounded-tl-[25%] rounded-br-[25%]"
-                        />
-                      </a>
-                    </Link>
-                  </td>
-                  <td>КРОССОВКИ МУЖСКИЕ LARUS 2 NY</td>
-                  <td>темно-синий</td>
-                  <td>43</td>
-                  <td>1</td>
-                  <td>4 599</td>
-                  <td>x</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="">
-            <div className="flex flex-col justify-between w-full h-80 p-5 shadow-lg shadow-gray-400 rounded-lg bg-gray-20">
-              <div className="mx-auto">
-                <Link href="/">
-                  <a>
-                    <Image
-                      src="/assets/icons/logo-demiks.svg"
-                      width={130}
-                      height={50}
-                      alt="logo"
-                    />
-                  </a>
-                </Link>
-              </div>
-              <div className="w-full flex justify-between">
-                <p className="text-2xl text-gray-400 font-bold text-center tracking-wider mb-5">
-                  Итого:
-                </p>
-                <div className="flex flex-col text-right ">
-                  <p className="text-4xl font-bold text-gray-600">4 599 p</p>
-                  <p className="text-2xl text-red-600 font-bold line-through ">
-                    6 900 p
-                  </p>
+        {cartItems.length === 0 ? (
+          <h5>
+            Ваша корзина пуста!!! Перейти на{' '}
+            <Link href="/">
+              <a className="text-gray-400 hover:text-lime-400 transition-all">
+                Главную страницу
+              </a>
+            </Link>
+          </h5>
+        ) : (
+          <div className="grid grid-cols-1 gap-x-20 gap-y-5 justify-between md:grid-cols-4">
+            <div className="col-span-3">
+              <table className="w-full">
+                <thead className="h-10 border-b-2 border-lime-400 text-sm text-gray-400 tracking-wider uppercase">
+                  <tr className="">
+                    <th className=""></th>
+                    <th>Название</th>
+                    <th>Цвет</th>
+                    <th>Размер</th>
+                    <th>Количество</th>
+                    <th>Цена</th>
+                    <th className="w-10"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartItems.map((item) => {
+                    let urlGender;
+                    if (item.gender === 'Мужчины') {
+                      urlGender = '/male-shoes/';
+                    } else if (item.gender === 'Женщины') {
+                      urlGender = '/female-shoes/';
+                    }
+                    return (
+                      <tr
+                        key={item.slug}
+                        className=" h-32 border-b text-xs uppercase tracking text-center "
+                      >
+                        <td className="text-left">
+                          <Link href={`${urlGender}${item.slug}`}>
+                            <a className="flex w-[100px]">
+                              <Image
+                                src={item.images[0]}
+                                blurDataURL={item.images[0]}
+                                width={100}
+                                height={100}
+                                alt={item.name}
+                                placeholder="blur"
+                                className="rounded-tl-[25%] rounded-br-[25%]"
+                              />
+                            </a>
+                          </Link>
+                        </td>
+                        <td>{item.name}</td>
+                        <td>{item.nameColor}</td>
+                        <td>{item.activeSizes}</td>
+                        <td>{item.quantity}</td>
+                        <td>
+                          <div className="text-right">
+                            <p>
+                              {item.priceNew} {item.currency}
+                            </p>
+                            {item.priceOld > 0 && (
+                              <p className="text-gray-400 line-through">
+                                {item.priceOld} {item.currency}
+                              </p>
+                            )}
+                          </div>
+                        </td>
+                        <td>
+                          <button onClick={() => removeItemHandler(item)}>
+                            <FaTrashAlt className="text-base text-gray-400 hover:text-gray-500 active:text-red-600 transition-all" />
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+
+                  {/* <tr className=" h-32 border-b text-xs uppercase tracking text-center ">
+                    <td className="text-left">
+                      <Link href="#">
+                        <a className="flex w-[100px]">
+                          <Image
+                            src="/assets/image/shoes/male/ATLANTA_2/beige/1.jpg"
+                            width={100}
+                            height={100}
+                            alt="item shoes"
+                            className="rounded-tl-[25%] rounded-br-[25%]"
+                          />
+                        </a>
+                      </Link>
+                    </td>
+                    <td>КРОССОВКИ МУЖСКИЕ LARUS 2 NY</td>
+                    <td>темно-синий</td>
+                    <td>43</td>
+                    <td>1</td>
+                    <td>4 599</td>
+                    <td>x</td>
+                  </tr>
+                  <tr className=" h-32 border-b text-xs uppercase tracking text-center ">
+                    <td className="text-left">
+                      <Link href="#">
+                        <a className="flex w-[100px]">
+                          <Image
+                            src="/assets/image/shoes/male/ATLANTA_2/beige/1.jpg"
+                            width={100}
+                            height={100}
+                            alt="item shoes"
+                            className="rounded-tl-[25%] rounded-br-[25%]"
+                          />
+                        </a>
+                      </Link>
+                    </td>
+                    <td>КРОССОВКИ МУЖСКИЕ LARUS 2 NY</td>
+                    <td>темно-синий</td>
+                    <td>43</td>
+                    <td>1</td>
+                    <td>4 599</td>
+                    <td>x</td>
+                  </tr>
+                  <tr className=" h-32 border-b text-xs uppercase tracking text-center ">
+                    <td className="text-left">
+                      <Link href="#">
+                        <a className="flex w-[100px]">
+                          <Image
+                            src="/assets/image/shoes/male/ATLANTA_2/beige/1.jpg"
+                            width={100}
+                            height={100}
+                            alt="item shoes"
+                            className="rounded-tl-[25%] rounded-br-[25%]"
+                          />
+                        </a>
+                      </Link>
+                    </td>
+                    <td>КРОССОВКИ МУЖСКИЕ LARUS 2 NY</td>
+                    <td>темно-синий</td>
+                    <td>43</td>
+                    <td>1</td>
+                    <td>4 599</td>
+                    <td>x</td>
+                  </tr> */}
+                </tbody>
+              </table>
+            </div>
+            <div className="">
+              <div className="flex flex-col justify-between w-full h-80 p-5 shadow-lg shadow-gray-400 rounded-lg bg-gray-20">
+                <div className="mx-auto">
+                  <Link href="/">
+                    <a>
+                      <Image
+                        src="/assets/icons/logo-demiks.svg"
+                        width={130}
+                        height={50}
+                        alt="logo"
+                      />
+                    </a>
+                  </Link>
                 </div>
+                <div className="w-full flex justify-between">
+                  <p className="text-2xl text-gray-400 font-bold text-center tracking-wider mb-5">
+                    Итого:
+                  </p>
+                  <div className="flex flex-col text-right ">
+                    <p className="text-4xl font-bold text-gray-600">
+                      {cartItems.reduce(
+                        (a, c) => a + c.quantity * c.priceNew,
+                        0
+                      )}{' '}
+                      {cartItems.map(({ currency }) => currency)}
+                    </p>
+                    {/* <p className="text-2xl text-red-600 font-bold line-through ">
+                      6 900 p
+                    </p> */}
+                  </div>
+                </div>
+                <button
+                  onClick={() => router.push('/shipping')}
+                  className="block py-2 w-full bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all"
+                >
+                  Купить
+                </button>
               </div>
-              <button className="block py-2 w-full bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all">
-                Купить
-              </button>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </Layout>
   );
