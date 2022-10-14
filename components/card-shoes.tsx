@@ -12,16 +12,17 @@ interface ProductProps {
     novelty: boolean;
     discount: string | undefined;
     rating: string | undefined;
-    colors: {
-      name: string;
-      colorSheme1: string;
-      colorSheme2?: string;
-      images: string[];
-      sizes: {
-        size: number;
-        countInStock: number;
-      }[];
+    // colors: {
+    // id: string;
+    nameColor: string;
+    colorSheme1: string;
+    colorSheme2?: string;
+    images: string[];
+    sizesColors: {
+      size: number;
+      countInStock: number;
     }[];
+    // }[];
     priceNew: number;
     priceOld: number;
     currency: string;
@@ -79,7 +80,10 @@ const CardShoes: FC<ProductProps> = ({ shoes }) => {
     novelty,
     discount,
     rating,
-    colors,
+    nameColor,
+    colorSheme1,
+    colorSheme2,
+    images,
     priceNew,
     priceOld,
     currency,
@@ -99,8 +103,8 @@ const CardShoes: FC<ProductProps> = ({ shoes }) => {
         <a>
           <div className="relative flex">
             <Image
-              src={colors[0].images[0]}
-              blurDataURL={colors[0].images[0]}
+              src={images[0]}
+              blurDataURL={images[0]}
               width={1000}
               height={1000}
               alt={name}
@@ -118,24 +122,27 @@ const CardShoes: FC<ProductProps> = ({ shoes }) => {
               </span>
             )}
           </div>
-          <div className="flex flex-col justify-between min-h-[172px] bg-gradient-to-bl from-black/60 via-lime-400 to-black/60 text-xs text-gray-600 px-4 pt-0 pb-2 rounded-b">
-            <p className="text-center font-semibold my-2 h-8">{name}</p>
-            <div className="flex justify-end h-8 mb-2">
-              {colors.map(({ name, images, colorSheme1, colorSheme2 }) => (
-                <div key={`${name}${images[0]}${colorSheme1}`} className="">
+          <div className="flex flex-col justify-between min-h-[132px] bg-gradient-to-bl from-black/60 via-lime-400 to-black/60 text-xs text-gray-600 px-4 pt-0 pb-2 rounded-b">
+            {/* <div className="flex flex-col justify-between min-h-[172px] bg-gradient-to-bl from-black/60 via-lime-400 to-black/60 text-xs text-gray-600 px-4 pt-0 pb-2 rounded-b"> */}
+            <p className="text-center font-semibold my-2 h-8 uppercase">
+              {name}
+            </p>
+            {/* <div className="flex justify-start h-8 mb-2"> */}
+            {/* {colors.map(({ id, colorSheme1, colorSheme2 }) => (
+              <div className="">
+                <p
+                  className="w-4 h-4 rounded ml-2"
+                  style={{ background: `${colorSheme1}` }}
+                ></p>
+                {colorSheme2 && (
                   <p
-                    className="w-4 h-4 rounded ml-2"
-                    style={{ background: `${colorSheme1}` }}
+                    className="relative -top-1 w-4 h-4 rounded ml-2"
+                    style={{ background: `${colorSheme2}` }}
                   ></p>
-                  {colorSheme2 && (
-                    <p
-                      className="relative -top-1 w-4 h-4 rounded ml-2"
-                      style={{ background: `${colorSheme2}` }}
-                    ></p>
-                  )}
-                </div>
-              ))}
-            </div>
+                )}
+              </div>
+              ))} */}
+            {/* </div> */}
             <div className="mb-1">
               <p className="text-right text-xl font-bold">
                 {priceNew} <span>{currency}</span>

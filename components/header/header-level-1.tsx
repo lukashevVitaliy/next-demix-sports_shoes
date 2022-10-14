@@ -1,9 +1,13 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
 import SocialLink from '../social-link';
 import { GiShoppingCart } from 'react-icons/gi';
+import { Store } from '../../utils/store';
 
 export default function HeaderLevel_1() {
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+
   return (
     <div className="bg-lime-400">
       <div className="container mx-auto flex items-center justify-between py-2 px-4 text-xs ">
@@ -26,8 +30,16 @@ export default function HeaderLevel_1() {
             <a className="text-sm text-gray-600">Logout</a>
           </Link>
           <Link href="/cart">
-            <a>
+            <a className="relative">
               <GiShoppingCart className="w-6 h-6 text-gray-600" />
+              {cart.cartItems.length > 0 && (
+                <span className="absolute -top-1 -right-2.5 rounded-full bg-black/70 px-1.5 py-0.5  text-xs font-bold text-gray-200">
+                  {cart.cartItems.reduce(
+                    (a: number, c: number): number => a + c.quantity,
+                    0
+                  )}
+                </span>
+              )}
             </a>
           </Link>
         </div>

@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import React from 'react';
 
-interface IProps {
+interface Props {
   path: string;
   title: string;
   title2: string;
 }
 
-const Breadcrumbs = ({ path, title, title2 }: IProps) => {
+const Breadcrumbs = ({ path, title, title2 }: Props) => {
   return (
     <div className="container mx-auto px-4">
-      <ul className="flex mb-5 text-xs text-gray-600 font-light list-none md:text-sm">
+      <ul className="flex mb-5 text-sm text-gray-600 font-light italic list-none">
         <li>
           <Link href="/">
             <a>Главная</a>

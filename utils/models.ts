@@ -8,16 +8,17 @@ export interface Product {
     novelty: boolean;
     discount: string | undefined;
     rating: string | undefined;
-    colors: {
-      name: string;
-      colorSheme1: string;
-      colorSheme2?: string;
-      images: string[];
-      sizes: {
-        size: number;
-        countInStock: number;
-      }[];
+    // colors: {
+    // id: string;
+    nameColor: string;
+    colorSheme1: string;
+    colorSheme2?: string;
+    images: string[];
+    sizesColors: {
+      size: number;
+      countInStock: number;
     }[];
+    // }[];
     priceNew: number;
     priceOld: number;
     currency: string;
