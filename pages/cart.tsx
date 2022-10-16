@@ -16,6 +16,23 @@ const CartPage: NextPage = () => {
   const removeItemHandler = (item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
+  const updateCartHandler = (item, qty) => {
+    const quantity: number = Number(qty);
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+  };
+
+  // достаем данные из нашего продукта
+  let stockQty: Object;
+  let product;
+  for (let item of cartItems) {
+    stockQty = item.sizesColors.find((x) => x.size === item.activeSizes);
+    product = item;
+  }
+  // предварительная стоимость товара
+  const priceNewItem = cartItems.reduce(
+    (a, c) => a + c.quantity * c.priceNew,
+    0
+  );
 
   return (
     <Layout title="Корзина товаров">
@@ -61,7 +78,7 @@ const CartPage: NextPage = () => {
                     }
                     return (
                       <tr
-                        key={item.slug}
+                        key={item.id}
                         className=" h-32 border-b text-xs uppercase tracking text-center "
                       >
                         <td className="text-left">
@@ -82,15 +99,36 @@ const CartPage: NextPage = () => {
                         <td>{item.name}</td>
                         <td>{item.nameColor}</td>
                         <td>{item.activeSizes}</td>
-                        <td>{item.quantity}</td>
                         <td>
-                          <div className="text-right">
+                          {
+                            <select
+                              value={item.quantity}
+                              onChange={(e) =>
+                                updateCartHandler(item, e.target.value)
+                              }
+                              className="p-1 my-5 overflow-y-auto"
+                            >
+                              {[...Array(stockQty.countInStock).keys()].map(
+                                (x) => (
+                                  <option key={x + 1} value={x + 1}>
+                                    {x + 1}
+                                  </option>
+                                )
+                              )}
+                            </select>
+                          }
+                        </td>
+
+                        <td>
+                          <div className="">
                             <p>
-                              {item.priceNew} {item.currency}
+                              {Intl.NumberFormat().format(item.priceNew)}{' '}
+                              {item.currency}
                             </p>
                             {item.priceOld > 0 && (
                               <p className="text-gray-400 line-through">
-                                {item.priceOld} {item.currency}
+                                {Intl.NumberFormat().format(item.priceOld)}{' '}
+                                {item.currency}
                               </p>
                             )}
                           </div>
@@ -103,70 +141,6 @@ const CartPage: NextPage = () => {
                       </tr>
                     );
                   })}
-
-                  {/* <tr className=" h-32 border-b text-xs uppercase tracking text-center ">
-                    <td className="text-left">
-                      <Link href="#">
-                        <a className="flex w-[100px]">
-                          <Image
-                            src="/assets/image/shoes/male/ATLANTA_2/beige/1.jpg"
-                            width={100}
-                            height={100}
-                            alt="item shoes"
-                            className="rounded-tl-[25%] rounded-br-[25%]"
-                          />
-                        </a>
-                      </Link>
-                    </td>
-                    <td>КРОССОВКИ МУЖСКИЕ LARUS 2 NY</td>
-                    <td>темно-синий</td>
-                    <td>43</td>
-                    <td>1</td>
-                    <td>4 599</td>
-                    <td>x</td>
-                  </tr>
-                  <tr className=" h-32 border-b text-xs uppercase tracking text-center ">
-                    <td className="text-left">
-                      <Link href="#">
-                        <a className="flex w-[100px]">
-                          <Image
-                            src="/assets/image/shoes/male/ATLANTA_2/beige/1.jpg"
-                            width={100}
-                            height={100}
-                            alt="item shoes"
-                            className="rounded-tl-[25%] rounded-br-[25%]"
-                          />
-                        </a>
-                      </Link>
-                    </td>
-                    <td>КРОССОВКИ МУЖСКИЕ LARUS 2 NY</td>
-                    <td>темно-синий</td>
-                    <td>43</td>
-                    <td>1</td>
-                    <td>4 599</td>
-                    <td>x</td>
-                  </tr>
-                  <tr className=" h-32 border-b text-xs uppercase tracking text-center ">
-                    <td className="text-left">
-                      <Link href="#">
-                        <a className="flex w-[100px]">
-                          <Image
-                            src="/assets/image/shoes/male/ATLANTA_2/beige/1.jpg"
-                            width={100}
-                            height={100}
-                            alt="item shoes"
-                            className="rounded-tl-[25%] rounded-br-[25%]"
-                          />
-                        </a>
-                      </Link>
-                    </td>
-                    <td>КРОССОВКИ МУЖСКИЕ LARUS 2 NY</td>
-                    <td>темно-синий</td>
-                    <td>43</td>
-                    <td>1</td>
-                    <td>4 599</td>
-                    <td>x</td>
-                  </tr> */}
                 </tbody>
               </table>
             </div>
@@ -188,13 +162,10 @@ const CartPage: NextPage = () => {
                   <p className="text-2xl text-gray-400 font-bold text-center tracking-wider mb-5">
                     Итого:
                   </p>
-                  <div className="flex flex-col text-right ">
-                    <p className="text-4xl font-bold text-gray-600">
-                      {cartItems.reduce(
-                        (a, c) => a + c.quantity * c.priceNew,
-                        0
-                      )}{' '}
-                      {cartItems.map(({ currency }) => currency)}
+                  <div className="flex flex-col">
+                    <p className="text-4xl font-bold text-gray-600 ">
+                      {Intl.NumberFormat().format(priceNewItem)}{' '}
+                      {product.currency}
                     </p>
                     {/* <p className="text-2xl text-red-600 font-bold line-through ">
                       6 900 p
