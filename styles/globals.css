@@ -41,6 +41,12 @@ body {
 	min-width: 20rem;
 }
 
+input,
+select,
+textarea {
+	@apply rounded border p-2 outline-none ring-lime-400 focus:ring;
+}
+
 /* slider-main-banner */
 .slider-main-banner .swiper-pagination-bullet {
 	@apply w-6 h-1 rounded bg-black/70;

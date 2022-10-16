@@ -26,8 +26,8 @@ export default function HeaderLevel_1() {
           className="flex items-center justify-between w-24
 				"
         >
-          <Link href="#">
-            <a className="text-sm text-gray-600">Logout</a>
+          <Link href="/login">
+            <a className="text-sm text-gray-600">Login</a>
           </Link>
           <Link href="/cart">
             <a className="relative">
