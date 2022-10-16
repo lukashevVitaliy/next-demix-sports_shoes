@@ -1,6 +1,21 @@
 import { Product } from './models';
+import bcrypt from 'bcryptjs';
 
 export const products: Product = {
+  users: [
+    {
+      name: 'Vitalii',
+      email: 'admin@example.com',
+      password: bcrypt.hashSync('134652250'),
+      isAdmin: true,
+    },
+    {
+      name: 'User',
+      email: 'user@example.com',
+      password: bcrypt.hashSync('user1389'),
+      isAdmin: false,
+    },
+  ],
   shoes: [
     {
       id: '01_ohra',

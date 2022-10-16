@@ -1,4 +1,10 @@
 export interface Product {
+  users: {
+    name: string;
+    email: string;
+    password: string;
+    isAdmin: boolean;
+  }[];
   shoes: {
     id: string | undefined;
     slug: string;
