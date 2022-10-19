@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { Menu } from '@headlessui/react';
@@ -10,9 +10,14 @@ import Cookies from 'js-cookie';
 
 export default function HeaderLevel_1() {
   const { status, data: session } = useSession();
-
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  useEffect(() => {
+    setCartItemsCount(
+      cart.cartItems.reduce((a: number, c: number): number => a + c.quantity, 0)
+    );
+  }, [cart.cartItems]);
 
   const logoutClickHandler = () => {
     Cookies.remove('cart');
@@ -38,12 +43,9 @@ export default function HeaderLevel_1() {
           <Link href="/cart">
             <a className="relative">
               <GiShoppingCart className="w-6 h-6 text-gray-600" />
-              {cart.cartItems.length > 0 && (
+              {cartItemsCount > 0 && (
                 <span className="absolute -top-1 -right-3.5 rounded-full bg-white px-2 py-0.5  text-xs font-bold text-gray-600">
-                  {cart.cartItems.reduce(
-                    (a: number, c: number): number => a + c.quantity,
-                    0
-                  )}
+                  {cartItemsCount}
                 </span>
               )}
             </a>

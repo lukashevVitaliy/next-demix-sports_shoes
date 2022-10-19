@@ -1,4 +1,5 @@
 import React, { createContext, FC, useReducer } from 'react';
+import Cookies from 'js-cookie';
 
 interface Children {
   children: React.ReactNode;
@@ -6,11 +7,14 @@ interface Children {
 interface IStore {
   cart: {
     cartItems: [];
+    shippingAddress: {};
   };
 }
 
 const initialState: IStore = {
-  cart: { cartItems: [] },
+  cart: Cookies.get('cart')
+    ? JSON.parse(Cookies.get('cart'))
+    : { cartItems: [], shippingAddress: {} },
 };
 
 export const Store = createContext();
@@ -27,12 +31,14 @@ const reducer = (state, action) => {
             item.name === existItem.name ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
+      Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case 'CART_REMOVE_ITEM': {
       const cartItems = state.cart.cartItems.filter(
         (x) => x.slug !== action.payload.slug
       );
+      Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case 'CART_RESET': {
@@ -41,6 +47,16 @@ const reducer = (state, action) => {
         cart: { cartItems: [] },
         shippingAdress: { location: {} },
         paymentMethod: '',
+      };
+    }
+    case 'SAVE_SHIPPING_ADDRESS': {
+      const newItem = action.payload;
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: { ...state.shippingAddress, newItem },
+        },
       };
     }
     default:

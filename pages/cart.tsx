@@ -7,6 +7,7 @@ import Layout from '../components/layout';
 import { Store } from '../utils/store';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
 const CartPage: NextPage = () => {
   const { state, dispatch } = useContext(Store);
@@ -85,8 +86,10 @@ const CartPage: NextPage = () => {
                           <Link href={`${urlGender}${item.slug}`}>
                             <a className="flex w-[100px]">
                               <Image
-                                src={item.images[0]}
-                                blurDataURL={item.images[0]}
+                                src={item.imageItem}
+                                // src={item.images[0]}
+                                // blurDataURL={item.images[0]}
+                                blurDataURL={item.imageItem}
                                 width={100}
                                 height={100}
                                 alt={item.name}
@@ -187,4 +190,4 @@ const CartPage: NextPage = () => {
   );
 };
 
-export default CartPage;
+export default dynamic(() => Promise.resolve(CartPage), { ssr: false });

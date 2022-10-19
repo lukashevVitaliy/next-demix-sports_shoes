@@ -102,13 +102,15 @@ const MaleShoesItemPage = () => {
   }
 
   const {
+    id,
+    // slug,
     name,
     // category,
     // stockAvailability,
     // novelty,
     // discount,
     rating,
-    // nameColor,
+    nameColor,
     // colorSheme1,
     // colorSheme2,
     images,
@@ -144,10 +146,24 @@ const MaleShoesItemPage = () => {
   const addToCartHandler = () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
+    const imageItem = images[0];
     if (activeSizes) {
       dispatch({
         type: 'CART_ADD_ITEM',
-        payload: { ...product, quantity, activeSizes },
+        payload: {
+          id,
+          slug,
+          name,
+          nameColor,
+          imageItem,
+          sizesColors,
+          priceNew,
+          priceOld,
+          gender,
+          currency,
+          quantity,
+          activeSizes,
+        },
       });
     }
     router.push('/cart');
@@ -180,93 +196,6 @@ const MaleShoesItemPage = () => {
               )}
             </div>
             <div className="w-4/5 mx-auto">
-              {/* <Disclosure>
-                {({ open }) => (
-                  <>
-                    <Disclosure.Button
-                      className={
-                        open
-                          ? 'flex items-center justify-between w-full text-xs text-gray-600 text-left tracking-wider py-3 uppercase'
-                          : 'flex items-center justify-between w-full text-xs text-gray-600 text-left tracking-wider border-b py-3 uppercase'
-                      }
-                    >
-                      <span className="w-5/6 tracking-widest">Цвет:</span>
-                      <BsChevronDown
-                        className={
-                          open ? 'rotate-180 transform transition-all' : ''
-                        }
-                        width={16}
-                        height={16}
-                      />
-                    </Disclosure.Button>
-                    <Transition
-                      enter="transition duration-100 ease-out"
-                      enterFrom="transform scale-95 opacity-0"
-                      enterTo="transform scale-100 opacity-100"
-                      leave="transition duration-75 ease-out"
-                      leaveFrom="transform scale-100 opacity-100"
-                      leaveTo="transform scale-95 opacity-0"
-                    >
-                      <Disclosure.Panel className=" border-b pb-3">
-                        <div className="w-full">
-                          <RadioGroup
-                            value={activeColors}
-                            onChange={setActiveColors}
-                          >
-                            <div className="space-y-2">
-                              {colors.map(({ nameColor }) => (
-                                <RadioGroup.Option
-                                  key={nameColor}
-                                  value={nameColor}
-                                  className={({ active, checked }) =>
-                                    `${
-                                      active
-                                        ? 'ring-2 ring-lime-400 ring-offset-1 ring-offset-white'
-                                        : ''
-                                    }
-                  ${
-                    checked
-                      ? 'bg-gradient-to-r from-black/80 via-gray-200 to-lime-400 text-gray-400'
-                      : 'bg-transparent'
-                  }
-                    relative flex cursor-pointer rounded-lg px-4 py-2 focus:outline-none`
-                                  }
-                                >
-                                  {({ checked }) => (
-                                    <>
-                                      <div className="flex w-full items-center justify-between">
-                                        <div className="flex items-center">
-                                          <div className="text-sm">
-                                            <RadioGroup.Label
-                                              as="p"
-                                              className={`font-medium tracking-wider  ${
-                                                checked
-                                                  ? 'text-gray-200'
-                                                  : 'text-gray-400'
-                                              }`}
-                                            >
-                                              {nameColor}
-                                            </RadioGroup.Label>
-                                          </div>
-                                        </div>
-                                        {checked && (
-                                          <div className="shrink-0 text-gray-700">
-                                            <MdCheckCircle className="h-6 w-6" />
-                                          </div>
-                                        )}
-                                      </div>
-                                    </>
-                                  )}
-                                </RadioGroup.Option>
-                              ))}
-                            </div>
-                          </RadioGroup>
-                        </div>
-                      </Disclosure.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Disclosure> */}
               <Disclosure>
                 {({ open }) => (
                   <>
@@ -348,102 +277,6 @@ const MaleShoesItemPage = () => {
                                   )}
                                 </RadioGroup.Option>
                               ))}
-
-                              {/* {colors.map((item) => {
-                                const sizeArr = item.sizesColors.map(
-                                  ({ size, countInStock }) => (
-                                    <RadioGroup.Option
-                                      key={size}
-                                      value={size}
-                                      className={({ active, checked }) =>
-                                        `${
-                                          active
-                                            ? 'ring-2 ring-lime-400 ring-offset-1 ring-offset-white'
-                                            : ''
-                                        }
-                                ${
-                                  checked
-                                    ? 'bg-gradient-to-r from-black/80 via-gray-200 to-lime-400 text-gray-400'
-                                    : 'bg-transparent'
-                                }
-                                  relative flex cursor-pointer rounded-lg px-4 py-2 focus:outline-none`
-                                      }
-                                    >
-                                      {({ checked }) => (
-                                        <>
-                                          <div className="flex w-full items-center justify-between">
-                                            <div className="flex items-center">
-                                              <div className="text-sm">
-                                                <RadioGroup.Label
-                                                  as="p"
-                                                  className={`font-medium tracking-wider  ${
-                                                    checked
-                                                      ? 'text-gray-200'
-                                                      : 'text-gray-400'
-                                                  }`}
-                                                >
-                                                  {size}
-                                                </RadioGroup.Label>
-                                              </div>
-                                            </div>
-                                            {checked && (
-                                              <div className="shrink-0 text-gray-700">
-                                                <MdCheckCircle className="h-6 w-6" />
-                                              </div>
-                                            )}
-                                          </div>
-                                        </>
-                                      )}
-                                    </RadioGroup.Option>
-                                  )
-                                );
-                                return sizeArr;
-                                // (
-                                //   <RadioGroup.Option
-                                //     key={i}
-                                //     value={sizeArr.length}
-                                //     className={({ active, checked }) =>
-                                //       `${
-                                //         active
-                                //           ? 'ring-2 ring-lime-400 ring-offset-1 ring-offset-white'
-                                //           : ''
-                                //       }
-                                // ${
-                                //   checked
-                                //     ? 'bg-gradient-to-r from-black/80 via-gray-200 to-lime-400 text-gray-400'
-                                //     : 'bg-transparent'
-                                // }
-                                //   relative flex cursor-pointer rounded-lg px-4 py-2 focus:outline-none`
-                                //     }
-                                //   >
-                                //     {({ checked }) => (
-                                //       <>
-                                //         <div className="flex w-full items-center justify-between">
-                                //           <div className="flex items-center">
-                                //             <div className="text-sm">
-                                //               <RadioGroup.Label
-                                //                 as="p"
-                                //                 className={`font-medium tracking-wider  ${
-                                //                   checked
-                                //                     ? 'text-gray-200'
-                                //                     : 'text-gray-400'
-                                //                 }`}
-                                //               >
-                                //                 {sizeArr}
-                                //               </RadioGroup.Label>
-                                //             </div>
-                                //           </div>
-                                //           {checked && (
-                                //             <div className="shrink-0 text-gray-700">
-                                //               <MdCheckCircle className="h-6 w-6" />
-                                //             </div>
-                                //           )}
-                                //         </div>
-                                //       </>
-                                //     )}
-                                //   </RadioGroup.Option>
-                                // );
-                              })} */}
                             </div>
                           </RadioGroup>
                         </div>
