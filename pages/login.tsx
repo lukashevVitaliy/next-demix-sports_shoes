@@ -1,23 +1,49 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '../components/layout';
 import { useForm } from 'react-hook-form';
+import { signIn, useSession } from 'next-auth/react';
+import { getError } from '../utils/error';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 interface Inputs {
   email: string;
   password: string;
+  redirect: boolean;
 }
 
 const LoginPage: NextPage = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+  const { redirect } = router.query;
+  // проверка авторизации пользователя при входе
+  useEffect(() => {
+    if (session?.user) {
+      router.push(redirect || '/');
+    }
+  }, [router, session, redirect]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const submitHandler = ({ email, password }: Inputs) => {
-    console.log(`Email: ${email}, Password: ${password}`);
+  const submitHandler = async ({ email, password }: Inputs) => {
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+      if (result.error) {
+        toast.error(result.error);
+      }
+    } catch (err) {
+      toast.error(getError(err));
+    }
   };
 
   return (
@@ -65,7 +91,6 @@ const LoginPage: NextPage = () => {
             })}
             className="w-full"
             id="password"
-            autoFocus
           />
           {errors.password && (
             <div className="text-red-500 text-xs mt-1">

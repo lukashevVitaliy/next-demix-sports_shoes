@@ -3,8 +3,11 @@ import React, { useContext } from 'react';
 import SocialLink from '../social-link';
 import { GiShoppingCart } from 'react-icons/gi';
 import { Store } from '../../utils/store';
+import { useSession } from 'next-auth/react';
 
 export default function HeaderLevel_1() {
+  const { status, data: session } = useSession();
+
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
 
@@ -22,13 +25,7 @@ export default function HeaderLevel_1() {
             </a>
           </Link>
         </div>
-        <div
-          className="flex items-center justify-between w-24
-				"
-        >
-          <Link href="/login">
-            <a className="text-sm text-gray-600">Login</a>
-          </Link>
+        <div className="flex items-center justify-between w-24">
           <Link href="/cart">
             <a className="relative">
               <GiShoppingCart className="w-6 h-6 text-gray-600" />
@@ -42,6 +39,16 @@ export default function HeaderLevel_1() {
               )}
             </a>
           </Link>
+
+          {status === 'loading' ? (
+            'Loading'
+          ) : session?.user ? (
+            session.user.name
+          ) : (
+            <Link href="/login">
+              <a className="text-sm text-gray-600">Login</a>
+            </Link>
+          )}
         </div>
       </div>
     </div>

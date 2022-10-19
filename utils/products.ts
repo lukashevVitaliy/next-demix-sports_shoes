@@ -1,5 +1,5 @@
 import { Product } from './models';
-import bcrypt from 'bcryptjs';
+var bcrypt = require('bcryptjs');
 
 export const products: Product = {
   users: [
