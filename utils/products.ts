@@ -4,13 +4,13 @@ var bcrypt = require('bcryptjs');
 export const products: Product = {
   users: [
     {
-      name: 'Vitalii',
+      name: 'Виталий',
       email: 'admin@example.com',
       password: bcrypt.hashSync('134652250'),
       isAdmin: true,
     },
     {
-      name: 'User',
+      name: 'Пользователь',
       email: 'user@example.com',
       password: bcrypt.hashSync('user1389'),
       isAdmin: false,

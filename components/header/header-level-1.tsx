@@ -1,15 +1,24 @@
-import Link from 'next/link';
 import React, { useContext } from 'react';
-import SocialLink from '../social-link';
+import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+import { Menu } from '@headlessui/react';
 import { GiShoppingCart } from 'react-icons/gi';
+import SocialLink from '../social-link';
 import { Store } from '../../utils/store';
-import { useSession } from 'next-auth/react';
+import Dropdownlink from '../dropdownlink';
+import Cookies from 'js-cookie';
 
 export default function HeaderLevel_1() {
   const { status, data: session } = useSession();
 
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
+
+  const logoutClickHandler = () => {
+    Cookies.remove('cart');
+    dispatch({ type: 'CART_RESET' });
+    signOut({ callbackUrl: '/login' });
+  };
 
   return (
     <div className="bg-lime-400">
@@ -25,7 +34,7 @@ export default function HeaderLevel_1() {
             </a>
           </Link>
         </div>
-        <div className="flex items-center justify-between w-24">
+        <div className="flex items-end justify-between w-24">
           <Link href="/cart">
             <a className="relative">
               <GiShoppingCart className="w-6 h-6 text-gray-600" />
@@ -39,11 +48,35 @@ export default function HeaderLevel_1() {
               )}
             </a>
           </Link>
-
           {status === 'loading' ? (
             'Loading'
           ) : session?.user ? (
-            session.user.name
+            <Menu as="div" className="relative inline-block">
+              <Menu.Button className="text-gray-600 text-sm font-bold tracking-wider ">
+                {session.user.name}
+              </Menu.Button>
+              <Menu.Items className="absolute right-0 w-56 origin-top-right bg-black/70 rounded shadow-lg">
+                <Menu.Item>
+                  <Dropdownlink className="dropdown-link" href="/profile">
+                    Профиль
+                  </Dropdownlink>
+                </Menu.Item>
+                <Menu.Item>
+                  <Dropdownlink className="dropdown-link" href="/order-history">
+                    История Заказов
+                  </Dropdownlink>
+                </Menu.Item>
+                <Menu.Item>
+                  <a
+                    href="#"
+                    className="dropdown-link"
+                    onClick={logoutClickHandler}
+                  >
+                    Выход
+                  </a>
+                </Menu.Item>
+              </Menu.Items>
+            </Menu>
           ) : (
             <Link href="/login">
               <a className="text-sm text-gray-600">Login</a>

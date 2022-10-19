@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Header from './header/header';
 import Footer from './footer/footer';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ILayoutProps {
   title: string;
