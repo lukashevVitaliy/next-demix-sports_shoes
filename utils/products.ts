@@ -5,7 +5,7 @@ export const products: Product = {
   users: [
     {
       name: 'Виталий',
-      email: 'admin@example.com',
+      email: 'admin-demix@example.com',
       password: bcrypt.hashSync('134652250'),
       isAdmin: true,
     },

@@ -1,3 +1,4 @@
+import Product from '../../models/Product';
 import User from '../../models/User';
 import db from '../../utils/db';
 import { products } from '../../utils/products';
@@ -14,9 +15,9 @@ const handler = async (req, res) => {
 
   // импортируем товары из модели products
   // удаляем все предыдущие товары в пользовательской коллекции
-  // await Product.deleteMany();
+  await Product.deleteMany();
   // добавить товары
-  // await Product.insertMany(data.products);
+  await Product.insertMany(products.shoes);
 
   // разъеденить после загрузки данных пользоателей
   await db.disconnect();
