@@ -26,7 +26,14 @@ const ShippingPage: NextPage = () => {
     setValue('city', shippingAddress.city);
     setValue('postalCode', shippingAddress.postalCode);
     setValue('country', shippingAddress.country);
-  }, [setValue, shippingAddress]);
+  }, [
+    setValue,
+    shippingAddress.address,
+    shippingAddress.city,
+    shippingAddress.country,
+    shippingAddress.fullName,
+    shippingAddress.postalCode,
+  ]);
 
   const submitHandler = ({ fullName, address, city, postalCode, country }) => {
     dispatch({

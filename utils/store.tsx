@@ -50,12 +50,20 @@ const reducer = (state, action) => {
       };
     }
     case 'SAVE_SHIPPING_ADDRESS': {
-      const newItem = action.payload;
       return {
         ...state,
         cart: {
           ...state.cart,
-          shippingAddress: { ...state.shippingAddress, newItem },
+          shippingAddress: { ...state.shippingAddress, ...action.payload },
+        },
+      };
+    }
+    case 'SAVE_PAYMENT_METHOD': {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          paymentMethod: action.payload,
         },
       };
     }
