@@ -65,11 +65,7 @@ const PaymentPage: NextPage = () => {
           >
             Назад
           </button>
-          <button
-            className="block py-2 w-1/4 bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all"
-            // onClick={() => router.push('/shipping')}
-            // type="button"
-          >
+          <button className="block py-2 w-1/4 bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all">
             Далее
           </button>
         </div>
@@ -79,3 +75,5 @@ const PaymentPage: NextPage = () => {
 };
 
 export default PaymentPage;
+
+PaymentPage.auth = true;

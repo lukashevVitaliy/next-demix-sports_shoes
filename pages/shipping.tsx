@@ -69,7 +69,7 @@ const ShippingPage: NextPage = () => {
             htmlFor="fullName"
             className="text-xs text-gray-400 tracking-wider"
           >
-            Полное Имя
+            Ф И О
           </label>
           <input
             type="text"

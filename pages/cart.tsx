@@ -76,10 +76,10 @@ const CartPage: NextPage = () => {
         ) : (
           <div className="grid grid-cols-1 gap-x-20 gap-y-5 justify-between md:grid-cols-4">
             <div className="col-span-3">
-              <table className="w-full">
+              <table className="min-w-full">
                 <thead className="h-10 border-b-2 border-lime-400 text-sm text-gray-400 tracking-wider uppercase">
-                  <tr className="">
-                    <th className=""></th>
+                  <tr>
+                    <th></th>
                     <th>Название</th>
                     <th>Цвет</th>
                     <th>Размер</th>
@@ -98,7 +98,7 @@ const CartPage: NextPage = () => {
                     }
                     return (
                       <tr
-                        key={item.id}
+                        key={item._id}
                         className=" h-32 border-b text-xs uppercase tracking text-center "
                       >
                         <td className="text-left">
@@ -144,12 +144,16 @@ const CartPage: NextPage = () => {
                         <td>
                           <div className="">
                             <p>
-                              {Intl.NumberFormat().format(item.priceNew)}{' '}
+                              {Intl.NumberFormat().format(
+                                item.quantity * item.priceNew
+                              )}{' '}
                               {item.currency}
                             </p>
                             {item.priceOld > 0 && (
                               <p className="text-gray-400 line-through">
-                                {Intl.NumberFormat().format(item.priceOld)}{' '}
+                                {Intl.NumberFormat().format(
+                                  item.quantity * item.priceOld
+                                )}{' '}
                                 {item.currency}
                               </p>
                             )}
