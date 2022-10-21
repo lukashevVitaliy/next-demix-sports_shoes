@@ -12,7 +12,7 @@ import 'swiper/css/navigation';
 
 interface newShoesProps {
   newShoes: {
-    id: string | undefined;
+    _id: string | undefined;
     slug: string;
     name: string;
     category: string;
@@ -20,8 +20,6 @@ interface newShoesProps {
     novelty: boolean;
     discount: string | undefined;
     rating: string | undefined;
-    // colors: {
-    // id: string;
     nameColor: string;
     colorSheme1: string;
     colorSheme2?: string;
@@ -30,7 +28,6 @@ interface newShoesProps {
       size: number;
       countInStock: number;
     }[];
-    // }[];
     priceNew: number;
     priceOld: number;
     currency: string;
@@ -106,26 +103,10 @@ const SliderNewShoes: FC<newShoesProps> = ({ newShoes }) => {
           <BsChevronCompactLeft className="text-3xl text-gray-400 cursor-pointer" />
         </div>
         {newShoes.map((shoes) => (
-          <SwiperSlide key={shoes.id} className="px-10 my-5 md:my-10">
+          <SwiperSlide key={shoes._id} className="px-10 my-5 md:my-10">
             <CardShoes shoes={shoes} />
           </SwiperSlide>
         ))}
-
-        {/* <SwiperSlide className="px-10 my-5 md:my-10">
-          <CardShoes />
-        </SwiperSlide>
-        <SwiperSlide className="px-10 my-5 md:my-10">
-          <CardShoes />
-        </SwiperSlide>
-        <SwiperSlide className="px-10 my-5 md:my-10">
-          <CardShoes />
-        </SwiperSlide>
-        <SwiperSlide className="px-10 my-5 md:my-10">
-          <CardShoes />
-        </SwiperSlide>
-        <SwiperSlide className="px-10 my-5 md:my-10">
-          <CardShoes />
-        </SwiperSlide> */}
         <div className="slider-new-shoes-button-next absolute top-1/2 right-0 z-10 -translate-y-1/2">
           <BsChevronCompactRight className="text-3xl text-gray-400 cursor-pointer" />
         </div>

@@ -18,7 +18,7 @@ export default function SocialLink({ hover }: IStyle) {
             width={15}
             height={15}
             alt="vk"
-            className=""
+            priority
           />
         </a>
       </Link>
@@ -31,7 +31,7 @@ export default function SocialLink({ hover }: IStyle) {
             width={15}
             height={15}
             alt="telegram"
-            className=""
+            priority
           />
         </a>
       </Link>
@@ -44,7 +44,7 @@ export default function SocialLink({ hover }: IStyle) {
             width={15}
             height={15}
             alt="youtube"
-            className=""
+            priority
           />
         </a>
       </Link>

@@ -2,6 +2,8 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useContext } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import Breadcrumbs from '../components/breadcrumbs';
 import Layout from '../components/layout';
 import { Store } from '../utils/store';
@@ -17,9 +19,25 @@ const CartPage: NextPage = () => {
   const removeItemHandler = (item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
-  const updateCartHandler = (item, qty) => {
+  const updateCartHandler = async (item, qty) => {
     const quantity: number = Number(qty);
+
+    // удостовериться о фактическом наличии товара в БД
+    const { data } = await axios.get(`/api/products/${item._id}`);
+    const { sizesColors } = data;
+
+    const selectedProduct = sizesColors.find(
+      (x) => x.size === item.activeSizes
+    );
+    const stokModelSize = selectedProduct.countInStock;
+
+    if (!stokModelSize) {
+      toast.info('Данный размер обуви, недоступен...');
+      return;
+    }
+
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+    toast.success('Данные в корзине обновлены...');
   };
 
   // достаем данные из нашего продукта
@@ -29,6 +47,7 @@ const CartPage: NextPage = () => {
     stockQty = item.sizesColors.find((x) => x.size === item.activeSizes);
     product = item;
   }
+
   // предварительная стоимость товара
   const priceNewItem = cartItems.reduce(
     (a, c) => a + c.quantity * c.priceNew,

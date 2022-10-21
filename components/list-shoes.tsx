@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import CardShoes from './card-shoes';
 
-interface newMaleShoesProps {
+interface IProps {
   shoes: {
-    id: string | undefined;
+    _id: string | undefined;
     slug: string;
     name: string;
     category: string;
@@ -11,8 +11,6 @@ interface newMaleShoesProps {
     novelty: boolean;
     discount: string | undefined;
     rating: string | undefined;
-    // colors: {
-    // id: string;
     nameColor: string;
     colorSheme1: string;
     colorSheme2?: string;
@@ -21,7 +19,6 @@ interface newMaleShoesProps {
       size: number;
       countInStock: number;
     }[];
-    // }[];
     priceNew: number;
     priceOld: number;
     currency: string;
@@ -72,11 +69,11 @@ interface newMaleShoesProps {
   }[];
 }
 
-const ListShoes: FC<newMaleShoesProps> = ({ shoes }) => {
+const ListShoes: FC<IProps> = ({ shoes }) => {
   return (
     <div className="grid grid-cols-1 grid-flow-row justify-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4">
       {shoes &&
-        shoes.map((shoes) => <CardShoes shoes={shoes} key={shoes.id} />)}
+        shoes.map((shoes) => <CardShoes shoes={shoes} key={shoes._id} />)}
     </div>
   );
 };

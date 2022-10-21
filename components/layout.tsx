@@ -20,7 +20,12 @@ export default function Layout({ title, children }: ILayoutProps) {
         <meta name="description" content="Ecommerce Website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ToastContainer position="bottom-center" limit={1} />
+      <ToastContainer
+        position="bottom-center"
+        limit={1}
+        theme="colored"
+        autoClose={3000}
+      />
       <div className="flex flex-col justify-between min-h-screen">
         <Header />
         <main>{children}</main>

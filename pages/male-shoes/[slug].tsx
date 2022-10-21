@@ -1,95 +1,88 @@
-import { Disclosure, RadioGroup, Transition } from '@headlessui/react';
 import React, { useContext, useState } from 'react';
-import Breadcrumbs from '../../components/breadcrumbs';
-import Layout from '../../components/layout';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { Disclosure, RadioGroup, Transition } from '@headlessui/react';
 import { BsChevronDown } from 'react-icons/bs';
 import { MdCheckCircle } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import SliderReviews from '../../components/sliders/slider-reviews';
-import { useRouter } from 'next/router';
-import { products } from '../../utils/products';
+import Breadcrumbs from '../../components/breadcrumbs';
+import Layout from '../../components/layout';
 import SliderItemShoes from '../../components/sliders/slider-item-shoes';
 import { Store } from '../../utils/store';
+import db from '../../utils/db';
+import Product from '../../models/Product';
 
-// interface Product {
-//   shoes: {
-//     id: string | undefined;
-//     slug: string;
-//     name: string;
-//     category: string;
-//     stockAvailability: boolean;
-//     novelty: boolean;
-//     discount: string | undefined;
-//     rating: string | undefined;
-//     colors: {
-//       nameColor: string;
-//       colorSheme1: string;
-//       colorSheme2?: string;
-//       images: string[];
-//       sizesColors: {
-//         size: number;
-//         countInStock: number;
-//       }[];
-//     }[];
-//     priceNew: number;
-//     priceOld: number;
-//     currency: string;
-//     description?: {
-//       title_1?: string | undefined;
-//       text_1?: string | undefined;
-//       title_2?: string | undefined;
-//       text_2?: string | undefined;
-//       title_3?: string | undefined;
-//       text_3?: string | undefined;
-//       title_4?: string | undefined;
-//       text_4?: string | undefined;
-//       title_5?: string | undefined;
-//       text_5?: string | undefined;
-//       title_6?: string | undefined;
-//       text_6?: string | undefined;
-//       title_7?: string | undefined;
-//       text_7?: string | undefined;
-//       title_8?: string | undefined;
-//       text_8?: string | undefined;
-//       title_9?: string | undefined;
-//       text_9?: string | undefined;
-//       title_10?: string | undefined;
-//       text_10?: string | undefined;
-//     };
-//     gender: string | undefined;
-//     sportType?: string | undefined;
-//     coverage?: string | undefined;
-//     typeOfTraining?: string | undefined;
-//     anatomicalInsole?: string | undefined;
-//     reflectiveDetails?: string | undefined;
-//     differenceSole?: string | undefined;
-//     typeOfPronation?: string | undefined;
-//     reinforcedBumper?: string | undefined;
-//     season?: string | undefined;
-//     warrantyPeriod?: string | undefined;
-//     closure?: string | undefined;
-//     feature?: string | undefined;
-//     antibacteriaImpregnation?: string | undefined;
-//     protectionFromMoisture?: string | undefined;
-//     materialUpper?: string | undefined;
-//     materialLining?: string | undefined;
-//     materialSole?: string | undefined;
-//     countryOfManufacture?: string | undefined;
-//     enrblast?: boolean;
-//     cushfoam?: boolean;
-//     flexzone360?: boolean;
-//   };
-// }
+interface IProps {
+  _id: string | undefined;
+  slug: string;
+  name: string;
+  category: string;
+  stockAvailability: boolean;
+  novelty: boolean;
+  discount: string | undefined;
+  rating: string | undefined;
+  nameColor: string;
+  colorSheme1: string;
+  colorSheme2?: string;
+  images: string[];
+  sizesColors: {
+    size: number;
+    countInStock: number;
+  }[];
+  priceNew: number;
+  priceOld: number;
+  currency: string;
+  description?: {
+    title_1?: string | undefined;
+    text_1?: string | undefined;
+    title_2?: string | undefined;
+    text_2?: string | undefined;
+    title_3?: string | undefined;
+    text_3?: string | undefined;
+    title_4?: string | undefined;
+    text_4?: string | undefined;
+    title_5?: string | undefined;
+    text_5?: string | undefined;
+    title_6?: string | undefined;
+    text_6?: string | undefined;
+    title_7?: string | undefined;
+    text_7?: string | undefined;
+    title_8?: string | undefined;
+    text_8?: string | undefined;
+    title_9?: string | undefined;
+    text_9?: string | undefined;
+    title_10?: string | undefined;
+    text_10?: string | undefined;
+  };
+  gender: string | undefined;
+  sportType?: string | undefined;
+  coverage?: string | undefined;
+  typeOfTraining?: string | undefined;
+  anatomicalInsole?: string | undefined;
+  reflectiveDetails?: string | undefined;
+  differenceSole?: string | undefined;
+  typeOfPronation?: string | undefined;
+  reinforcedBumper?: string | undefined;
+  season?: string | undefined;
+  warrantyPeriod?: string | undefined;
+  closure?: string | undefined;
+  feature?: string | undefined;
+  antibacteriaImpregnation?: string | undefined;
+  protectionFromMoisture?: string | undefined;
+  materialUpper?: string | undefined;
+  materialLining?: string | undefined;
+  materialSole?: string | undefined;
+  countryOfManufacture?: string | undefined;
+  enrblast?: boolean;
+  cushfoam?: boolean;
+  flexzone360?: boolean;
+}
 
-const MaleShoesItemPage = () => {
-  // const [activeColors, setActiveColors] = useState(false);
+const MaleShoesItemPage = ({ product }) => {
   const [activeSizes, setActiveSizes] = useState(false);
-
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
-
-  const { query } = useRouter();
-  const { slug } = query;
-  const product = products.shoes.find((x) => x.slug === slug);
 
   if (!product) {
     return (
@@ -102,17 +95,11 @@ const MaleShoesItemPage = () => {
   }
 
   const {
-    id,
-    // slug,
+    _id,
+    slug,
     name,
-    // category,
-    // stockAvailability,
-    // novelty,
-    // discount,
     rating,
     nameColor,
-    // colorSheme1,
-    // colorSheme2,
     images,
     sizesColors,
     priceNew,
@@ -141,17 +128,33 @@ const MaleShoesItemPage = () => {
     enrblast,
     cushfoam,
     flexzone360,
-  } = product;
+  }: IProps = product;
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const imageItem = images[0];
-    if (activeSizes) {
+
+    if (!activeSizes) {
+      return toast.info('Выберите размер обуви...');
+    }
+    // удостовериться о фактическом наличии товара в БД
+    const { data } = await axios.get(`/api/products/${_id}`);
+    const { sizesColors } = data;
+    const selectedProduct = sizesColors.find(
+      (item) => item.size === activeSizes
+    );
+    const stokModelSize = selectedProduct.countInStock;
+
+    if (!stokModelSize) {
+      return toast.info('Данный размер обуви, недоступен...');
+    }
+
+    if (activeSizes && stokModelSize) {
       dispatch({
         type: 'CART_ADD_ITEM',
         payload: {
-          id,
+          _id,
           slug,
           name,
           nameColor,
@@ -439,395 +442,248 @@ const MaleShoesItemPage = () => {
                     >
                       <Disclosure.Panel className=" border-b pb-3">
                         <div className="w-full text-sm text-gray-600">
-                          <table className="border-collapse border-separate border-spacing-y-2">
+                          <table className="border-separate border-spacing-y-2 w-full">
                             <tbody>
-                              {gender ? (
+                              {gender && (
                                 <tr>
-                                  <td className="align-top font-bold">Пол</td>
-                                  <td className="text-right align-bottom">
+                                  <td className="align-top font-bold w-1/2">
+                                    Пол
+                                  </td>
+                                  <td className="text-right align-bottom w-1/2">
                                     {gender}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">Пол</td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {sportType ? (
+                              {sportType && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Вид спорта
                                   </td>
                                   {}
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {sportType}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Вид спорта
-                                  </td>
-                                  {}
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {coverage ? (
+                              {coverage && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Покрытие
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {coverage}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Покрытие
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {typeOfTraining ? (
+                              {typeOfTraining && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Вид тренировки
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {typeOfTraining}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Вид тренировки
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {anatomicalInsole ? (
+                              {anatomicalInsole && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Анатомическая стелька
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {anatomicalInsole}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Анатомическая стелька
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {reflectiveDetails ? (
+                              {reflectiveDetails && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Светоотражающие детали
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {reflectiveDetails}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Светоотражающие детали
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {differenceSole ? (
+                              {differenceSole && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Перепад высоты подошвы
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {differenceSole}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Перепад высоты подошвы
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {typeOfPronation ? (
+                              {typeOfPronation && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Тип пронации
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {typeOfPronation}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Тип пронации
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {reinforcedBumper ? (
+                              {reinforcedBumper && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Усиленный бампер
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {reinforcedBumper}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Усиленный бампер
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {season ? (
+                              {season && (
                                 <tr>
-                                  <td className="align-top font-bold">Сезон</td>
-                                  <td className="text-right align-bottom">
+                                  <td className="align-top font-bold w-1/2">
+                                    Сезон
+                                  </td>
+                                  <td className="text-right align-bottom w-1/2">
                                     {season}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">Сезон</td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {warrantyPeriod ? (
+                              {warrantyPeriod && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Гарантийный период
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {warrantyPeriod}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Гарантийный период
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {closure ? (
+                              {closure && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Застежка
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {closure}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Застежка
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {feature ? (
+                              {feature && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Особенность
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {feature}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Особенность
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {antibacteriaImpregnation ? (
+                              {antibacteriaImpregnation && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Антибактериальная пропитка
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {antibacteriaImpregnation}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Антибактериальная пропитка
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {protectionFromMoisture ? (
+                              {protectionFromMoisture && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Защита от влаги
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {protectionFromMoisture}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Защита от влаги
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {materialUpper ? (
+                              {materialUpper && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Материал верха
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {materialUpper}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Материал верха
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {materialLining ? (
+                              {materialLining && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Материал подкладки
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {materialLining}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Материал подкладки
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {materialSole ? (
+                              {materialSole && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Материал подошвы
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {materialSole}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Материал подошвы
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {countryOfManufacture ? (
+                              {countryOfManufacture && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Страна производства
                                   </td>
-                                  <td className="text-right align-bottom">
+                                  <td className="text-right align-bottom w-1/2">
                                     {countryOfManufacture}
                                   </td>
                                 </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Страна производства
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
-                                </tr>
                               )}
 
-                              {enrblast ? (
+                              {enrblast && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Enrblast
                                   </td>
-                                  <td className="text-right align-bottom">
-                                    {enrblast}
+                                  <td className="text-right align-bottom w-1/2">
+                                    да
                                   </td>
-                                </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Enrblast
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
                                 </tr>
                               )}
 
-                              {cushfoam ? (
+                              {cushfoam && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Cushfoam
                                   </td>
-                                  <td className="text-right align-bottom">
-                                    {cushfoam}
+                                  <td className="text-right align-bottom w-1/2">
+                                    да
                                   </td>
-                                </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Cushfoam
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
                                 </tr>
                               )}
 
-                              {flexzone360 ? (
+                              {flexzone360 && (
                                 <tr>
-                                  <td className="align-top font-bold">
+                                  <td className="align-top font-bold w-1/2">
                                     Flexzone360
                                   </td>
-                                  <td className="text-right align-bottom">
-                                    {flexzone360}
+                                  <td className="text-right align-bottom w-1/2">
+                                    да
                                   </td>
-                                </tr>
-                              ) : (
-                                <tr>
-                                  <td className="align-top font-bold">
-                                    Flexzone360
-                                  </td>
-                                  <td className="text-right align-bottom">-</td>
                                 </tr>
                               )}
                             </tbody>
@@ -852,3 +708,16 @@ const MaleShoesItemPage = () => {
 };
 
 export default MaleShoesItemPage;
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { slug } = params;
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+  await db.disconnect();
+  return {
+    props: {
+      product: product && JSON.parse(JSON.stringify(product)),
+    },
+  };
+}

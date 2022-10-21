@@ -39,7 +39,7 @@ export default function HeaderLevel_1() {
             </a>
           </Link>
         </div>
-        <div className="flex items-end justify-between w-24">
+        <div className="flex items-end justify-between w-28">
           <Link href="/cart">
             <a className="relative">
               <GiShoppingCart className="w-6 h-6 text-gray-600" />
