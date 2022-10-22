@@ -9,6 +9,9 @@ interface IOrder {
     activeSizes: number;
     quantity: number;
     priceNew: number;
+    gender: string;
+    currency: string;
+    slug: string;
   }[];
   shippingAddress: {
     fullName: string;
@@ -33,12 +36,15 @@ const orderSchema = new mongoose.Schema<IOrder>(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     ordersItems: [
       {
+        slug: { type: String, required: true, unique: true },
         imageItem: { type: String, required: true },
         name: { type: String, required: true },
         nameColor: { type: String, required: true },
         activeSizes: { type: Number, required: true },
         quantity: { type: Number, required: true },
         priceNew: { type: Number, required: true },
+        gender: { type: String, required: true },
+        currency: { type: String, required: true },
       },
     ],
     shippingAddress: {
