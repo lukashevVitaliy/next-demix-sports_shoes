@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import Layout from '../components/layout';
 import { useForm } from 'react-hook-form';
 import { signIn, useSession } from 'next-auth/react';
@@ -9,12 +10,14 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 interface Inputs {
+  name: string;
   email: string;
   password: string;
+  confirmPassword: string;
   redirect: boolean;
 }
 
-const LoginPage: NextPage = () => {
+const RegisterPage: NextPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const { redirect } = router.query;
@@ -28,11 +31,19 @@ const LoginPage: NextPage = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const submitHandler = async ({ email, password }: Inputs) => {
+  const submitHandler = async ({ name, email, password }: Inputs) => {
     try {
+      // регистрация
+      await axios.post(`/api/auth/signup`, {
+        name,
+        email,
+        password,
+      });
+      // авторизация
       const result = await signIn('credentials', {
         redirect: false,
         email,
@@ -47,12 +58,37 @@ const LoginPage: NextPage = () => {
   };
 
   return (
-    <Layout title="Авторизация">
+    <Layout title="Регистрация">
       <form
         className="mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <h3 className="text-center">Авторизация</h3>
+        <h3 className="text-center">Регистрация</h3>
+
+        <div className="mb-4">
+          <label htmlFor="name" className="text-xs text-gray-400">
+            Name
+          </label>
+          <input
+            type="name"
+            {...register('name', {
+              required: 'Пожалуйста введите имя',
+              minLength: {
+                value: 2,
+                message: 'Введите минимум 2 символa',
+              },
+            })}
+            className="w-full"
+            id="name"
+            autoFocus
+          />
+          {errors.name && (
+            <div className="text-red-500 text-xs mt-1">
+              {errors.name.message}
+            </div>
+          )}
+        </div>
+
         <div className="mb-4">
           <label htmlFor="email" className="text-xs text-gray-400">
             Email
@@ -68,7 +104,6 @@ const LoginPage: NextPage = () => {
             })}
             className="w-full"
             id="email"
-            autoFocus
           />
           {errors.email && (
             <div className="text-red-500 text-xs mt-1">
@@ -76,6 +111,7 @@ const LoginPage: NextPage = () => {
             </div>
           )}
         </div>
+
         <div className="mb-10">
           <label htmlFor="password" className="text-xs text-gray-400">
             Password
@@ -98,9 +134,40 @@ const LoginPage: NextPage = () => {
             </div>
           )}
         </div>
+
+        <div className="mb-10">
+          <label htmlFor="confirmPassword" className="text-xs text-gray-400">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            {...register('confirmPassword', {
+              required: 'Пожалуйста подтвердите пароль',
+              validate: (value) => value === getValues('password'),
+              minLength: {
+                value: 6,
+                message: 'Подтвердите пароль минимум 6 символов',
+              },
+            })}
+            className="w-full"
+            id="confirmPassword"
+          />
+          {errors.password && (
+            <div className="text-red-500 text-xs mt-1">
+              {errors.password.message}
+            </div>
+          )}
+          {errors.confirmPassword &&
+            errors.confirmPassword.type === 'validate' && (
+              <div className="text-red-500 text-xs mt-1">
+                Пароль не совпадает !!!
+              </div>
+            )}
+        </div>
+
         <div className="mb-4 flex justify-center">
           <button className="block py-2 w-1/4 bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all">
-            Авторизация
+            Регистрация
           </button>
         </div>
         <div className="mb-4 text-center text-gray-400">
@@ -116,4 +183,4 @@ const LoginPage: NextPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

@@ -95,7 +95,7 @@ const OrderItemPage = () => {
                   <div className="alert-error">Не оплачено</div>
                 )}
               </div>
-              <div className="border border-gray-200 shadow-md rounded py-2 px-4 hover:shadow-lime-400 hover:border-lime-400 hover:scale-[99%] transition-all">
+              <div className="border border-gray-200 shadow-md rounded py-2 px-4 pb-1 mb-5 hover:shadow-lime-400 hover:border-lime-400 hover:scale-[99%] transition-all">
                 <h5 className="mb-5">Способ Оплаты</h5>
                 <table className="min-w-full">
                   <thead className="h-10 border-b-2 border-lime-400 text-sm text-gray-400 tracking-wider uppercase">
@@ -165,7 +165,7 @@ const OrderItemPage = () => {
                 </table>
               </div>
             </div>
-            <div className="p-5 border shadow-md border-gray-200 rounded hover:shadow-lime-400 hover:border-lime-400 hover:scale-[99%] transition-all">
+            <div className="p-5 mb-5 border shadow-md border-gray-200 rounded hover:shadow-lime-400 hover:border-lime-400 hover:scale-[99%] transition-all">
               <h5 className="mb-5">Итого по заказу:</h5>
               <ul>
                 <li>
