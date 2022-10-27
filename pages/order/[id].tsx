@@ -96,7 +96,7 @@ const OrderItemPage = () => {
                 )}
               </div>
               <div className="border border-gray-200 shadow-md rounded py-2 px-4 pb-1 mb-5 hover:shadow-lime-400 hover:border-lime-400 hover:scale-[99%] transition-all">
-                <h5 className="mb-5">Способ Оплаты</h5>
+                <h5 className="mb-5">Ваш Заказ</h5>
                 <table className="min-w-full">
                   <thead className="h-10 border-b-2 border-lime-400 text-sm text-gray-400 tracking-wider uppercase">
                     <tr>
@@ -201,6 +201,5 @@ const OrderItemPage = () => {
   );
 };
 
-export default OrderItemPage;
-
 OrderItemPage.auth = true;
+export default OrderItemPage;

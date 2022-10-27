@@ -234,6 +234,5 @@ const PlaceOrderPage = () => {
   );
 };
 
-export default PlaceOrderPage;
-
 PlaceOrderPage.auth = true;
+export default PlaceOrderPage;

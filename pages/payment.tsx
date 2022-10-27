@@ -74,6 +74,5 @@ const PaymentPage: NextPage = () => {
   );
 };
 
-export default PaymentPage;
-
 PaymentPage.auth = true;
+export default PaymentPage;

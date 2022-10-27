@@ -205,6 +205,5 @@ const ShippingPage: NextPage = () => {
   );
 };
 
-export default ShippingPage;
-
 ShippingPage.auth = true;
+export default ShippingPage;

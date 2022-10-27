@@ -1,5 +1,3 @@
-// информация о заказе
-
 import { getSession } from 'next-auth/react';
 import Order from '../../../models/Order';
 import db from '../../../utils/db';
@@ -7,13 +5,13 @@ import db from '../../../utils/db';
 const handler = async (req, res) => {
   const session = await getSession({ req });
   if (!session) {
-    return res.status(401).send('требуется регистрация');
+    return res.status(401).send({ message: 'требуется регистрация' });
   }
-
+  const { user } = session;
   await db.connect();
-  const order = await Order.findById(req.query.id);
+  const orders = await Order.find({ user: user._id });
   await db.disconnect();
-  res.send(order);
+  res.send(orders);
 };
 
 export default handler;
