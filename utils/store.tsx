@@ -9,12 +9,16 @@ interface IStore {
     cartItems: [];
     shippingAddress: {};
   };
+  sortProduct: {};
+  filterProduct: '';
 }
 
 const initialState: IStore = {
   cart: Cookies.get('cart')
     ? JSON.parse(Cookies.get('cart'))
     : { cartItems: [], shippingAddress: {} },
+  sortProduct: {},
+  filterProduct: '',
 };
 
 export const Store = createContext();
@@ -71,6 +75,24 @@ const reducer = (state, action) => {
           ...state.cart,
           paymentMethod: action.payload,
         },
+      };
+    }
+    case 'SORT_METHOD_VALUE': {
+      return {
+        ...state,
+        sortProduct: action.payload,
+      };
+    }
+    case 'FILTER_METHOD_VALUE': {
+      return {
+        ...state,
+        filterProduct: action.payload,
+      };
+    }
+    case 'RESET_FILTER_METHOD_VALUE': {
+      return {
+        ...state,
+        filterProduct: '',
       };
     }
     default:

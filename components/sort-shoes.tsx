@@ -1,5 +1,5 @@
 import { Listbox } from '@headlessui/react';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { TbSortAscendingNumbers } from 'react-icons/tb';
 import { TbSortDescendingNumbers } from 'react-icons/tb';
 import { TbStar } from 'react-icons/tb';
@@ -7,6 +7,7 @@ import { AiOutlinePercentage } from 'react-icons/ai';
 import { MdOutlineFiberNew } from 'react-icons/md';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { RiArrowLeftRightFill } from 'react-icons/ri';
+import { Store } from '../utils/store';
 
 const items = [
   {
@@ -39,6 +40,11 @@ const items = [
 
 const SortShoes = () => {
   const [selectedItem, setSelectedItem] = useState(items[0]);
+  const { dispatch } = useContext(Store);
+
+  useEffect(() => {
+    dispatch({ type: 'SORT_METHOD_VALUE', payload: selectedItem });
+  }, [dispatch, selectedItem]);
 
   return (
     <div className=" relative flex flex-col text-gray-400 py-2 px-4 w-[240px] border-r-2 border-gray-400 hover:border-lime-400 hover:text-gray-600">
@@ -54,8 +60,8 @@ const SortShoes = () => {
                 <li
                   className={`${
                     active
-                      ? 'flex items-center justify-between px-2 py-1 rounded bg-gray-600 text-gray-200 text-sm'
-                      : 'flex items-center justify-between px-2 py-1 rounded bg-white text-gray-400 text-sm'
+                      ? 'flex items-center justify-between px-2 py-1 rounded bg-gray-600 text-gray-200 text-sm cursor-pointer'
+                      : 'flex items-center justify-between px-2 py-1 rounded bg-white text-gray-400 text-sm cursor-pointer'
                   }`}
                 >
                   {item.name} {item.icon}

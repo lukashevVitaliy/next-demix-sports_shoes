@@ -1,10 +1,17 @@
-import React, { Dispatch, Fragment, useState } from 'react';
+import React, {
+  Dispatch,
+  Fragment,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { RiArrowLeftRightFill } from 'react-icons/ri';
 import { Disclosure, RadioGroup, Transition } from '@headlessui/react';
 import { BsChevronDown } from 'react-icons/bs';
 import { MdCheckCircle } from 'react-icons/md';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Store } from '../utils/store';
 
 const technology = ['Enrblast', 'Cushfoam', 'Flexzone360'];
 const typeShoes = ['Кроссовки', 'Кеды', 'Бутсы'];
@@ -41,14 +48,515 @@ interface Iprops {
 }
 
 const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
-  const [activeTechnology, setActiveTechnology] = useState(false);
   const [activeTypeShoes, setActiveTypeShoes] = useState(false);
   const [activeSports, setActiveSports] = useState(false);
   const [activeCoverage, setActiveCoverage] = useState(false);
   const [activeSeasons, setActiveSeasons] = useState(false);
+  const [activeTechnology, setActiveTechnology] = useState(false);
   const [activeTypePronation, setActiveTypePronation] = useState(false);
   const [activeReflectiveDetails, setActiveReflectiveDetails] = useState(false);
   const [activeUpperMaterils, setActiveUpperMaterils] = useState(false);
+
+  const { state, dispatch } = useContext(Store);
+
+  useEffect(() => {
+    switch (activeTypeShoes || activeSports) {
+      case 'Кроссовки': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeTypeShoes,
+        });
+        setActiveTechnology(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Кеды': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeTypeShoes,
+        });
+        setActiveTechnology(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Бутсы': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeTypeShoes,
+        });
+        setActiveTechnology(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+    }
+    // if (
+    //   activeTechnology ||
+    //   activeTypeShoes ||
+    //   activeSports ||
+    //   activeCoverage ||
+    //   activeSeasons ||
+    //   activeTypePronation ||
+    //   activeReflectiveDetails ||
+    //   activeUpperMaterils
+    // ) {
+    //   dispatch({
+    //     type: 'FILTER_METHOD_VALUE',
+    //     payload:
+    //       activeTechnology ||
+    //       activeTypeShoes ||
+    //       activeSports ||
+    //       activeCoverage ||
+    //       activeSeasons ||
+    //       activeTypePronation ||
+    //       activeReflectiveDetails ||
+    //       activeUpperMaterils,
+    //   });
+    // }
+  }, [activeTypeShoes, dispatch]);
+
+  useEffect(() => {
+    switch (activeSports) {
+      case 'Спортивный стиль': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSports,
+        });
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Футбол': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSports,
+        });
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Бег': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSports,
+        });
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Фитнес': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSports,
+        });
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Волейбол': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSports,
+        });
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Трейлраннинг': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSports,
+        });
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+    }
+  }, [activeSports, dispatch]);
+
+  useEffect(() => {
+    switch (activeCoverage) {
+      case 'Асфальт': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeCoverage,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Зал': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeCoverage,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Все типы покрытий': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeCoverage,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Грунт и искусственное покрытие': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeCoverage,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Натуральный и исскуственный газон': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeCoverage,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Пересеченная местность': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeCoverage,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+    }
+  }, [activeCoverage, dispatch]);
+
+  useEffect(() => {
+    switch (activeSeasons) {
+      case 'Весна': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSeasons,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Лето': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSeasons,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Осень': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSeasons,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Зима': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeSeasons,
+        });
+        setActiveSports(false);
+        setActiveTypeShoes(false);
+        setActiveTechnology(false);
+        setActiveCoverage(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+    }
+  }, [activeSeasons, dispatch]);
+
+  useEffect(() => {
+    switch (activeTechnology) {
+      case 'Enrblast': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeTechnology,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Cushfoam': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeTechnology,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Flexzone360': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeTechnology,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+    }
+  }, [activeTechnology, dispatch]);
+
+  useEffect(() => {
+    switch (activeTypePronation) {
+      case 'Нейтральная пронация': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeTypePronation,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTechnology(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+      case 'Гиперпронация': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeTypePronation,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTechnology(false);
+        setActiveReflectiveDetails(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+    }
+  }, [activeTypePronation, dispatch]);
+
+  useEffect(() => {
+    switch (activeReflectiveDetails) {
+      case 'Да': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeReflectiveDetails,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTechnology(false);
+        setActiveTypePronation(false);
+        setActiveUpperMaterils(false);
+        break;
+      }
+    }
+  }, [activeReflectiveDetails, dispatch]);
+
+  useEffect(() => {
+    switch (activeUpperMaterils) {
+      case 'Синтетическая кожа': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeUpperMaterils,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTechnology(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        break;
+      }
+      case 'Полиэстер': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeUpperMaterils,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTechnology(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        break;
+      }
+      case 'Натуральная кожа': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeUpperMaterils,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTechnology(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        break;
+      }
+      case 'Полиуретан': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeUpperMaterils,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTechnology(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        break;
+      }
+      case 'Хлопок': {
+        dispatch({
+          type: 'FILTER_METHOD_VALUE',
+          payload: activeUpperMaterils,
+        });
+        setActiveTypeShoes(false);
+        setActiveSports(false);
+        setActiveCoverage(false);
+        setActiveSeasons(false);
+        setActiveTechnology(false);
+        setActiveTypePronation(false);
+        setActiveReflectiveDetails(false);
+        break;
+      }
+    }
+  }, [activeUpperMaterils, dispatch]);
+
+  useEffect(() => {
+    resetClickHandler();
+  }, []);
+
+  const resetClickHandler = () => {
+    dispatch({ type: 'RESET_FILTER_METHOD_VALUE' });
+    setActiveTypeShoes(false);
+    setActiveTechnology(false);
+    setActiveSports(false);
+    setActiveCoverage(false);
+    setActiveSeasons(false);
+    setActiveTypePronation(false);
+    setActiveReflectiveDetails(false);
+    setActiveUpperMaterils(false);
+  };
 
   return (
     <div
@@ -746,6 +1254,12 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
             )}
           </Disclosure>
         </div>
+        <button
+          className="block mx-auto mt-10 py-2 w-1/2 bg-black/80 ring-2 ring-lime-400 rounded-lg shadow text-white text-xs font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 transition-all"
+          onClick={resetClickHandler}
+        >
+          Сбросить Фильтры
+        </button>
       </div>
     </div>
   );
