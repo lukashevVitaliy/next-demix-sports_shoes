@@ -10,7 +10,8 @@ interface IStore {
     shippingAddress: {};
   };
   sortProduct: {};
-  filterProduct: '';
+  filterProduct: string | false;
+  searchItem: string | false;
 }
 
 const initialState: IStore = {
@@ -19,6 +20,7 @@ const initialState: IStore = {
     : { cartItems: [], shippingAddress: {} },
   sortProduct: {},
   filterProduct: '',
+  searchItem: '',
 };
 
 export const Store = createContext();
@@ -93,6 +95,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         filterProduct: '',
+      };
+    }
+    case 'SEARCH_ITEM': {
+      return {
+        ...state,
+        searchItem: action.payload,
       };
     }
     default:

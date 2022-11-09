@@ -8,6 +8,7 @@ import FiltersMenu from '../../components/filter-menu';
 import db from '../../utils/db';
 import Product from '../../models/Product';
 import { Store } from '../../utils/store';
+import { usePagination } from '../../hooks/usePagination';
 
 interface IProps {
   products: {
@@ -80,7 +81,7 @@ interface IProps {
 const MaleShoesPage: FC<IProps> = ({ products }) => {
   const [activeMenuFilters, setActiveMenuFilters] = useState(false);
   const { state } = useContext(Store);
-  const { sortProduct, filterProduct } = state;
+  const { sortProduct, filterProduct, searchItem } = state;
 
   const maleShoes = products
     .filter(
@@ -192,7 +193,25 @@ const MaleShoesPage: FC<IProps> = ({ products }) => {
         (sortProduct.name === 'Сначала дороже' && b.priceNew - a.priceNew) ||
         (sortProduct.name === 'По Рейтингу отзывов' &&
           b.rating.length - a.rating.length)
+    )
+    .filter(
+      (item) =>
+        item.gender === 'Мужчины' &&
+        item.name.toLowerCase().includes(searchItem.toLowerCase())
     );
+
+  // pagination
+  const {
+    totalPages,
+    nextPage,
+    prevPage,
+    firstContentIndex,
+    lastContentIndex,
+    page,
+  } = usePagination({
+    contentPerPage: 12,
+    count: maleShoes.length,
+  });
 
   return (
     <Layout title="Обувь для мужчин">
@@ -207,8 +226,20 @@ const MaleShoesPage: FC<IProps> = ({ products }) => {
           activeMenuFilters={activeMenuFilters}
           setActiveMenuFilters={setActiveMenuFilters}
         />
-        <ListShoes shoes={maleShoes} />
-        <Pagination />
+        {maleShoes.filter((item) =>
+          item.name.toLowerCase().includes(searchItem.toLowerCase())
+        ).length === 0 && <h5>Товар не найден...</h5>}
+        <ListShoes
+          shoes={maleShoes}
+          firstContentIndex={firstContentIndex}
+          lastContentIndex={lastContentIndex}
+        />
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          nextPage={nextPage}
+          prevPage={prevPage}
+        />
       </div>
     </Layout>
   );

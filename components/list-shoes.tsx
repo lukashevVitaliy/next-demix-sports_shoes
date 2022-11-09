@@ -67,13 +67,20 @@ interface IProps {
     cushfoam?: boolean;
     flexzone360?: boolean;
   }[];
+  firstContentIndex: number;
+  lastContentIndex: number;
 }
 
-const ListShoes: FC<IProps> = ({ shoes }) => {
+const ListShoes: FC<IProps> = ({
+  shoes,
+  firstContentIndex,
+  lastContentIndex,
+}) => {
   return (
     <div className="grid grid-cols-1 grid-flow-row justify-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4">
-      {shoes &&
-        shoes.map((shoes) => <CardShoes shoes={shoes} key={shoes._id} />)}
+      {shoes.slice(firstContentIndex, lastContentIndex).map((shoes) => (
+        <CardShoes shoes={shoes} key={shoes._id} />
+      ))}
     </div>
   );
 };
