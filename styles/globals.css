@@ -44,7 +44,7 @@ body {
 input,
 select,
 textarea {
-	@apply rounded border p-2 outline-none ring-lime-400 focus:ring;
+	@apply rounded border p-2 outline-none ring-lime-400 resize-none focus:ring;
 }
 
 .dropdown-link {
@@ -66,4 +66,73 @@ textarea {
 }
 .alert-success {
 	@apply my-3 p-3 rounded-lg bg-green-100 text-green-700;
+}
+
+/* rating-review */
+/* .review_item:checked,
+.review_item:checked ~ .review_label {
+	@apply text-lime-400;
+}
+.review_label:hover,
+.review_label:hover ~ .review_label,
+.review_label:checked ~ .review_label:hover {
+	@apply text-lime-400;
+} */
+
+.review_item_reliability:checked,
+.review_item_reliability:checked ~ .review_label_reliability {
+	@apply text-lime-400;
+}
+.review_label_reliability:hover,
+.review_label_reliability:hover ~ .review_label_reliability,
+.review_label_reliability:checked ~ .review_label_reliability:hover {
+	@apply text-lime-400;
+}
+
+.review_item_quality:checked,
+.review_item_quality:checked ~ .review_label_quality {
+	@apply text-lime-400;
+}
+.review_label_quality:hover,
+.review_label_quality:hover ~ .review_label_quality,
+.review_label_quality:checked ~ .review_label_quality:hover {
+	@apply text-lime-400;
+}
+
+.review_item_photoMatching:checked,
+.review_item_photoMatching:checked ~ .review_label_photoMatching {
+	@apply text-lime-400;
+}
+.review_label_photoMatching:hover,
+.review_label_photoMatching:hover ~ .review_label_photoMatching,
+.review_label_photoMatching:checked ~ .review_label_photoMatching:hover {
+	@apply text-lime-400;
+}
+
+.review_item_functionality:checked,
+.review_item_functionality:checked ~ .review_label_functionality {
+	@apply text-lime-400;
+}
+.review_label_functionality:hover,
+.review_label_functionality:hover ~ .review_label_functionality,
+.review_label_functionality:checked ~ .review_label_functionality:hover {
+	@apply text-lime-400;
+}
+
+.review_item_impression:checked,
+.review_item_impression:checked ~ .review_label_impression {
+	@apply text-lime-400;
+}
+.review_label_impression:hover,
+.review_label_impression:hover ~ .review_label_impression,
+.review_label_impression:checked ~ .review_label_impression:hover {
+	@apply text-lime-400;
+}
+
+/* private policy */
+.policyInp:checked + .policySp {
+	background-image: url("/assets/icons/check.svg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }

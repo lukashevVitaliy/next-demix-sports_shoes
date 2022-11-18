@@ -16,6 +16,7 @@ export const products: Product = {
       isAdmin: false,
     },
   ],
+  reviews: [],
   shoes: [
     {
       id: '01_ohra',

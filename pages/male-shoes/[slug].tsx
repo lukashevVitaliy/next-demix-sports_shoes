@@ -12,6 +12,8 @@ import SliderItemShoes from '../../components/sliders/slider-item-shoes';
 import { Store } from '../../utils/store';
 import db from '../../utils/db';
 import Product from '../../models/Product';
+import ModalReview from '../../components/modal/modal-review';
+import Review from '../../models/Review';
 
 interface IProps {
   _id: string | undefined;
@@ -78,17 +80,17 @@ interface IProps {
   cushfoam?: boolean;
   flexzone360?: boolean;
 }
-
-const MaleShoesItemPage = ({ product }) => {
+const MaleShoesItemPage = ({ product, reviews }) => {
   const [activeSizes, setActiveSizes] = useState(false);
   const { state, dispatch } = useContext(Store);
+  const [modalReview, setModalReview] = useState(false);
   const router = useRouter();
 
   if (!product) {
     return (
       <Layout title="Товар не найден...">
         <div className="container mx-auto px-4">
-          <h5>Товар не найден...</h5>
+          <h5>Товар не найден...</h5>discommenddiscommend
         </div>
       </Layout>
     );
@@ -170,6 +172,13 @@ const MaleShoesItemPage = ({ product }) => {
       });
     }
     router.push('/cart');
+  };
+
+  const onClose = () => {
+    setModalReview(false);
+  };
+  const openModalReview = () => {
+    setModalReview(true);
   };
 
   return (
@@ -698,9 +707,20 @@ const MaleShoesItemPage = ({ product }) => {
           </div>
         </div>
         <h5 className="my-10 text-center">Отзывы покупателей</h5>
-        <SliderReviews />
-        <button className="block mx-auto mt-10 py-2 w-1/4 bg-black/80 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 transition-all">
-          Оставить отзыв
+        <SliderReviews reviews={reviews} />
+
+        <ModalReview
+          slug={slug}
+          name={name}
+          active={modalReview}
+          onClose={onClose}
+        />
+
+        <button
+          className="block mx-auto mt-10 py-2 w-1/4 bg-black/80 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 transition-all"
+          onClick={openModalReview}
+        >
+          Написать отзыв
         </button>
       </div>
     </Layout>
@@ -714,10 +734,12 @@ export async function getServerSideProps(context) {
   const { slug } = params;
   await db.connect();
   const product = await Product.findOne({ slug }).lean();
+  const reviews = await Review.find().lean();
   await db.disconnect();
   return {
     props: {
       product: product && JSON.parse(JSON.stringify(product)),
+      reviews: reviews && JSON.parse(JSON.stringify(reviews)),
     },
   };
 }

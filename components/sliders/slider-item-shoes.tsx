@@ -12,7 +12,7 @@ interface Images {
 
 const SliderItemShoes = ({ images }: Images) => {
   return (
-    <div className="w-2/3 mb-5">
+    <div className="w-2/3 mb-5 z-0">
       <Swiper
         effect={'cards'}
         grabCursor={true}

@@ -104,29 +104,6 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
         break;
       }
     }
-    // if (
-    //   activeTechnology ||
-    //   activeTypeShoes ||
-    //   activeSports ||
-    //   activeCoverage ||
-    //   activeSeasons ||
-    //   activeTypePronation ||
-    //   activeReflectiveDetails ||
-    //   activeUpperMaterils
-    // ) {
-    //   dispatch({
-    //     type: 'FILTER_METHOD_VALUE',
-    //     payload:
-    //       activeTechnology ||
-    //       activeTypeShoes ||
-    //       activeSports ||
-    //       activeCoverage ||
-    //       activeSeasons ||
-    //       activeTypePronation ||
-    //       activeReflectiveDetails ||
-    //       activeUpperMaterils,
-    //   });
-    // }
   }, [activeTypeShoes, dispatch]);
 
   useEffect(() => {

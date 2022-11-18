@@ -1,9 +1,9 @@
+import React from 'react';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { SessionProvider, useSession } from 'next-auth/react';
 import { StoreProvider } from '../utils/store';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (

@@ -10,7 +10,30 @@ import 'swiper/css/free-mode';
 import 'swiper/css/keyboard';
 import 'swiper/css/navigation';
 
-export default function SliderReviews() {
+interface IPropsReview {
+  _id: string;
+  slug: string;
+  name: string;
+  aboutProduct: string;
+  advantage: string;
+  disadvantages: string;
+  nameUser: string;
+  userCity: string;
+  impression: string;
+  reliability: string;
+  functionality: string;
+  quality: string;
+  photoMatching: string;
+  recommend: boolean;
+  discommend: boolean;
+  periodOfUseUser: string;
+  frequencyOfUseUser: string;
+  policyData: boolean;
+  timestamps: boolean;
+}
+
+export default function SliderReviews({ reviews }) {
+  console.log(reviews);
   return (
     <div className="container mx-auto px-4">
       <Swiper

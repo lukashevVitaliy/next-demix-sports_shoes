@@ -5,6 +5,7 @@ export interface Product {
     password: string;
     isAdmin: boolean;
   }[];
+  reviews: [];
   shoes: {
     id: string | undefined;
     slug: string;
