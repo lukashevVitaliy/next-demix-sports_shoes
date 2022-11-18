@@ -46,7 +46,6 @@ const ModalReview = ({ slug, name, active, onClose }: IModalProps) => {
     register,
     handleSubmit,
     reset,
-    formState,
     formState: { errors },
   } = useForm();
 
@@ -95,8 +94,25 @@ const ModalReview = ({ slug, name, active, onClose }: IModalProps) => {
           frequencyOfUseUser,
           policyData,
         });
-        onClose();
         toast.success('Ваш отзыв успешно отправлен...');
+        reset({
+          aboutProduct: '',
+          advantage: '',
+          disadvantages: '',
+          nameUser: '',
+          userCity: '',
+        });
+        setImpression(false);
+        setReliability(false);
+        setFunctionality(false);
+        setQuality(false);
+        setPhotoMatching(false);
+        setRecommend(false);
+        setDiscommend(false);
+        setPeriodOfUseUser(false);
+        setFrequencyOfUseUser(false);
+        setPolicyData(false);
+        onClose();
       } else if (
         !impression ||
         !reliability ||
@@ -120,28 +136,6 @@ const ModalReview = ({ slug, name, active, onClose }: IModalProps) => {
       toast.error(`Ошибка: ${err}`);
     }
   };
-
-  useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset({
-        aboutProduct: '',
-        advantage: '',
-        disadvantages: '',
-        nameUser: '',
-        userCity: '',
-      });
-      setImpression(false);
-      setReliability(false);
-      setFunctionality(false);
-      setQuality(false);
-      setPhotoMatching(false);
-      setRecommend(false);
-      setDiscommend(false);
-      setPeriodOfUseUser(false);
-      setFrequencyOfUseUser(false);
-      setPolicyData(false);
-    }
-  }, [formState.isSubmitSuccessful, reset]);
 
   const handleClickRecommend = () => {
     if (discommend === false && recommend === false) {

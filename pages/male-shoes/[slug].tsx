@@ -736,6 +736,7 @@ export async function getServerSideProps(context) {
   const product = await Product.findOne({ slug }).lean();
   const reviews = await Review.find().lean();
   await db.disconnect();
+
   return {
     props: {
       product: product && JSON.parse(JSON.stringify(product)),
