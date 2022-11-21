@@ -327,8 +327,8 @@ const ModalReview = ({ slug, name, active, onClose }: IModalProps) => {
                 message: 'Введите более 2 символов!',
               },
               maxLength: {
-                value: 30,
-                message: 'Введите менее 30 символов!',
+                value: 20,
+                message: 'Введите менее 20 символов!',
               },
             })}
           />
@@ -358,8 +358,8 @@ const ModalReview = ({ slug, name, active, onClose }: IModalProps) => {
                 message: 'Введите более 2 символов!',
               },
               maxLength: {
-                value: 30,
-                message: 'Введите менее 30 символов!',
+                value: 20,
+                message: 'Введите менее 20 символов!',
               },
             })}
           />

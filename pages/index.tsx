@@ -5,6 +5,7 @@ import SliderMainBanner from '../components/sliders/slider-main-banner';
 import SliderNewShoes from '../components/sliders/slider-new-shoes';
 import SliderTehnologyDemix from '../components/sliders/slider-tehnology-demix';
 import Product from '../models/Product';
+import Review from '../models/Review';
 import db from '../utils/db';
 
 interface IProps {
@@ -73,9 +74,28 @@ interface IProps {
     cushfoam?: boolean;
     flexzone360?: boolean;
   }[];
+  reviews: {
+    slug: string;
+    name: string;
+    aboutProduct: string;
+    advantage: string;
+    disadvantages: string;
+    nameUser: string;
+    userCity: string;
+    impression: string;
+    reliability: string;
+    functionality: string;
+    quality: string;
+    photoMatching: string;
+    recommend: boolean;
+    discommend: boolean;
+    periodOfUseUser: string;
+    frequencyOfUseUser: string;
+    createdAt: string;
+  }[];
 }
 
-const HomePage: FC<IProps> = ({ products }) => {
+const HomePage: FC<IProps> = ({ products, reviews }) => {
   const newShoes = products.filter((x) => x.novelty === true);
   // const femaleShoes = products.filter((x) => x.gender === 'Женщины');
 
@@ -83,7 +103,7 @@ const HomePage: FC<IProps> = ({ products }) => {
     <Layout title="Home">
       <SliderMainBanner />
       <CatalogMain />
-      <SliderNewShoes newShoes={newShoes} />
+      <SliderNewShoes newShoes={newShoes} reviews={reviews} />
       <SliderTehnologyDemix />
     </Layout>
   );
@@ -94,9 +114,11 @@ export default HomePage;
 export async function getServerSideProps() {
   await db.connect();
   const products = await Product.find().lean();
+  const reviews = await Review.find().lean();
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
+      reviews: JSON.parse(JSON.stringify(reviews)),
     },
   };
 }

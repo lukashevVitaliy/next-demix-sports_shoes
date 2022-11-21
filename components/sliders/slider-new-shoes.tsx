@@ -76,9 +76,28 @@ interface newShoesProps {
     cushfoam?: boolean;
     flexzone360?: boolean;
   }[];
+  reviews: {
+    slug: string;
+    name: string;
+    aboutProduct: string;
+    advantage: string;
+    disadvantages: string;
+    nameUser: string;
+    userCity: string;
+    impression: string;
+    reliability: string;
+    functionality: string;
+    quality: string;
+    photoMatching: string;
+    recommend: boolean;
+    discommend: boolean;
+    periodOfUseUser: string;
+    frequencyOfUseUser: string;
+    createdAt: string;
+  }[];
 }
 
-const SliderNewShoes: FC<newShoesProps> = ({ newShoes }) => {
+const SliderNewShoes: FC<newShoesProps> = ({ newShoes, reviews }) => {
   return (
     <div className="container mx-auto px-4">
       <h2 className="text-center">Новые модели обуви</h2>
@@ -104,7 +123,7 @@ const SliderNewShoes: FC<newShoesProps> = ({ newShoes }) => {
         </div>
         {newShoes.map((shoes) => (
           <SwiperSlide key={shoes._id} className="px-10 my-5 md:my-10">
-            <CardShoes shoes={shoes} />
+            <CardShoes shoes={shoes} reviews={reviews} />
           </SwiperSlide>
         ))}
         <div className="slider-new-shoes-button-next absolute top-1/2 right-0 z-10 -translate-y-1/2">

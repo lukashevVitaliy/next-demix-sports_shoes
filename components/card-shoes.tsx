@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
+import { enumerate } from './utils';
 
 interface ProductProps {
   shoes: {
@@ -68,9 +69,29 @@ interface ProductProps {
     cushfoam?: boolean;
     flexzone360?: boolean;
   };
+  reviews: {
+    _id: string;
+    slug: string;
+    name: string;
+    aboutProduct: string;
+    advantage: string;
+    disadvantages: string;
+    nameUser: string;
+    userCity: string;
+    impression: string;
+    reliability: string;
+    functionality: string;
+    quality: string;
+    photoMatching: string;
+    recommend: boolean;
+    discommend: boolean;
+    periodOfUseUser: string;
+    frequencyOfUseUser: string;
+    createdAt: string;
+  }[];
 }
 
-const CardShoes: FC<ProductProps> = ({ shoes }) => {
+const CardShoes: FC<ProductProps> = ({ shoes, reviews }) => {
   const {
     slug,
     name,
@@ -90,6 +111,8 @@ const CardShoes: FC<ProductProps> = ({ shoes }) => {
   } else if (gender === 'Женщины') {
     urlGender = '/female-shoes/';
   }
+
+  const reviewsItems = reviews.filter((item) => item.slug === shoes.slug);
 
   return (
     <div className="w-[288px] shadow-md rounded hover:shadow-lime-400 hover:shadow-lg hover:scale-105 transition-all">
@@ -122,18 +145,26 @@ const CardShoes: FC<ProductProps> = ({ shoes }) => {
             </p>
             <div className="mb-1">
               <p className="text-right text-xl font-bold">
-                {priceNew} <span>{currency}</span>
+                {Intl.NumberFormat().format(priceNew)}&nbsp;{currency}
               </p>
               {priceOld > 0 && (
                 <p className="text-right text-sm font-bold text-red-700 line-through">
-                  {priceOld} <span>{currency}</span>
+                  {Intl.NumberFormat().format(priceNew)}&nbsp;{currency}
                 </p>
               )}
             </div>
             {rating && (
               <p className="text-base text-amber-400">
                 {rating}{' '}
-                <span className="text-xs text-gray-600">(0 отзывов)</span>
+                <span className="text-xs text-gray-600">
+                  {reviewsItems.length}&nbsp; (
+                  {enumerate(reviewsItems.length, [
+                    'отзыв',
+                    'отзыва',
+                    'отзывов',
+                  ])}
+                  )
+                </span>
               </p>
             )}
           </div>

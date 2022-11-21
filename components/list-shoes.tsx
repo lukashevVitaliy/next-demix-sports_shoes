@@ -67,19 +67,40 @@ interface IProps {
     cushfoam?: boolean;
     flexzone360?: boolean;
   }[];
+  reviews: {
+    _id: string;
+    slug: string;
+    name: string;
+    aboutProduct: string;
+    advantage: string;
+    disadvantages: string;
+    nameUser: string;
+    userCity: string;
+    impression: string;
+    reliability: string;
+    functionality: string;
+    quality: string;
+    photoMatching: string;
+    recommend: boolean;
+    discommend: boolean;
+    periodOfUseUser: string;
+    frequencyOfUseUser: string;
+    createdAt: string;
+  }[];
   firstContentIndex: number;
   lastContentIndex: number;
 }
 
 const ListShoes: FC<IProps> = ({
   shoes,
+  reviews,
   firstContentIndex,
   lastContentIndex,
 }) => {
   return (
     <div className="grid grid-cols-1 grid-flow-row justify-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4">
       {shoes.slice(firstContentIndex, lastContentIndex).map((shoes) => (
-        <CardShoes shoes={shoes} key={shoes._id} />
+        <CardShoes shoes={shoes} reviews={reviews} key={shoes._id} />
       ))}
     </div>
   );

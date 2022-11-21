@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Pagination from '../../components/pagination';
 import Breadcrumbs from '../../components/breadcrumbs';
 import Layout from '../../components/layout';
@@ -9,6 +9,7 @@ import db from '../../utils/db';
 import Product from '../../models/Product';
 import { Store } from '../../utils/store';
 import { usePagination } from '../../hooks/usePagination';
+import Review from '../../models/Review';
 
 interface IProps {
   products: {
@@ -76,9 +77,26 @@ interface IProps {
     cushfoam?: boolean;
     flexzone360?: boolean;
   }[];
+  reviews: {
+    aboutProduct: string;
+    advantage: string;
+    disadvantages: string;
+    nameUser: string;
+    userCity: string;
+    impression: string;
+    reliability: string;
+    functionality: string;
+    quality: string;
+    photoMatching: string;
+    recommend: boolean;
+    discommend: boolean;
+    periodOfUseUser: string;
+    frequencyOfUseUser: string;
+    createdAt: string;
+  }[];
 }
 
-const MaleShoesPage: FC<IProps> = ({ products }) => {
+const MaleShoesPage = ({ products, reviews }: IProps) => {
   const [activeMenuFilters, setActiveMenuFilters] = useState(false);
   const { state } = useContext(Store);
   const { sortProduct, filterProduct, searchItem } = state;
@@ -231,6 +249,7 @@ const MaleShoesPage: FC<IProps> = ({ products }) => {
         ).length === 0 && <h5>Товар не найден...</h5>}
         <ListShoes
           shoes={maleShoes}
+          reviews={reviews}
           firstContentIndex={firstContentIndex}
           lastContentIndex={lastContentIndex}
         />
@@ -250,9 +269,11 @@ export default MaleShoesPage;
 export async function getServerSideProps() {
   await db.connect();
   const products = await Product.find().lean();
+  const reviews = await Review.find().lean();
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
+      reviews: JSON.parse(JSON.stringify(reviews)),
     },
   };
 }

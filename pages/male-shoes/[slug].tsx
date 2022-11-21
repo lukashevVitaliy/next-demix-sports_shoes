@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { Disclosure, RadioGroup, Transition } from '@headlessui/react';
@@ -14,8 +14,34 @@ import db from '../../utils/db';
 import Product from '../../models/Product';
 import ModalReview from '../../components/modal/modal-review';
 import Review from '../../models/Review';
+import { enumerate } from '../../components/utils';
 
 interface IProps {
+  product: any;
+  reviews: {
+    _id: string;
+    slug: string;
+    name: string;
+    aboutProduct: string;
+    advantage: string;
+    disadvantages: string;
+    nameUser: string;
+    userCity: string;
+    impression: string;
+    reliability: string;
+    functionality: string;
+    quality: string;
+    photoMatching: string;
+    recommend: boolean;
+    discommend: boolean;
+    periodOfUseUser: string;
+    frequencyOfUseUser: string;
+    policyData: boolean;
+    createdAt: string;
+  }[];
+}
+
+interface IPropsProduct {
   _id: string | undefined;
   slug: string;
   name: string;
@@ -80,7 +106,8 @@ interface IProps {
   cushfoam?: boolean;
   flexzone360?: boolean;
 }
-const MaleShoesItemPage = ({ product, reviews }) => {
+
+const MaleShoesItemPage: FC<IProps> = ({ product, reviews }) => {
   const [activeSizes, setActiveSizes] = useState(false);
   const { state, dispatch } = useContext(Store);
   const [modalReview, setModalReview] = useState(false);
@@ -130,10 +157,14 @@ const MaleShoesItemPage = ({ product, reviews }) => {
     enrblast,
     cushfoam,
     flexzone360,
-  }: IProps = product;
+  }: IPropsProduct = product;
+
+  const reviewsItems = reviews.filter((item) => item.slug === slug);
 
   const addToCartHandler = async () => {
-    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+    const existItem = state.cart.cartItems.find(
+      (x: any) => x.slug === product.slug
+    );
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const imageItem = images[0];
 
@@ -144,7 +175,7 @@ const MaleShoesItemPage = ({ product, reviews }) => {
     const { data } = await axios.get(`/api/products/${_id}`);
     const { sizesColors } = data;
     const selectedProduct = sizesColors.find(
-      (item) => item.size === activeSizes
+      (item: any) => item.size === activeSizes
     );
     const stokModelSize = selectedProduct.countInStock;
 
@@ -194,16 +225,17 @@ const MaleShoesItemPage = ({ product, reviews }) => {
             <div className="w-4/5 mx-auto flex justify-end text-sm text-lime-400  mb-5">
               <p className="mr-2">{rating}</p>
               <p>
-                <span>113</span> отзывов
+                <span>{reviewsItems.length}</span>&nbsp;
+                {enumerate(reviewsItems.length, ['отзыв', 'отзыва', 'отзывов'])}
               </p>
             </div>
             <div className="w-4/5 mx-auto flex flex-col  text-left mb-5">
               <p className="text-4xl text-right text-gray-600 font-bold">
-                {priceNew} {currency}
+                {Intl.NumberFormat().format(priceNew)}&nbsp;{currency}
               </p>
               {priceOld > 0 && (
                 <p className="text-2xl text-right font-bold text-red-600 line-through">
-                  {priceOld} {currency}
+                  {Intl.NumberFormat().format(priceNew)}&nbsp;{currency}
                 </p>
               )}
             </div>
@@ -707,7 +739,7 @@ const MaleShoesItemPage = ({ product, reviews }) => {
           </div>
         </div>
         <h5 className="my-10 text-center">Отзывы покупателей</h5>
-        <SliderReviews reviews={reviews} />
+        <SliderReviews reviewsItems={reviewsItems} reviews={reviews} />
 
         <ModalReview
           slug={slug}
@@ -729,7 +761,7 @@ const MaleShoesItemPage = ({ product, reviews }) => {
 
 export default MaleShoesItemPage;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
   const { params } = context;
   const { slug } = params;
   await db.connect();
