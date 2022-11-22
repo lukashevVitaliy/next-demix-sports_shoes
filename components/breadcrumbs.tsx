@@ -10,7 +10,7 @@ interface Props {
 const Breadcrumbs = ({ path, title, title2 }: Props) => {
   return (
     <div className="container mx-auto px-4">
-      <ul className="flex mb-5 text-sm text-gray-600 font-light italic list-none">
+      <ul className="flex mb-5 text-xs sm:text-sm text-gray-600 font-light italic list-none">
         <li>
           <Link href="/">
             <a>Главная</a>

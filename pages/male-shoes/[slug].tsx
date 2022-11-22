@@ -217,12 +217,14 @@ const MaleShoesItemPage: FC<IProps> = ({ product, reviews }) => {
     <Layout title="Позиция обуви">
       <Breadcrumbs title="Обувь для мужчин" path="/male-shoes" title2={name} />
       <div className="container mx-auto px-4 mt-10">
-        <div className="grid grid-cols-1 grid-flow-row gap-x-10 gap-y-5 md:grid-cols-3">
+        <div className="grid grid-cols-1 grid-flow-row lg:gap-x-10 gap-y-5 lg:grid-cols-3">
           <div className="col-span-2 flex justify-center">
             <SliderItemShoes images={images} />
           </div>
           <div className="">
-            <h3 className="text-center uppercase mb-2">{name}</h3>
+            <h3 className="text-xl xl:text-2xl 2xl:text-3xl text-center uppercase mb-2">
+              {name}
+            </h3>
             <div className="w-4/5 mx-auto flex justify-end text-sm text-lime-400  mb-5">
               <p className="mr-2">{rating}</p>
               <p>
@@ -751,7 +753,7 @@ const MaleShoesItemPage: FC<IProps> = ({ product, reviews }) => {
         <Button
           title="Написать отзыв"
           onClick={openModalReview}
-          addClass="w-1/4"
+          addClass="md:w-1/4"
         />
       </div>
     </Layout>
