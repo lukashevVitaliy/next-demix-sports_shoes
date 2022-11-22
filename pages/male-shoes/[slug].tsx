@@ -15,6 +15,7 @@ import Product from '../../models/Product';
 import ModalReview from '../../components/modal/modal-review';
 import Review from '../../models/Review';
 import { enumerate } from '../../components/utils';
+import Button from '../../components/button';
 
 interface IProps {
   product: any;
@@ -331,12 +332,7 @@ const MaleShoesItemPage: FC<IProps> = ({ product, reviews }) => {
               </Disclosure>
             </div>
 
-            <button
-              onClick={addToCartHandler}
-              className="block mx-auto mt-10 py-2 w-1/2 bg-black/80 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 transition-all"
-            >
-              В Корзину
-            </button>
+            <Button title="В Корзину" onClick={addToCartHandler} addClass="" />
 
             <div className="w-4/5 mx-auto mt-10">
               <Disclosure>
@@ -739,7 +735,11 @@ const MaleShoesItemPage: FC<IProps> = ({ product, reviews }) => {
           </div>
         </div>
         <h5 className="my-10 text-center">Отзывы покупателей</h5>
-        <SliderReviews reviewsItems={reviewsItems} reviews={reviews} />
+        {reviewsItems.length > 0 ? (
+          <SliderReviews reviewsItems={reviewsItems} reviews={reviews} />
+        ) : (
+          <h5 className="text-gray-400">Отзывов пока нет...</h5>
+        )}
 
         <ModalReview
           slug={slug}
@@ -748,12 +748,11 @@ const MaleShoesItemPage: FC<IProps> = ({ product, reviews }) => {
           onClose={onClose}
         />
 
-        <button
-          className="block mx-auto mt-10 py-2 w-1/4 bg-black/80 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 transition-all"
+        <Button
+          title="Написать отзыв"
           onClick={openModalReview}
-        >
-          Написать отзыв
-        </button>
+          addClass="w-1/4"
+        />
       </div>
     </Layout>
   );

@@ -78,6 +78,9 @@ interface IProps {
     flexzone360?: boolean;
   }[];
   reviews: {
+    _id: string;
+    slug: string;
+    name: string;
     aboutProduct: string;
     advantage: string;
     disadvantages: string;
@@ -235,7 +238,9 @@ const MaleShoesPage = ({ products, reviews }: IProps) => {
     <Layout title="Обувь для мужчин">
       <Breadcrumbs title="Обувь для мужчин" path="/male-shoes" title2="" />
       <div className="container mx-auto px-4">
-        <h2 className="mb-10">Обувь для мужчин</h2>
+        <h2 className="text-xl md:text-3xl lg:text-4xl md:mb-5 lg:mb-10">
+          Обувь для мужчин
+        </h2>
         <SortPanel
           activeMenuFilters={activeMenuFilters}
           setActiveMenuFilters={setActiveMenuFilters}

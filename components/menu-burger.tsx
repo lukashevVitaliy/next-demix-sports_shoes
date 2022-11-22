@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC, useEffect } from 'react';
+import { Dispatch, FC, useEffect } from 'react';
 import { RiArrowLeftRightFill } from 'react-icons/ri';
 
 interface IProps {
   active: boolean;
+  setMenu: Dispatch<boolean>;
 }
 
 const itemsLinks = [

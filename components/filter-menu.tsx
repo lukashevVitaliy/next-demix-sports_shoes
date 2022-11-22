@@ -12,6 +12,7 @@ import { MdCheckCircle } from 'react-icons/md';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Store } from '../utils/store';
+import Button from './button';
 
 const technology = ['Enrblast', 'Cushfoam', 'Flexzone360'];
 const typeShoes = ['Кроссовки', 'Кеды', 'Бутсы'];
@@ -539,8 +540,8 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
     <div
       className={
         activeMenuFilters
-          ? 'fixed top-0 right-0 visible opacity-100 w-1/4 h-full bg-black/80 shadow-lg shadow-black z-50 rounded-l-2xl overflow-y-auto transition-all duration-300'
-          : 'fixed top-0 -right-[100%] invisible opacity-0 w-1/4 h-full bg-black/80 shadow-lg shadow-black z-50 rounded-l-2xl overflow-y-auto transition-all duration-300'
+          ? 'fixed top-0 right-0 visible opacity-100 w-5/6 sm:w-2/3 md:w-3/5 lg:w-1/3  h-full bg-black/80 shadow-lg shadow-black z-50 rounded-l-2xl overflow-y-auto transition-all duration-300'
+          : 'fixed top-0 -right-[100%] invisible opacity-0 xl:w-1/3 2xl:w-1/4 h-full bg-black/80 shadow-lg shadow-black z-50 rounded-l-2xl overflow-y-auto transition-all duration-300'
       }
     >
       <div className="relative text-white m-4 p-4">
@@ -1231,12 +1232,11 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
             )}
           </Disclosure>
         </div>
-        <button
-          className="block mx-auto mt-10 py-2 w-1/2 bg-black/80 ring-2 ring-lime-400 rounded-lg shadow text-white text-xs font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 transition-all"
+        <Button
+          title="Сбросить Фильтры"
           onClick={resetClickHandler}
-        >
-          Сбросить Фильтры
-        </button>
+          addClass=""
+        />
       </div>
     </div>
   );

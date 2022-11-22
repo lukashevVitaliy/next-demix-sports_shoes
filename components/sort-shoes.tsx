@@ -47,13 +47,13 @@ const SortShoes = () => {
   }, [dispatch, selectedItem]);
 
   return (
-    <div className=" relative flex flex-col text-gray-400 py-2 px-4 w-[240px] border-r-2 border-gray-400 hover:border-lime-400 hover:text-gray-600">
+    <div className=" relative flex flex-col text-gray-400 py-2 px-4 w-[180px] border-r-2 border-gray-400 hover:border-lime-400 hover:text-gray-600">
       <Listbox value={selectedItem} onChange={setSelectedItem}>
         <Listbox.Button className="flex items-center justify-between pl-2">
           {selectedItem.name}
           <RiArrowLeftRightFill className="text-lg ml-2" />
         </Listbox.Button>
-        <Listbox.Options className="absolute top-11 left-5 z-10 w-full">
+        <Listbox.Options className="absolute top-11 left-0 z-10 w-full">
           {items.map((item) => (
             <Listbox.Option key={item.id} value={item} as={Fragment}>
               {({ active }) => (
