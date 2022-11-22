@@ -75,6 +75,7 @@ interface IProps {
     flexzone360?: boolean;
   }[];
   reviews: {
+    _id: string;
     slug: string;
     name: string;
     aboutProduct: string;

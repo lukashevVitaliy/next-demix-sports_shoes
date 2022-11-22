@@ -18,8 +18,8 @@ const services = [
 export default function FooterLevel_1() {
   return (
     <div className="bg-black/70">
-      <div className="container mx-auto px-4 py-12 flex justify-between text-xs text-gray-200">
-        <div className="flex flex-col">
+      <div className="container mx-auto px-4 py-12 flex flex-col md:flex-row text-center sm:text-left sm:justify-between text-xs text-gray-200">
+        <div className="mt-1 md:pr-10 lg:pr-24">
           <Link href="/">
             <a className="mb-5">
               <Image
@@ -31,41 +31,45 @@ export default function FooterLevel_1() {
             </a>
           </Link>
         </div>
-        <div className="flex flex-col mt-4">
-          <p className="text-base uppercase mb-3">Информация</p>
-          {infoItems &&
-            infoItems.map(({ title, path }) => (
-              <Link href={path} key={title}>
-                <a className="text-sm font-light mb-2 hover:text-lime-400 transition-all">
-                  {title}
-                </a>
-              </Link>
-            ))}
-        </div>
-        <div className="flex flex-col mt-4">
-          <p className="text-base uppercase mb-3">Сервис и помощь</p>
-          {services &&
-            services.map(({ title, path }) => (
-              <Link href={path} key={title}>
-                <a className="text-sm font-light mb-2 hover:text-lime-400 transition-all">
-                  {title}
-                </a>
-              </Link>
-            ))}
-        </div>
-        <div className="flex flex-col mt-4">
-          <p className="text-base uppercase mb-3">Контакты</p>
-          <Link href="tel:84957777757">
-            <a className="text-sm font-light mb-2 hover:text-lime-400 transition-all">
-              8 (495) 777-77-57
-            </a>
-          </Link>
-          <Link href="mailto:support@demix.ru">
-            <a className="text-sm font-light mb-5 hover:text-lime-400 transition-all">
-              support@demix.ru
-            </a>
-          </Link>
-          <SocialLink hover="hover:bg-lime-400" />
+        <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-row justify-between   w-full">
+          <div className="flex flex-col mt-4">
+            <p className="text-base uppercase mb-3">Информация</p>
+            {infoItems &&
+              infoItems.map(({ title, path }) => (
+                <Link href={path} key={title}>
+                  <a className="text-sm font-light mb-2 hover:text-lime-400 transition-all">
+                    {title}
+                  </a>
+                </Link>
+              ))}
+          </div>
+          <div className="flex flex-col mt-4">
+            <p className="text-base uppercase mb-3">Сервис и помощь</p>
+            {services &&
+              services.map(({ title, path }) => (
+                <Link href={path} key={title}>
+                  <a className="text-sm font-light mb-2 hover:text-lime-400 transition-all">
+                    {title}
+                  </a>
+                </Link>
+              ))}
+          </div>
+          <div className="flex flex-col mt-4 ">
+            <p className="text-base uppercase mb-3">Контакты</p>
+            <Link href="tel:84957777757">
+              <a className="text-sm font-light mb-2 hover:text-lime-400 transition-all">
+                8 (495) 777-77-57
+              </a>
+            </Link>
+            <Link href="mailto:support@demix.ru">
+              <a className="text-sm font-light mb-5 hover:text-lime-400 transition-all">
+                support@demix.ru
+              </a>
+            </Link>
+            <div className="mx-auto">
+              <SocialLink hover="hover:bg-lime-400 hover:border-lime-400" />
+            </div>
+          </div>
         </div>
       </div>
     </div>

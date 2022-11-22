@@ -9,9 +9,10 @@ interface IStyle {
 export default function SocialLink({ hover }: IStyle) {
   return (
     <div className="flex items-center justify-between w-36">
-      <Link href="#">
+      <Link href="https://vk.com/">
         <a
-          className={`flex items-center rounded-full py-1 px-3 ${hover} transition-all`}
+          target="_blank"
+          className={`flex items-center rounded-full border border-white py-1 px-3 ${hover} transition-all`}
         >
           <Image
             src="/assets/icons/vk.svg"
@@ -22,9 +23,10 @@ export default function SocialLink({ hover }: IStyle) {
           />
         </a>
       </Link>
-      <Link href="#">
+      <Link href="https://web.telegram.org/">
         <a
-          className={`flex items-center rounded-full py-1 px-3 ${hover} transition-all`}
+          target="_blank"
+          className={`flex items-center rounded-full border border-white py-1 px-3 ${hover} transition-all`}
         >
           <Image
             src="/assets/icons/telegram.svg"
@@ -35,9 +37,10 @@ export default function SocialLink({ hover }: IStyle) {
           />
         </a>
       </Link>
-      <Link href="#">
+      <Link href="https://www.youtube.com/">
         <a
-          className={`flex items-center rounded-full py-1 px-3 ${hover} transition-all`}
+          target="_blank"
+          className={`flex items-center rounded-full border border-white py-1 px-3 ${hover} transition-all`}
         >
           <Image
             src="/assets/icons/youtube.svg"

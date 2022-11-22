@@ -28,16 +28,20 @@ export default function HeaderLevel_1() {
   return (
     <div className="bg-lime-400">
       <div className="container mx-auto flex items-center justify-between py-2 px-4 text-xs ">
-        <div className="flex items-center justify-between w-1/3">
-          <SocialLink hover="hover:bg-gray-600" />
-          <Link href="tel:84957777757">
-            <a className="text-gray-600 font-light">8 (495) 777-77-57</a>
-          </Link>
-          <Link href="mailto:support@demix.ru">
-            <a className="text-gray-600 font-light" target="_blank">
-              support@demix.ru
-            </a>
-          </Link>
+        <div className="flex flex-col items-center justify-between xl:w-1/3 md:w-1/2 md:flex-row">
+          <SocialLink hover="hover:bg-gray-600 hover:border-lime-400" />
+          <div className="flex flex-col md:flex-row justify-between mt-1 md:mt-0">
+            <Link href="tel:84957777757">
+              <a className="text-gray-600 font-ligh mb-1 md:mb-0  md:mr-5">
+                8 (495) 777-77-57
+              </a>
+            </Link>
+            <Link href="mailto:support@demix.ru">
+              <a className="text-gray-600 font-light" target="_blank">
+                support@demix.ru
+              </a>
+            </Link>
+          </div>
         </div>
         <div className="flex items-end justify-between min-w-20">
           <Link href="/cart">

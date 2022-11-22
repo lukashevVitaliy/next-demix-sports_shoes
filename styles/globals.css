@@ -69,16 +69,6 @@ textarea {
 }
 
 /* rating-review */
-/* .review_item:checked,
-.review_item:checked ~ .review_label {
-	@apply text-lime-400;
-}
-.review_label:hover,
-.review_label:hover ~ .review_label,
-.review_label:checked ~ .review_label:hover {
-	@apply text-lime-400;
-} */
-
 .review_item_reliability:checked,
 .review_item_reliability:checked ~ .review_label_reliability {
 	@apply text-lime-400;

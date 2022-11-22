@@ -10,7 +10,7 @@ const itemLinks = [
 export default function HeaderLevel_2() {
   return (
     <div className="bg-black/70 border-b-4 border-lime-400">
-      <div className="container mx-auto py-2 px-4 flex items-center justify-between">
+      <div className="container mx-auto py-2 px-4 flex flex-col sm:flex-row items-center justify-between">
         <div>
           <Link href="/">
             <a>
@@ -23,7 +23,7 @@ export default function HeaderLevel_2() {
             </a>
           </Link>
         </div>
-        <div className="flex justify-between w-1/4">
+        <div className="flex justify-between w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4">
           {itemLinks &&
             itemLinks.map(({ title, path }) => (
               <Link key={title} href={path}>

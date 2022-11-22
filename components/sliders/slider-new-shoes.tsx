@@ -77,6 +77,7 @@ interface newShoesProps {
     flexzone360?: boolean;
   }[];
   reviews: {
+    _id: string;
     slug: string;
     name: string;
     aboutProduct: string;
@@ -100,7 +101,9 @@ interface newShoesProps {
 const SliderNewShoes: FC<newShoesProps> = ({ newShoes, reviews }) => {
   return (
     <div className="container mx-auto px-4">
-      <h2 className="text-center">Новые модели обуви</h2>
+      <h2 className="text-xl md:text-3xl lg:text-4xl text-center">
+        Новые модели обуви
+      </h2>
       <Swiper
         modules={[Keyboard, FreeMode, Navigation]}
         spaceBetween={0}
@@ -116,13 +119,30 @@ const SliderNewShoes: FC<newShoesProps> = ({ newShoes, reviews }) => {
           pageUpDown: true,
         }}
         loop={true}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+          1536: {
+            slidesPerView: 4,
+          },
+        }}
         className="slider-new-shoes relative"
       >
         <div className="slider-new-shoes-button-prev absolute top-1/2 left-0 z-10 -translate-y-1/2">
           <BsChevronCompactLeft className="text-3xl text-gray-400 cursor-pointer" />
         </div>
         {newShoes.map((shoes) => (
-          <SwiperSlide key={shoes._id} className="px-10 my-5 md:my-10">
+          <SwiperSlide
+            key={shoes._id}
+            className="px-10 my-5 flex justify-center  md:my-10"
+          >
             <CardShoes shoes={shoes} reviews={reviews} />
           </SwiperSlide>
         ))}

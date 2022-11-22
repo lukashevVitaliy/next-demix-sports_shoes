@@ -13,7 +13,9 @@ import 'swiper/css/navigation';
 export default function SliderTehnologyDemix() {
   return (
     <div className="container mx-auto px-4">
-      <h2 className="text-center mb-10">Спортивные технологии Demix</h2>
+      <h2 className="text-xl md:text-3xl lg:text-4xl text-center mb-10">
+        Спортивные технологии Demix
+      </h2>
       <Swiper
         modules={[Keyboard, FreeMode, Navigation]}
         spaceBetween={0}
