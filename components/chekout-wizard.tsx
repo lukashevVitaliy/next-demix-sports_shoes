@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChekoutWizard = ({ activeStep = 0 }) => {
   return (
-    <div className="container mx-auto px-4 mb-5 flex flex-wrap">
+    <div className="container mx-auto px-4 mb-5 flex flex-wrap text-xs sm:text-base">
       {[
         'Авторизация',
         'Адрес Доставки',

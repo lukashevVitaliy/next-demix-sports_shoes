@@ -2,11 +2,12 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
+
 import ChekoutWizard from '../components/chekout-wizard';
 import Layout from '../components/layout';
 import { Store } from '../utils/store';
-import Cookies from 'js-cookie';
-import { useForm } from 'react-hook-form';
+import Button from '../components/button';
 
 const PaymentPage: NextPage = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
@@ -38,8 +39,8 @@ const PaymentPage: NextPage = () => {
   return (
     <Layout title="Способ Оплаты">
       <ChekoutWizard activeStep={2} />
-      <form className="mx-auto max-w-screen-md" onSubmit={submitHandler}>
-        <h5 className="mb-4">Способ Оплаты</h5>
+      <form className="mx-auto px-4 max-w-screen-md" onSubmit={submitHandler}>
+        <h5 className="text-base lg:text-xl mb-4">Способ Оплаты</h5>
         {['PayPal', 'Оплата курьеру ', 'Оплата при получении заказа'].map(
           (payment) => (
             <div key={payment} className="mb-4">
@@ -65,9 +66,7 @@ const PaymentPage: NextPage = () => {
           >
             Назад
           </button>
-          <button className="block py-2 w-1/4 bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all">
-            Далее
-          </button>
+          <Button title="Далее" addClass="w-1/4 mx-0 mt-0" />
         </div>
       </form>
     </Layout>

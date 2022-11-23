@@ -1,11 +1,13 @@
 import { NextPage } from 'next';
 import React, { useContext, useEffect } from 'react';
 import Layout from '../components/layout';
-import CheckoutWizard from '../components/chekout-wizard';
-import { useForm } from 'react-hook-form';
-import { Store } from '../utils/store';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+
+import CheckoutWizard from '../components/chekout-wizard';
+import { Store } from '../utils/store';
+import Button from '../components/button';
 
 const ShippingPage: NextPage = () => {
   const {
@@ -60,10 +62,10 @@ const ShippingPage: NextPage = () => {
     <Layout title="Адрес Доставки">
       <CheckoutWizard activeStep={1} />
       <form
-        className="mx-auto max-w-screen-md"
+        className="mx-auto px-4 max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <h5 className="mb-4">Адрес Доставки</h5>
+        <h5 className="text-base lg:text-xl mb-4">Адрес Доставки</h5>
         <div className="mb-4">
           <label
             htmlFor="fullName"
@@ -196,9 +198,7 @@ const ShippingPage: NextPage = () => {
         </div>
 
         <div className="mb-4 flex justify-end">
-          <button className="block py-2 w-1/4 bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all">
-            Далее
-          </button>
+          <Button title="Далее" addClass="w-1/4 mx-0" />
         </div>
       </form>
     </Layout>

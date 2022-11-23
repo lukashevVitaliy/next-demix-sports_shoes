@@ -2,8 +2,8 @@ import React from 'react';
 
 interface IProps {
   title: string;
-  addClass: string | undefined;
-  onClick: () => void;
+  addClass?: string | undefined;
+  onClick?: () => void;
 }
 
 const Button = ({ title, onClick, addClass }: IProps) => {
