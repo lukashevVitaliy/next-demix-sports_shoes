@@ -238,7 +238,7 @@ const MaleShoesItemPage: FC<IProps> = ({ product, reviews }) => {
               </p>
               {priceOld > 0 && (
                 <p className="text-2xl text-right font-bold text-red-600 line-through">
-                  {Intl.NumberFormat().format(priceNew)}&nbsp;{currency}
+                  {Intl.NumberFormat().format(priceOld)}&nbsp;{currency}
                 </p>
               )}
             </div>

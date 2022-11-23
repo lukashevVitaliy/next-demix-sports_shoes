@@ -10,6 +10,17 @@ import { Store } from '../utils/store';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import Button from '../components/button';
+
+const theadTable = [
+  { title: 'Фото' },
+  { title: 'Название' },
+  { title: 'Цвет' },
+  { title: 'Размер' },
+  { title: 'Количество' },
+  { title: 'Цена' },
+  { title: '' },
+];
 
 const CartPage: NextPage = () => {
   const { state, dispatch } = useContext(Store);
@@ -40,6 +51,13 @@ const CartPage: NextPage = () => {
     toast.success('Данные в корзине обновлены...');
   };
 
+  const clearCart = () => {
+    if (cartItems.length > 0) {
+      dispatch({ type: 'CART_RESET' });
+      toast.success('Корзина очищена...');
+    }
+  };
+
   // достаем данные из нашего продукта
   let stockQty: Object;
   let product;
@@ -58,10 +76,12 @@ const CartPage: NextPage = () => {
     <Layout title="Корзина товаров">
       <Breadcrumbs title="Корзина товаров" path="/cart" title2="" />
       <div className="container mx-auto mb-10 px-4 flex items-end justify-between">
-        <h2>Корзина</h2>
-        <button className="block py-2 w-1/6 bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all">
-          Очистить корзину
-        </button>
+        <h2 className="text-xl md:text-3xl lg:text-4xl">Корзина</h2>
+        <Button
+          title="Очистить корзину"
+          onClick={clearCart}
+          addClass="mx-0 w-1/2 md:w-1/4"
+        />
       </div>
       <div className="container mx-auto px-4">
         {cartItems.length === 0 ? (
@@ -74,11 +94,137 @@ const CartPage: NextPage = () => {
             </Link>
           </h5>
         ) : (
-          <div className="grid grid-cols-1 gap-x-20 gap-y-5 justify-between md:grid-cols-4">
+          <div className="grid grid-cols-1 lg:gap-x-5 xl:gap-x-20 gap-y-5 justify-between lg:grid-cols-4">
             <div className="col-span-3">
-              <table className="min-w-full">
+              <table className="min-w-full grid md:hidden">
+                <thead className="border-b-2 border-lime-400"></thead>
+                <tbody>
+                  {cartItems.map((item) => {
+                    let urlGender;
+                    if (item.gender === 'Мужчины') {
+                      urlGender = '/male-shoes/';
+                    } else if (item.gender === 'Женщины') {
+                      urlGender = '/female-shoes/';
+                    }
+                    return (
+                      <div
+                        key={item._id}
+                        className="border-b my-5 w-[320px] mx-auto"
+                      >
+                        <tr>
+                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                            {theadTable[0].title}
+                          </td>
+                          <td className="flex justify-center">
+                            <Link href={`${urlGender}${item.slug}`}>
+                              <a className="flex w-[100px]">
+                                <Image
+                                  src={item.imageItem}
+                                  blurDataURL={item.imageItem}
+                                  width={100}
+                                  height={100}
+                                  alt={item.name}
+                                  placeholder="blur"
+                                  className="rounded-tl-[25%] rounded-br-[25%]"
+                                />
+                              </a>
+                            </Link>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="text-sm text-gray-400 tracking-wider uppercase align-top pr-5">
+                            {theadTable[1].title}
+                          </td>
+                          <td className="text-gray-600 text-center">
+                            {item.name}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                            {theadTable[2].title}
+                          </td>
+                          <td className="text-gray-600 text-center">
+                            {item.nameColor}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                            {theadTable[3].title}
+                          </td>
+                          <td className="text-gray-600 text-center">
+                            {item.activeSizes}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                            {theadTable[4].title}
+                          </td>
+                          <td className="text-gray-600 text-center">
+                            {
+                              <select
+                                value={item.quantity}
+                                onChange={(e) =>
+                                  updateCartHandler(item, e.target.value)
+                                }
+                                className="p-1 my-5 overflow-y-auto"
+                              >
+                                {[...Array(stockQty.countInStock).keys()].map(
+                                  (x) => (
+                                    <option key={x + 1} value={x + 1}>
+                                      {x + 1}
+                                    </option>
+                                  )
+                                )}
+                              </select>
+                            }
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                            {theadTable[5].title}
+                          </td>
+                          <td className="text-gray-600 text-center">
+                            {
+                              <div className="">
+                                <p>
+                                  {Intl.NumberFormat().format(
+                                    item.quantity * item.priceNew
+                                  )}{' '}
+                                  {item.currency}
+                                </p>
+                                {item.priceOld > 0 && (
+                                  <p className="text-gray-400 line-through">
+                                    {Intl.NumberFormat().format(
+                                      item.quantity * item.priceOld
+                                    )}{' '}
+                                    {item.currency}
+                                  </p>
+                                )}
+                              </div>
+                            }
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                            {theadTable[6].title}
+                          </td>
+                          <td className="text-gray-600 text-center">
+                            {
+                              <button onClick={() => removeItemHandler(item)}>
+                                <FaTrashAlt className="text-base text-gray-400 hover:text-gray-500 active:text-red-600 transition-all" />
+                              </button>
+                            }
+                          </td>
+                        </tr>
+                      </div>
+                    );
+                  })}
+                </tbody>
+              </table>
+
+              <table className="min-w-full invisible hidden md:visible md:inline-table">
                 <thead className="h-10 border-b-2 border-lime-400 text-sm text-gray-400 tracking-wider uppercase">
-                  <tr>
+                  <tr className="text-xs xl:text-sm">
                     <th></th>
                     <th>Название</th>
                     <th>Цвет</th>
@@ -106,8 +252,6 @@ const CartPage: NextPage = () => {
                             <a className="flex w-[100px]">
                               <Image
                                 src={item.imageItem}
-                                // src={item.images[0]}
-                                // blurDataURL={item.images[0]}
                                 blurDataURL={item.imageItem}
                                 width={100}
                                 height={100}
@@ -170,8 +314,8 @@ const CartPage: NextPage = () => {
                 </tbody>
               </table>
             </div>
-            <div className="">
-              <div className="flex flex-col justify-between w-full h-80 p-5 shadow-lg shadow-gray-400 rounded-lg bg-gray-20">
+            <div className="flex justify-center">
+              <div className="flex flex-col justify-between w-full sm:w-1/2  lg:w-full h-60 p-5 shadow-lg shadow-gray-400 rounded-lg bg-gray-20">
                 <div className="mx-auto">
                   <Link href="/">
                     <a>
@@ -189,21 +333,17 @@ const CartPage: NextPage = () => {
                     Итого:
                   </p>
                   <div className="flex flex-col">
-                    <p className="text-4xl font-bold text-gray-600 ">
+                    <p className="text-2xl xl:text-4xl font-bold text-gray-600 ">
                       {Intl.NumberFormat().format(priceNewItem)}{' '}
                       {product.currency}
                     </p>
-                    {/* <p className="text-2xl text-red-600 font-bold line-through ">
-                      6 900 p
-                    </p> */}
                   </div>
                 </div>
-                <button
+                <Button
+                  title="Купить"
                   onClick={() => router.push('login?redirect=/shipping')}
-                  className="block py-2 w-full bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all"
-                >
-                  Купить
-                </button>
+                  addClass="mt-0 mx-0 min-w-full"
+                />
               </div>
             </div>
           </div>

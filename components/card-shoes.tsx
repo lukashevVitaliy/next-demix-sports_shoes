@@ -149,7 +149,7 @@ const CardShoes: FC<ProductProps> = ({ shoes, reviews }) => {
               </p>
               {priceOld > 0 && (
                 <p className="text-right text-sm font-bold text-red-700 line-through">
-                  {Intl.NumberFormat().format(priceNew)}&nbsp;{currency}
+                  {Intl.NumberFormat().format(priceOld)}&nbsp;{currency}
                 </p>
               )}
             </div>
