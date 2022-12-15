@@ -11,6 +11,24 @@ import Layout from '../components/layout';
 import { toast } from 'react-toastify';
 import { getError } from '../utils/error';
 
+interface ItemCart {
+  _id: string;
+  activeSizes: number;
+  currency: string;
+  gender: string;
+  imageItem: string;
+  name: string;
+  slug: string;
+  nameColor: string;
+  priceNew: number;
+  priceOld: number;
+  quantity: number;
+  sizesColors: {
+    size: number;
+    countInStock: number;
+  }[];
+}
+
 const theadTable = [
   { title: 'Фото' },
   { title: 'Название' },
@@ -26,7 +44,7 @@ const PlaceOrderPage = () => {
   const { cartItems, shippingAddress, paymentMethod } = cart;
   const router = useRouter();
 
-  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
+  const round2 = (num: number) => Math.round(num * 100 + Number.EPSILON) / 100;
   // стоимость товара
   const itemsPrice = round2(
     cartItems.reduce((a, c) => a + c.quantity * c.priceNew, 0)
@@ -125,27 +143,26 @@ const PlaceOrderPage = () => {
               <div className="border border-gray-200 shadow-md rounded py-2 px-4 hover:shadow-lime-400 hover:border-lime-400 hover:scale-[99%] transition-all">
                 <h5 className="text-base lg:text-xl mb-5">Ваш Заказ</h5>
 
-                <div className="">
-                  <table className="min-w-full grid md:hidden">
-                    <thead className="border-b-2 border-lime-400"></thead>
-                    <tbody>
-                      {cartItems.map((item) => {
-                        let urlGender;
-                        if (item.gender === 'Мужчины') {
-                          urlGender = '/male-shoes/';
-                        } else if (item.gender === 'Женщины') {
-                          urlGender = '/female-shoes/';
-                        }
-                        return (
-                          <div
-                            key={item._id}
-                            className="border-b my-5 w-[320px] mx-auto"
-                          >
+                <div>
+                  {cartItems.map((item: ItemCart) => {
+                    let urlGender;
+                    if (item.gender === 'Мужчины') {
+                      urlGender = '/male-shoes/';
+                    } else if (item.gender === 'Женщины') {
+                      urlGender = '/female-shoes/';
+                    }
+                    return (
+                      <div
+                        key={item._id}
+                        className="border-b md:border-hidden w-[320px] mx-auto"
+                      >
+                        <table className="min-w-full grid md:hidden text-sm">
+                          <tbody className="mx-auto my-2">
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[0].title}
                               </td>
-                              <td className="flex justify-center">
+                              <td className="flex justify-center mb-2">
                                 <Link href={`${urlGender}${item.slug}`}>
                                   <a className="flex w-[100px]">
                                     <Image
@@ -162,7 +179,7 @@ const PlaceOrderPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-top pt-1 pr-5">
+                              <td className="text-gray-400 tracking-wider align-top pt-1 pr-5">
                                 {theadTable[1].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -170,7 +187,7 @@ const PlaceOrderPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[2].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -178,7 +195,7 @@ const PlaceOrderPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[3].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -186,7 +203,7 @@ const PlaceOrderPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[4].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -194,7 +211,7 @@ const PlaceOrderPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[5].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -218,11 +235,11 @@ const PlaceOrderPage = () => {
                                 }
                               </td>
                             </tr>
-                          </div>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                          </tbody>
+                        </table>
+                      </div>
+                    );
+                  })}
 
                   <table className="min-w-full invisible hidden md:visible md:inline-table mb-2">
                     <thead className="h-10 border-b-2 border-lime-400 text-sm text-gray-400 tracking-wider uppercase">
@@ -236,7 +253,7 @@ const PlaceOrderPage = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {cartItems.map((item) => {
+                      {cartItems.map((item: ItemCart) => {
                         let urlGender;
                         if (item.gender === 'Мужчины') {
                           urlGender = '/male-shoes/';

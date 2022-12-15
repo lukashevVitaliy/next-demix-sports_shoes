@@ -4,9 +4,8 @@ import Layout from '../components/layout';
 import { Disclosure, Transition } from '@headlessui/react';
 import { BsChevronDown } from 'react-icons/bs';
 import Link from 'next/link';
-import { NextPage } from 'next';
 
-const UserAgreementPage: NextPage = () => {
+const UserAgreementPage = () => {
   return (
     <Layout title="Пользовательское соглашение">
       <Breadcrumbs
@@ -15,7 +14,9 @@ const UserAgreementPage: NextPage = () => {
         title2=""
       />
       <div className="container mx-auto px-4">
-        <h2 className="mb-10">Пользовательское соглашение</h2>
+        <h2 className="text-2xl lg:text-4xl mb-5 lg:mb-10">
+          Пользовательское соглашение
+        </h2>
         <Disclosure>
           {({ open }) => (
             <>

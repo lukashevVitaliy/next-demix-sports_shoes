@@ -7,11 +7,11 @@ interface IProps {
   disadvantages: string;
   nameUser: string;
   userCity: string;
-  impression: string;
-  reliability: string;
-  functionality: string;
-  quality: string;
-  photoMatching: string;
+  impression: number;
+  reliability: number;
+  functionality: number;
+  quality: number;
+  photoMatching: number;
   recommend: boolean;
   discommend: boolean;
   periodOfUseUser: string;
@@ -60,7 +60,7 @@ const CardReview = ({
   const formateDate = createdAt.slice(0, 10).split('-').reverse().join('.');
 
   return (
-    <div className="max-w-xs h-[652px] text-sm shadow-lg shadow-black/80 rounded-lg bg-gradient-to-bl from-black/60 via-lime-400 to-black/60 m-5">
+    <div className="relative overflow-hidden w-[320px] h-[690px] text-sm shadow-lg shadow-black/80 rounded-lg bg-gradient-to-bl from-black/60 via-lime-400 to-black/60 my-5">
       <div className="flex flex-col p-4">
         <p className="text-base text-amber-600/90 mb-1">{ratingImpression}</p>
         <p className="text-gray-500 mb-4">{formateDate}</p>
@@ -105,7 +105,7 @@ const CardReview = ({
           <b>Недостатки:</b> {disadvantages}
         </p>
         {recommend && (
-          <p className="flex text-xs text-cyan-800 items-center">
+          <p className="absolute bottom-4 left-4 flex text-xs text-cyan-800 items-center">
             <span className="mr-2">
               <MdCheckCircle className="text-base text-amber-600/90" />
             </span>
@@ -113,7 +113,7 @@ const CardReview = ({
           </p>
         )}
         {discommend && (
-          <p className="flex text-xs text-cyan-800 items-center">
+          <p className="absolute bottom-4 left-4 flex text-xs text-cyan-800 items-center">
             <span className="mr-2">
               <MdCheckCircle className="text-base text-red-600/90" />
             </span>

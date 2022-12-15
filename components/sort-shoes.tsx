@@ -47,7 +47,7 @@ const SortShoes = () => {
   }, [dispatch, selectedItem]);
 
   return (
-    <div className=" relative flex flex-col text-gray-400 py-2 px-4 w-[180px] border-r-2 border-gray-400 hover:border-lime-400 hover:text-gray-600">
+    <div className=" relative flex flex-col text-sm text-gray-400 p-2 pl-2 pr-4  w-[200px] border-r-2 border-gray-400 hover:border-lime-400 hover:text-gray-600">
       <Listbox value={selectedItem} onChange={setSelectedItem}>
         <Listbox.Button className="flex items-center justify-between pl-2">
           {selectedItem.name}

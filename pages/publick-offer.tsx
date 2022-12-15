@@ -4,14 +4,13 @@ import Layout from '../components/layout';
 import { Disclosure, Transition } from '@headlessui/react';
 import { BsChevronDown } from 'react-icons/bs';
 import Link from 'next/link';
-import { NextPage } from 'next';
 
-const PublickOfferPage: NextPage = () => {
+const PublickOfferPage = () => {
   return (
     <Layout title="Публичная оферта">
       <Breadcrumbs title="Публичная оферта" path="/publick-offer" title2="" />
-      <div className="container mx-auto">
-        <h2 className="mb-10">Публичная оферта</h2>
+      <div className="container mx-auto px-4">
+        <h2 className="text-2xl lg:text-4xl mb-5 lg:mb-10">Публичная оферта</h2>
         <Disclosure>
           {({ open }) => (
             <>

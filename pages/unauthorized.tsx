@@ -1,9 +1,8 @@
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Layout from '../components/layout';
 
-const Гnauthorized: NextPage = () => {
+const Unauthorized = () => {
   const router = useRouter();
   const { message } = router.query;
 
@@ -17,4 +16,4 @@ const Гnauthorized: NextPage = () => {
   );
 };
 
-export default Гnauthorized;
+export default Unauthorized;

@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 import axios from 'axios';
@@ -14,10 +13,9 @@ interface Inputs {
   email: string;
   password: string;
   confirmPassword: string;
-  redirect: boolean;
 }
 
-const RegisterPage: NextPage = () => {
+const RegisterPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const { redirect } = router.query;

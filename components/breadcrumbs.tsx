@@ -4,7 +4,7 @@ import React from 'react';
 interface Props {
   path: string;
   title: string;
-  title2: string;
+  title2?: string;
 }
 
 const Breadcrumbs = ({ path, title, title2 }: Props) => {

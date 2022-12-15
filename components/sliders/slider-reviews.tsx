@@ -4,55 +4,20 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { BsChevronCompactLeft } from 'react-icons/bs';
 import { BsChevronCompactRight } from 'react-icons/bs';
 import CardReview from './card-review';
+import { IReviews } from '../../utils/models';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/keyboard';
 import 'swiper/css/navigation';
 
+interface AppendIReviews extends IReviews {
+  _id?: string;
+}
+
 interface IPropsReview {
-  reviews: {
-    _id: string;
-    slug: string;
-    name: string;
-    aboutProduct: string;
-    advantage: string;
-    disadvantages: string;
-    nameUser: string;
-    userCity: string;
-    impression: string;
-    reliability: string;
-    functionality: string;
-    quality: string;
-    photoMatching: string;
-    recommend: boolean;
-    discommend: boolean;
-    periodOfUseUser: string;
-    frequencyOfUseUser: string;
-    policyData: boolean;
-    createdAt: string;
-  }[];
-  reviewsItems: {
-    _id: string;
-    slug: string;
-    name: string;
-    aboutProduct: string;
-    advantage: string;
-    disadvantages: string;
-    nameUser: string;
-    userCity: string;
-    impression: string;
-    reliability: string;
-    functionality: string;
-    quality: string;
-    photoMatching: string;
-    recommend: boolean;
-    discommend: boolean;
-    periodOfUseUser: string;
-    frequencyOfUseUser: string;
-    policyData: boolean;
-    createdAt: string;
-  }[];
+  reviews: AppendIReviews[];
+  reviewsItems: AppendIReviews[];
 }
 
 export default function SliderReviews({ reviewsItems, reviews }: IPropsReview) {
@@ -76,9 +41,23 @@ export default function SliderReviews({ reviewsItems, reviews }: IPropsReview) {
             pageUpDown: true,
           }}
           loop={true}
-          className="slider-reviews relative"
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            1280: {
+              slidesPerView: 3,
+            },
+            1536: {
+              slidesPerView: 4,
+            },
+          }}
+          className="slider-reviews"
         >
-          <div className="slider-reviews-button-prev absolute top-1/2 -left-[8px] z-10 -translate-y-1/2">
+          <div className="slider-reviews-button-prev absolute top-1/2 -left-[10px] z-10 -translate-y-1/2">
             <BsChevronCompactLeft className="text-3xl text-gray-400 cursor-pointer" />
           </div>
           {reviewsItems.map(
@@ -100,7 +79,7 @@ export default function SliderReviews({ reviewsItems, reviews }: IPropsReview) {
               frequencyOfUseUser,
               createdAt,
             }) => (
-              <SwiperSlide key={_id}>
+              <SwiperSlide key={_id} className="flex justify-center z-0">
                 <CardReview
                   aboutProduct={aboutProduct}
                   advantage={advantage}
@@ -121,7 +100,7 @@ export default function SliderReviews({ reviewsItems, reviews }: IPropsReview) {
               </SwiperSlide>
             )
           )}
-          <div className="slider-reviews-button-next absolute top-1/2 right-0 z-10 -translate-y-1/2">
+          <div className="slider-reviews-button-next absolute top-1/2 -right-[10px] z-10 -translate-y-1/2">
             <BsChevronCompactRight className="text-3xl text-gray-400 cursor-pointer" />
           </div>
         </Swiper>

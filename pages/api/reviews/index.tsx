@@ -1,8 +1,9 @@
 import Review from '../../../models/Review';
 import db from '../../../utils/db';
 import IReview from './review-interface';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-const handler = async (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {
     return;
   }

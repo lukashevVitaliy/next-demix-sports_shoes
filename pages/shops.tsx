@@ -1,9 +1,8 @@
-import { NextPage } from 'next';
 import React from 'react';
 import Breadcrumbs from '../components/breadcrumbs';
 import Layout from '../components/layout';
 
-const ShopsPage: NextPage = () => {
+const ShopsPage = () => {
   return (
     <Layout title="Shops">
       <Breadcrumbs title="Shops" path="/shops" title2="" />

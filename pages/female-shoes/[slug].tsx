@@ -30,7 +30,7 @@ interface IProps {
   reviews: AppendIReviews[];
 }
 
-const MaleShoesItemPage = ({ product, reviews }: IProps) => {
+const FemaleShoesItemPage = ({ product, reviews }: IProps) => {
   const [activeSizes, setActiveSizes] = useState<boolean>(false);
   const { state, dispatch } = useContext(Store);
   const [modalReview, setModalReview] = useState<boolean>(false);
@@ -137,7 +137,11 @@ const MaleShoesItemPage = ({ product, reviews }: IProps) => {
 
   return (
     <Layout title="Позиция обуви">
-      <Breadcrumbs title="Обувь для мужчин" path="/male-shoes" title2={name} />
+      <Breadcrumbs
+        title="Обувь для женщин"
+        path="/female-shoes"
+        title2={name}
+      />
       <div className="container mx-auto px-4 mt-10">
         <div className="grid grid-cols-1 grid-flow-row lg:gap-x-10 gap-y-5 lg:grid-cols-3">
           <div className="col-span-2 flex justify-center">
@@ -686,7 +690,7 @@ const MaleShoesItemPage = ({ product, reviews }: IProps) => {
   );
 };
 
-export default MaleShoesItemPage;
+export default FemaleShoesItemPage;
 
 export async function getServerSideProps(context: any) {
   const { params } = context;

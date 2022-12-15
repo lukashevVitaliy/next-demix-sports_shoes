@@ -26,15 +26,15 @@ interface IPagination {
   page: number;
 }
 
-const MaleShoesPage = ({ products, reviews }: IProps) => {
+const FemaleShoesPage = ({ products, reviews }: IProps) => {
   const [activeMenuFilters, setActiveMenuFilters] = useState<boolean>(false);
   const { state } = useContext(Store);
   const { sortProduct, filterProduct, searchItem } = state;
 
-  const maleShoes = products
+  const femaleShoes = products
     .filter(
       (item) =>
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           ((sortProduct.name === 'Новинки' && item.novelty) ||
             (sortProduct.name === 'Скидки' && item.discount) ||
             [
@@ -44,94 +44,94 @@ const MaleShoesPage = ({ products, reviews }: IProps) => {
               'По Рейтингу отзывов',
             ].includes(sortProduct.name)) &&
           Object.keys(filterProduct).length === 0) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Enrblast' &&
           item.enrblast === true) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Cushfoam' &&
           item.cushfoam === true) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Flexzone360' &&
           item.flexzone360 === true) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Кроссовки' &&
           item.category === 'Кроссовки') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Кеды' &&
           item.category === 'Кеды') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Бутсы' &&
           item.category === 'Бутсы') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Спортивный стиль' &&
           item.sportType === 'Спортивный стиль') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Футбол' &&
           item.sportType === 'Футбол') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Бег' &&
           item.sportType === 'Бег') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Фитнес' &&
           item.sportType === 'Фитнес') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Волейбол' &&
           item.sportType === 'Волейбол') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Трейлраннинг' &&
           item.sportType === 'Трейлраннинг') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Асфальт' &&
           item.coverage === 'Асфальт') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Зал' &&
           item.coverage === 'Зал') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Все типы покрытий' &&
           item.coverage === 'Все типы покрытий') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Грунт и искусственное покрытие' &&
           item.coverage === 'Грунт и искусственное покрытие') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Натуральный и исскуственный газон' &&
           item.coverage === 'Натуральный и исскуственный газон') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Пересеченная местность' &&
           item.coverage === 'Пересеченная местность') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Весна' &&
           item.season?.includes('Весна')) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Лето' &&
           item.season?.includes('Лето')) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Осень' &&
           item.season?.includes('Осень')) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Зима' &&
           item.season?.includes('Зима')) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Нейтральная пронация' &&
           item.typeOfPronation === 'Нейтральная пронация') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Гиперпронация' &&
           item.typeOfPronation === 'Гиперпронация') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Да' &&
           item.reflectiveDetails === 'Да') ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Синтетическая кожа' &&
           item.materialUpper?.includes('синтетическая кожа')) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Полиэстер' &&
           item.materialUpper?.includes('полиэстер')) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Натуральная кожа' &&
           item.materialUpper?.includes('натуральная кожа')) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Полиуретан' &&
           item.materialUpper?.includes('полиуретан')) ||
-        (item.gender === 'Мужчины' &&
+        (item.gender === 'Женщины' &&
           filterProduct === 'Хлопок' &&
           item.materialUpper?.includes('хлопок'))
     )
@@ -144,7 +144,7 @@ const MaleShoesPage = ({ products, reviews }: IProps) => {
     )
     .filter(
       (item) =>
-        item.gender === 'Мужчины' &&
+        item.gender === 'Женщины' &&
         item.name.toLowerCase().includes(searchItem.toLowerCase())
     );
 
@@ -158,15 +158,15 @@ const MaleShoesPage = ({ products, reviews }: IProps) => {
     page,
   }: IPagination = usePagination({
     contentPerPage: 12,
-    count: maleShoes.length,
+    count: femaleShoes.length,
   });
 
   return (
-    <Layout title="Обувь для мужчин">
-      <Breadcrumbs title="Обувь для мужчин" path="/male-shoes" title2="" />
+    <Layout title="Обувь для женщин">
+      <Breadcrumbs title="Обувь для женщин" path="/female-shoes" title2="" />
       <div className="container mx-auto px-4">
         <h2 className="text-xl md:text-3xl lg:text-4xl md:mb-5 lg:mb-10">
-          Обувь для мужчин
+          Обувь для женщин
         </h2>
         <SortPanel
           activeMenuFilters={activeMenuFilters}
@@ -176,11 +176,11 @@ const MaleShoesPage = ({ products, reviews }: IProps) => {
           activeMenuFilters={activeMenuFilters}
           setActiveMenuFilters={setActiveMenuFilters}
         />
-        {maleShoes.filter((item) =>
+        {femaleShoes.filter((item) =>
           item.name.toLowerCase().includes(searchItem.toLowerCase())
         ).length === 0 && <h5>Товар не найден...</h5>}
         <ListProducts
-          products={maleShoes}
+          products={femaleShoes}
           reviews={reviews}
           firstContentIndex={firstContentIndex}
           lastContentIndex={lastContentIndex}
@@ -196,7 +196,7 @@ const MaleShoesPage = ({ products, reviews }: IProps) => {
   );
 };
 
-export default MaleShoesPage;
+export default FemaleShoesPage;
 
 export async function getServerSideProps() {
   await db.connect();

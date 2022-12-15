@@ -1,8 +1,9 @@
 import { getSession } from 'next-auth/react';
 import Order from '../../../models/Order';
 import db from '../../../utils/db';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-const handler = async (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
   if (!session) {
     return res.status(401).send({ message: 'требуется регистрация' });

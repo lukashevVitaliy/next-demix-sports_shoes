@@ -1,10 +1,9 @@
-import { NextPage } from 'next';
 import Link from 'next/link';
 import React from 'react';
 import Breadcrumbs from '../components/breadcrumbs';
 import Layout from '../components/layout';
 
-const ExchangeAndRefundPage: NextPage = () => {
+const ExchangeAndRefundPage = () => {
   return (
     <Layout title="Обмен и возврат">
       <Breadcrumbs
@@ -13,7 +12,7 @@ const ExchangeAndRefundPage: NextPage = () => {
         title2=""
       />
       <div className="container mx-auto px-4">
-        <h2 className="mb-10">ОБМЕН И ВОЗВРАТ</h2>
+        <h2 className="text-2xl lg:text-4xl mb-5 lg:mb-10">ОБМЕН И ВОЗВРАТ</h2>
         <p className="mb-4">
           Согласно Закону о защите прав потребителей, при дистанционном способе
           покупки обмен товара происходит через оформление возврата.

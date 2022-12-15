@@ -13,15 +13,29 @@ const theadTable = [
   { title: 'Заказ' },
 ];
 
+interface HistoryOrders {
+  _id: string;
+  createdAt: string;
+  isDelivered: boolean;
+  isPaid: boolean;
+  deliveredAt: string;
+  paidAt: string;
+  totalPrice: number;
+}
+
+const FETCH_REQUEST = 'FETCH_REQUEST';
+const FETCH_SUCCESS = 'FETCH_SUCCESS';
+const FETCH_FAIL = 'FETCH_FAIL';
+
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_REQUEST': {
+    case FETCH_REQUEST: {
       return { ...state, loading: true, error: '' };
     }
-    case 'FETCH_SUCCESS': {
-      return { ...state, loading: false, orders: action.payload, error: false };
+    case FETCH_SUCCESS: {
+      return { ...state, loading: false, order: action.payload, error: false };
     }
-    case 'FETCH_FAIL': {
+    case FETCH_FAIL: {
       return { ...state, loading: false, error: action.payload };
     }
     default: {
@@ -59,79 +73,76 @@ const OrderHistoryPage = () => {
         ) : error ? (
           <div className="alert-error">{error}</div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full grid md:hidden">
-              <thead className=""></thead>
-              <tbody>
-                {orders.map((order) => {
-                  return (
-                    <div
-                      key={order._id}
-                      className="border-b my-5 w-[320px] mx-auto"
-                    >
-                      <tr>
-                        <td className="text-sm text-gray-400 tracking-wider uppercase pr-5">
-                          {theadTable[0].title}
-                        </td>
-                        <td className="text-center">
-                          {order._id.substring(20, 24)}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-sm text-gray-400 tracking-wider uppercase pt-1 pr-5">
-                          {theadTable[1].title}
-                        </td>
-                        <td className="text-gray-600 text-center">
-                          {order.createdAt.substring(0, 10)}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-sm text-gray-400 tracking-wider uppercase pr-5">
-                          {theadTable[2].title}
-                        </td>
-                        <td className="text-gray-600 text-center">
-                          {order.totalPrice} ₽
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-sm text-gray-400 tracking-wider uppercase pr-5">
-                          {theadTable[3].title}
-                        </td>
-                        <td className="text-gray-600 text-center">
-                          {order.isPaid ? (
-                            `${order.paidAt.substring(0, 10)}`
-                          ) : (
-                            <span className="text-red-500">не оплачено</span>
-                          )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-sm text-gray-400 tracking-wider uppercase pr-5">
-                          {theadTable[4].title}
-                        </td>
-                        <td className="text-gray-600 text-center">
-                          {order.isDelivered ? (
-                            `${order.deliveredAt.substring(0, 10)}`
-                          ) : (
-                            <span className="text-red-500">не доставлено</span>
-                          )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-sm text-gray-400 tracking-wider uppercase pr-5">
-                          {theadTable[5].title}
-                        </td>
-                        <td className="text-gray-600 text-center">
-                          <Link href={`/order/${order._id}`} passHref>
-                            <a>подробности</a>
-                          </Link>
-                        </td>
-                      </tr>
-                    </div>
-                  );
-                })}
-              </tbody>
-            </table>
+          <div>
+            {orders.map((order: HistoryOrders) => (
+              <div
+                key={order._id}
+                className="border-b md:border-hidden w-[320px] mx-auto"
+              >
+                <table className="w-full grid md:hidden text-sm my-2">
+                  <tbody className="mx-auto">
+                    <tr>
+                      <td className="text-gray-400 tracking-wider  pr-5">
+                        {theadTable[0].title}
+                      </td>
+                      <td className="text-center">
+                        {order._id.substring(20, 24)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-400 tracking-wider  pt-1 pr-5">
+                        {theadTable[1].title}
+                      </td>
+                      <td className="text-gray-600 text-center">
+                        {order.createdAt.substring(0, 10)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-400 tracking-wider  pr-5">
+                        {theadTable[2].title}
+                      </td>
+                      <td className="text-gray-600 text-center">
+                        {order.totalPrice} ₽
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-400 tracking-wider  pr-5">
+                        {theadTable[3].title}
+                      </td>
+                      <td className="text-gray-600 text-center">
+                        {order.isPaid ? (
+                          `${order.paidAt.substring(0, 10)}`
+                        ) : (
+                          <span className="text-red-500">не оплачено</span>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-400 tracking-wider  pr-5">
+                        {theadTable[4].title}
+                      </td>
+                      <td className="text-gray-600 text-center">
+                        {order.isDelivered ? (
+                          `${order.deliveredAt.substring(0, 10)}`
+                        ) : (
+                          <span className="text-red-500">не доставлено</span>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-400 tracking-wider  pr-5">
+                        {theadTable[5].title}
+                      </td>
+                      <td className="text-gray-600 text-center">
+                        <Link href={`/order/${order._id}`} passHref>
+                          <a>подробности</a>
+                        </Link>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            ))}
 
             <table className="min-w-full invisible hidden md:visible md:inline-table">
               <thead className="border-b">
@@ -145,7 +156,7 @@ const OrderHistoryPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order) => (
+                {orders.map((order: HistoryOrders) => (
                   <tr key={order._id} className="border-b">
                     <td className="p-5">{order._id.substring(20, 24)}</td>
                     <td className="p-5">{order.createdAt.substring(0, 10)}</td>

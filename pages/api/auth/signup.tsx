@@ -1,8 +1,9 @@
 import User from '../../../models/User';
 import db from '../../../utils/db';
 var bcryptjs = require('bcryptjs');
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-async function handler(req, res) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return;
   }

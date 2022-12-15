@@ -1,10 +1,4 @@
-import React, {
-  Dispatch,
-  Fragment,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { Dispatch, useContext, useEffect, useState } from 'react';
 import { RiArrowLeftRightFill } from 'react-icons/ri';
 import { Disclosure, RadioGroup, Transition } from '@headlessui/react';
 import { BsChevronDown } from 'react-icons/bs';
@@ -49,31 +43,31 @@ interface Iprops {
 }
 
 const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
-  const [activeTypeShoes, setActiveTypeShoes] = useState(false);
-  const [activeSports, setActiveSports] = useState(false);
-  const [activeCoverage, setActiveCoverage] = useState(false);
-  const [activeSeasons, setActiveSeasons] = useState(false);
-  const [activeTechnology, setActiveTechnology] = useState(false);
-  const [activeTypePronation, setActiveTypePronation] = useState(false);
-  const [activeReflectiveDetails, setActiveReflectiveDetails] = useState(false);
-  const [activeUpperMaterils, setActiveUpperMaterils] = useState(false);
+  const [activeTypeShoes, setActiveTypeShoes] = useState('');
+  const [activeSports, setActiveSports] = useState('');
+  const [activeCoverage, setActiveCoverage] = useState('');
+  const [activeSeasons, setActiveSeasons] = useState('');
+  const [activeTechnology, setActiveTechnology] = useState('');
+  const [activeTypePronation, setActiveTypePronation] = useState('');
+  const [activeReflectiveDetails, setActiveReflectiveDetails] = useState('');
+  const [activeUpperMaterils, setActiveUpperMaterils] = useState('');
 
   const { state, dispatch } = useContext(Store);
 
   useEffect(() => {
-    switch (activeTypeShoes || activeSports) {
+    switch (activeTypeShoes) {
       case 'Кроссовки': {
         dispatch({
           type: 'FILTER_METHOD_VALUE',
           payload: activeTypeShoes,
         });
-        setActiveTechnology(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTechnology('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Кеды': {
@@ -81,13 +75,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeTypeShoes,
         });
-        setActiveTechnology(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTechnology('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Бутсы': {
@@ -95,13 +89,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeTypeShoes,
         });
-        setActiveTechnology(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTechnology('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
     }
@@ -114,13 +108,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSports,
         });
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Футбол': {
@@ -128,13 +122,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSports,
         });
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Бег': {
@@ -142,13 +136,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSports,
         });
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Фитнес': {
@@ -156,13 +150,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSports,
         });
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Волейбол': {
@@ -170,13 +164,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSports,
         });
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Трейлраннинг': {
@@ -184,13 +178,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSports,
         });
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
     }
@@ -203,13 +197,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeCoverage,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Зал': {
@@ -217,13 +211,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeCoverage,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Все типы покрытий': {
@@ -231,13 +225,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeCoverage,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Грунт и искусственное покрытие': {
@@ -245,13 +239,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeCoverage,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Натуральный и исскуственный газон': {
@@ -259,13 +253,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeCoverage,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Пересеченная местность': {
@@ -273,13 +267,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeCoverage,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
     }
@@ -292,13 +286,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSeasons,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Лето': {
@@ -306,13 +300,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSeasons,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Осень': {
@@ -320,13 +314,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSeasons,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Зима': {
@@ -334,13 +328,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeSeasons,
         });
-        setActiveSports(false);
-        setActiveTypeShoes(false);
-        setActiveTechnology(false);
-        setActiveCoverage(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveSports('');
+        setActiveTypeShoes('');
+        setActiveTechnology('');
+        setActiveCoverage('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
     }
@@ -353,13 +347,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeTechnology,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Cushfoam': {
@@ -367,13 +361,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeTechnology,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Flexzone360': {
@@ -381,13 +375,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeTechnology,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
     }
@@ -400,13 +394,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeTypePronation,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTechnology(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTechnology('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
       case 'Гиперпронация': {
@@ -414,13 +408,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeTypePronation,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTechnology(false);
-        setActiveReflectiveDetails(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTechnology('');
+        setActiveReflectiveDetails('');
+        setActiveUpperMaterils('');
         break;
       }
     }
@@ -433,13 +427,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeReflectiveDetails,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTechnology(false);
-        setActiveTypePronation(false);
-        setActiveUpperMaterils(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTechnology('');
+        setActiveTypePronation('');
+        setActiveUpperMaterils('');
         break;
       }
     }
@@ -452,13 +446,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeUpperMaterils,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTechnology(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTechnology('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
         break;
       }
       case 'Полиэстер': {
@@ -466,13 +460,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeUpperMaterils,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTechnology(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTechnology('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
         break;
       }
       case 'Натуральная кожа': {
@@ -480,13 +474,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeUpperMaterils,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTechnology(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTechnology('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
         break;
       }
       case 'Полиуретан': {
@@ -494,13 +488,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeUpperMaterils,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTechnology(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTechnology('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
         break;
       }
       case 'Хлопок': {
@@ -508,13 +502,13 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
           type: 'FILTER_METHOD_VALUE',
           payload: activeUpperMaterils,
         });
-        setActiveTypeShoes(false);
-        setActiveSports(false);
-        setActiveCoverage(false);
-        setActiveSeasons(false);
-        setActiveTechnology(false);
-        setActiveTypePronation(false);
-        setActiveReflectiveDetails(false);
+        setActiveTypeShoes('');
+        setActiveSports('');
+        setActiveCoverage('');
+        setActiveSeasons('');
+        setActiveTechnology('');
+        setActiveTypePronation('');
+        setActiveReflectiveDetails('');
         break;
       }
     }
@@ -526,14 +520,14 @@ const FiltersMenu = ({ activeMenuFilters, setActiveMenuFilters }: Iprops) => {
 
   const resetClickHandler = () => {
     dispatch({ type: 'RESET_FILTER_METHOD_VALUE' });
-    setActiveTypeShoes(false);
-    setActiveTechnology(false);
-    setActiveSports(false);
-    setActiveCoverage(false);
-    setActiveSeasons(false);
-    setActiveTypePronation(false);
-    setActiveReflectiveDetails(false);
-    setActiveUpperMaterils(false);
+    setActiveTypeShoes('');
+    setActiveTechnology('');
+    setActiveSports('');
+    setActiveCoverage('');
+    setActiveSeasons('');
+    setActiveTypePronation('');
+    setActiveReflectiveDetails('');
+    setActiveUpperMaterils('');
   };
 
   return (

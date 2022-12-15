@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React, { useContext, useEffect } from 'react';
 import Layout from '../components/layout';
 import Cookies from 'js-cookie';
@@ -9,7 +8,11 @@ import CheckoutWizard from '../components/chekout-wizard';
 import { Store } from '../utils/store';
 import Button from '../components/button';
 
-const ShippingPage: NextPage = () => {
+interface Props {
+  [key: string]: string;
+}
+
+const ShippingPage = () => {
   const {
     handleSubmit,
     register,
@@ -37,7 +40,13 @@ const ShippingPage: NextPage = () => {
     shippingAddress.postalCode,
   ]);
 
-  const submitHandler = ({ fullName, address, city, postalCode, country }) => {
+  const submitHandler = ({
+    fullName,
+    address,
+    city,
+    postalCode,
+    country,
+  }: Props) => {
     dispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
       payload: { fullName, address, city, postalCode, country },

@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Pagination = ({ page, totalPages, nextPage, prevPage }) => {
+interface IPagination {
+  totalPages: number;
+  nextPage: () => void;
+  prevPage: () => void;
+  page: number;
+}
+
+const Pagination = ({ page, totalPages, nextPage, prevPage }: IPagination) => {
   return (
     <div className="mt-6 md:mt-10 text-sm md:text-base text-center font-light text-gray-600">
       <button

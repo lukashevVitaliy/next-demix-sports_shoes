@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -9,11 +8,11 @@ import Layout from '../components/layout';
 import { Store } from '../utils/store';
 import Button from '../components/button';
 
-const PaymentPage: NextPage = () => {
+const PaymentPage = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
-  const { shippingAddress, paymentMethod } = cart;
+  const { paymentMethod } = cart;
   const router = useRouter();
 
   const submitHandler = (e) => {
@@ -60,7 +59,7 @@ const PaymentPage: NextPage = () => {
         )}
         <div className="flex justify-between mb-4">
           <button
-            className="block py-2 w-1/4 bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all"
+            className="block mt-10 py-2 w-1/4 bg-black/70 ring-2 ring-lime-400 rounded-lg shadow text-white text-sm font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 hover:bg-black/80 transition-all"
             onClick={() => router.push('/shipping')}
             type="button"
           >

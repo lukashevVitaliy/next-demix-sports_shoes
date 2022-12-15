@@ -1,19 +1,8 @@
-import React, { createContext, FC, useReducer } from 'react';
+import React, { FC, createContext, useReducer } from 'react';
 import Cookies from 'js-cookie';
+import { ActionTypes, Children, IStore, Action } from './types/store-types';
 
-interface Children {
-  children: React.ReactNode;
-}
-interface IStore {
-  cart: {
-    cartItems: [];
-    shippingAddress: {};
-  };
-  sortProduct: {};
-  filterProduct: string | false;
-  searchItem: string | false;
-}
-
+// ===== STATE =====
 const initialState: IStore = {
   cart: Cookies.get('cart')
     ? JSON.parse(Cookies.get('cart'))
@@ -23,11 +12,14 @@ const initialState: IStore = {
   searchItem: '',
 };
 
-export const Store = createContext();
+export const Store = createContext({
+  state: initialState,
+  action: ActionTypes,
+});
 
-const reducer = (state, action) => {
+const reducer = (state = initialState, action: Action): IStore => {
   switch (action.type) {
-    case 'CART_ADD_ITEM': {
+    case ActionTypes.CART_ADD_ITEM: {
       const newItem = action.payload;
       const existItem = state.cart.cartItems.find(
         (item) => item.slug === newItem.slug
@@ -40,14 +32,16 @@ const reducer = (state, action) => {
       Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
-    case 'CART_REMOVE_ITEM': {
+
+    case ActionTypes.CART_REMOVE_ITEM: {
       const cartItems = state.cart.cartItems.filter(
         (x) => x.slug !== action.payload.slug
       );
       Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
-    case 'CART_RESET': {
+
+    case ActionTypes.CART_RESET: {
       return {
         ...state,
         cart: { cartItems: [] },
@@ -55,13 +49,15 @@ const reducer = (state, action) => {
         paymentMethod: '',
       };
     }
-    case 'CART_CLEAR_ITEMS': {
+
+    case ActionTypes.CART_CLEAR_ITEMS: {
       return {
         ...state,
         cart: { ...state.cart, cartItems: [] },
       };
     }
-    case 'SAVE_SHIPPING_ADDRESS': {
+
+    case ActionTypes.SAVE_SHIPPING_ADDRESS: {
       return {
         ...state,
         cart: {
@@ -70,7 +66,8 @@ const reducer = (state, action) => {
         },
       };
     }
-    case 'SAVE_PAYMENT_METHOD': {
+
+    case ActionTypes.SAVE_PAYMENT_METHOD: {
       return {
         ...state,
         cart: {
@@ -79,30 +76,35 @@ const reducer = (state, action) => {
         },
       };
     }
-    case 'SORT_METHOD_VALUE': {
+
+    case ActionTypes.SORT_METHOD_VALUE: {
       return {
         ...state,
         sortProduct: action.payload,
       };
     }
-    case 'FILTER_METHOD_VALUE': {
+
+    case ActionTypes.FILTER_METHOD_VALUE: {
       return {
         ...state,
         filterProduct: action.payload,
       };
     }
-    case 'RESET_FILTER_METHOD_VALUE': {
+
+    case ActionTypes.RESET_FILTER_METHOD_VALUE: {
       return {
         ...state,
         filterProduct: '',
       };
     }
-    case 'SEARCH_ITEM': {
+
+    case ActionTypes.SEARCH_ITEM: {
       return {
         ...state,
         searchItem: action.payload,
       };
     }
+
     default:
       return state;
   }

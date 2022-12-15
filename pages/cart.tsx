@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useContext } from 'react';
@@ -12,6 +11,24 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Button from '../components/button';
 
+interface ItemCart {
+  _id: string;
+  activeSizes: number;
+  currency: string;
+  gender: string;
+  imageItem: string;
+  name: string;
+  slug: string;
+  nameColor: string;
+  priceNew: number;
+  priceOld: number;
+  quantity: number;
+  sizesColors: {
+    size: number;
+    countInStock: number;
+  }[];
+}
+
 const theadTable = [
   { title: 'Фото' },
   { title: 'Название' },
@@ -22,23 +39,23 @@ const theadTable = [
   { title: '' },
 ];
 
-const CartPage: NextPage = () => {
+const CartPage = () => {
   const { state, dispatch } = useContext(Store);
   const { cartItems } = state.cart;
   const router = useRouter();
 
-  const removeItemHandler = (item) => {
+  const removeItemHandler = (item: ItemCart) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
-  const updateCartHandler = async (item, qty) => {
-    const quantity: number = Number(qty);
+  const updateCartHandler = async (item: ItemCart, qty: number) => {
+    const quantity = qty;
 
     // удостовериться о фактическом наличии товара в БД
     const { data } = await axios.get(`/api/products/${item._id}`);
     const { sizesColors } = data;
 
     const selectedProduct = sizesColors.find(
-      (x) => x.size === item.activeSizes
+      (x: any) => x.size === item.activeSizes
     );
     const stokModelSize = selectedProduct.countInStock;
 
@@ -62,13 +79,13 @@ const CartPage: NextPage = () => {
   let stockQty: Object;
   let product;
   for (let item of cartItems) {
-    stockQty = item.sizesColors.find((x) => x.size === item.activeSizes);
+    stockQty = item.sizesColors.find((x: any) => x.size === item.activeSizes);
     product = item;
   }
 
   // предварительная стоимость товара
   const priceNewItem = cartItems.reduce(
-    (a, c) => a + c.quantity * c.priceNew,
+    (a: any, c: any): void => a + c.quantity * c.priceNew,
     0
   );
 
@@ -96,31 +113,32 @@ const CartPage: NextPage = () => {
         ) : (
           <div className="grid grid-cols-1 lg:gap-x-5 xl:gap-x-20 gap-y-5 justify-between lg:grid-cols-4">
             <div className="col-span-3">
-              <table className="min-w-full grid md:hidden">
-                <thead className="border-b-2 border-lime-400"></thead>
-                <tbody>
-                  {cartItems.map((item) => {
-                    let urlGender;
-                    if (item.gender === 'Мужчины') {
-                      urlGender = '/male-shoes/';
-                    } else if (item.gender === 'Женщины') {
-                      urlGender = '/female-shoes/';
-                    }
-                    return (
-                      <div
-                        key={item._id}
-                        className="border-b my-5 w-[320px] mx-auto"
-                      >
+              {cartItems.map((item: ItemCart) => {
+                let urlGender;
+                if (item.gender === 'Мужчины') {
+                  urlGender = '/male-shoes/';
+                } else if (item.gender === 'Женщины') {
+                  urlGender = '/female-shoes/';
+                }
+                return (
+                  <div
+                    key={item._id}
+                    className="border-b md:border-hidden w-[320px] mx-auto"
+                  >
+                    <table className="min-w-full grid md:hidden text-sm">
+                      <tbody className="mx-auto my-2">
                         <tr>
-                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                          <td className="text-gray-400 tracking-wider align-middle pr-5">
                             {theadTable[0].title}
                           </td>
-                          <td className="flex justify-center">
+                          <td className="flex justify-center mb-2">
                             <Link href={`${urlGender}${item.slug}`}>
                               <a className="flex w-[100px]">
                                 <Image
                                   src={item.imageItem}
-                                  blurDataURL={item.imageItem}
+                                  blurDataURL={
+                                    'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NjYuNjY3IiBoZWlnaHQ9IjI2Ni42NjciIHZlcnNpb249IjEuMCIgdmlld0JveD0iMCAwIDUwMCAyMDAiPjxnIGZpbGw9IiNhM2U2MzUiPjxwYXRoIGQ9Ik00MS44IDU3LjJjLS4zLjcgNC44IDkuNiAxMS4zIDE5LjggMTIuOSAyMC4xIDEzLjggMjIuNiA5LjIgMjUuOS00LjcgMy41LTI0LjggMTUuOC0yNS4xIDE1LjYtLjItLjIgMi40LTUgNS43LTEwLjggNS43LTkuOCA1LjktMTAuNiA0LjgtMTMuNi0uNi0xLjctMS43LTMuMS0yLjMtMy4xLTEgMC01LjcgNS4xLTI5LjkgMzIuNEMtMy4yIDE0NC41LTMgMTQ0IDYuNSAxNDRjNS42IDAgOC44LS45IDIzLjMtNi40IDQ3LjctMTguNCA2NS4zLTI1LjQgNjcuNy0yNyAxLjQtLjkgMy4zLTMuMyA0LjItNS4yIDEuNi0zLjMgMS42LTMuNS0uMy02LjItMS4xLTEuNS02LjMtNi4zLTExLjUtMTAuNy01LjItNC40LTE2LTEzLjUtMjQtMjAuMkM1MiA1Ni40IDUxLjMgNTYgNDYuOSA1NmMtMi45IDAtNC45LjUtNS4xIDEuMnpNMTQ2LjIgODQuNWMtMS4yLjktMi45IDMtMy44IDQuNy0zIDUuOC0yLjkgNS44IDI0LjUgNS44IDEzLjcgMCAyNi4xLjQgMjcuNSAxIDMuNyAxLjQgNC42IDMuOCAzLjEgOC40LTEuOSA1LjQtNi40IDEwLjctMTEuMSAxMy4xLTMuMSAxLjYtNi41IDItMTcuNSAyLjNsLTEzLjcuNCA1LjUtMTAuNiA1LjQtMTAuNy0xMS4yLjMtMTEuMi4zLTcuNCAxNGMtNC41IDguNi03LjIgMTUtNy4xIDE2LjVsLjMgMi41IDI0LjUuM2MyNy45LjMgMzQuMy0uNiA0Ni02LjQgOC4yLTQuMiAxNC0xMC4yIDE4LjMtMTkuMiAzLjktOC40IDMuNS0xNC4zLTEuNC0xOC41LTUuNy00LjYtOC41LTUtMzkuNC01LjQtMjUuNC0uMy0yOS4zLS4yLTMxLjMgMS4yek0yMzYuMiA4NC42Yy0yLjkgMi0yMy40IDQyLjgtMjMgNDUuOC4zIDIuMS40IDIuMSAzMS43IDIuNCAzNC42LjMgMzQuNi4zIDM3LjEtNS45IDIuMy01LjUuNy01LjktMjIuNy01LjlIMjM5bDEuNy0zLjUgMS43LTMuNWgxOS4xYzIwLjkgMCAyMi4xLS4zIDI0LjUtNiAyLjMtNS42IDEuMS02LTE5LjEtNi05LjkgMC0xNy45LS4yLTE3LjktLjUgMC0uNC43LTEuOSAxLjUtMy41bDEuNS0yLjkgMjIuNi0uMyAyMi42LS4zIDIuNC0yLjljMS42LTEuOCAyLjQtMy44IDIuMi01LjVsLS4zLTIuNi0zMS41LS4zYy0yNy41LS4yLTMxLjggMC0zMy44IDEuNHpNMzA5LjYgODQuMWMtMSAuNi02LjcgMTEuMy0xMi43IDIzLjYtOC41IDE3LjYtMTAuNyAyMi45LTkuOCAyMy45IDEuNSAxLjggMTUuOSAxLjkgMTguMS4xLjktLjYgNC42LTcuMSA4LjItMTQuMmw2LjUtMTN2MTJjLjEgMTUuNC43IDE2LjUgOS4zIDE2LjVoNi4xbDE0LjQtMTQuMyAxNC40LTE0LjItNi4yIDEyLjdjLTcuNSAxNS41LTcuNCAxNS44IDQgMTUuOCA0LjYgMCA4LjQtLjUgOS40LTEuMyAyLjQtMS44IDIyLjktNDMuNiAyMi41LTQ2LjEtLjMtMi0uOS0yLjEtMTMuMy0yLjQtOC4xLS4yLTE0IC4yLTE1LjcuOS0xLjUuNi04LjMgNi45LTE0LjkgMTQtNi43IDcuMS0xMi41IDEyLjktMTMuMSAxMi45LS41IDAtLjgtNS42LS43LTEzLjEuMS0xMC4xLS4yLTEzLjQtMS4yLTE0LTItMS4yLTIzLjEtMS0yNS4zLjJ6TTQwMy40IDg0LjhjLTMgMy42LTIyLjcgNDUtMjIuMSA0Ni42LjUgMS4zIDIuMyAxLjYgOC42IDEuNiA0LjQgMCA4LjctLjMgOS42LS42IDIuMi0uOSAyMy43LTQ0IDIzLjMtNDYuOC0uMy0xLjktMS0yLjEtOS0yLjQtNy41LS4yLTkgMC0xMC40IDEuNnpNNDM1LjIgODQuMmMtLjcuNy0xLjIgMS42LTEuMiAyIDAgLjUgMi43IDQuOSA2IDkuOHM2IDkuMyA2IDkuOC03LjYgNS41LTE2LjkgMTEuMWMtMTcuOCAxMC43LTE5LjcgMTIuMS0xOC43IDE0LjYuNCAxLjIgMi40IDEuNSA5LjYgMS41IDEwLjEgMCAxMS0uMyAyNS42LTkuMSA0LjUtMi43IDguNC00LjkgOC43LTQuOS4zIDAgMi4zIDIuNiA0LjMgNS43IDIuMSAzLjIgNC40IDYuNCA1LjMgNyAyLjMgMiAxOC41IDEuNyAyMC41LS4zLjktLjggMS42LTEuOCAxLjYtMi4xIDAtLjMtMi45LTUuMS02LjYtMTAuNS0zLjYtNS41LTYuNC0xMC40LTYuMi0xMC44LjItLjUgNi4yLTQuNCAxMy4zLTguN2wxMy03LjkuMy00LjMuMy00LjMtNy44LjRjLTcuNS4zLTguMS41LTE4IDYuNUw0NjQgOTUuOWwtMS41LTIuOWMtLjktMS42LTIuOS00LjYtNC42LTYuNWwtMy4xLTMuNWgtOS4yYy01LjggMC05LjYuNC0xMC40IDEuMnoiLz48L2c+PC9zdmc'
+                                  }
                                   width={100}
                                   height={100}
                                   alt={item.name}
@@ -132,7 +150,7 @@ const CartPage: NextPage = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="text-sm text-gray-400 tracking-wider uppercase align-top pr-5">
+                          <td className="text-gray-400 tracking-wider align-top pr-5">
                             {theadTable[1].title}
                           </td>
                           <td className="text-gray-600 text-center">
@@ -140,7 +158,7 @@ const CartPage: NextPage = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                          <td className="text-gray-400 tracking-wider align-middle pr-5">
                             {theadTable[2].title}
                           </td>
                           <td className="text-gray-600 text-center">
@@ -148,7 +166,7 @@ const CartPage: NextPage = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                          <td className="text-gray-400 tracking-wider align-middle pr-5">
                             {theadTable[3].title}
                           </td>
                           <td className="text-gray-600 text-center">
@@ -156,7 +174,7 @@ const CartPage: NextPage = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                          <td className="text-gray-400 tracking-wider align-middle pr-5">
                             {theadTable[4].title}
                           </td>
                           <td className="text-gray-600 text-center">
@@ -180,7 +198,7 @@ const CartPage: NextPage = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                          <td className="text-gray-400 tracking-wider align-middle pr-5">
                             {theadTable[5].title}
                           </td>
                           <td className="text-gray-600 text-center">
@@ -205,10 +223,10 @@ const CartPage: NextPage = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                          <td className=" text-gray-400 tracking-wider align-middle pr-5">
                             {theadTable[6].title}
                           </td>
-                          <td className="text-gray-600 text-center">
+                          <td className="text-gray-600 text-right">
                             {
                               <button onClick={() => removeItemHandler(item)}>
                                 <FaTrashAlt className="text-base text-gray-400 hover:text-gray-500 active:text-red-600 transition-all" />
@@ -216,11 +234,11 @@ const CartPage: NextPage = () => {
                             }
                           </td>
                         </tr>
-                      </div>
-                    );
-                  })}
-                </tbody>
-              </table>
+                      </tbody>
+                    </table>
+                  </div>
+                );
+              })}
 
               <table className="min-w-full invisible hidden md:visible md:inline-table">
                 <thead className="h-10 border-b-2 border-lime-400 text-sm text-gray-400 tracking-wider uppercase">
@@ -235,7 +253,7 @@ const CartPage: NextPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {cartItems.map((item) => {
+                  {cartItems.map((item: ItemCart) => {
                     let urlGender;
                     if (item.gender === 'Мужчины') {
                       urlGender = '/male-shoes/';

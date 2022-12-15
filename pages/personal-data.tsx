@@ -3,9 +3,8 @@ import Breadcrumbs from '../components/breadcrumbs';
 import Layout from '../components/layout';
 import { Disclosure, Transition } from '@headlessui/react';
 import { BsChevronDown } from 'react-icons/bs';
-import { NextPage } from 'next';
 
-const PersonalDataPage: NextPage = () => {
+const PersonalDataPage = () => {
   return (
     <Layout title="Политика обработки персональных данных">
       <Breadcrumbs
@@ -13,8 +12,10 @@ const PersonalDataPage: NextPage = () => {
         path="/personal-data"
         title2=""
       />
-      <div className="container mx-auto">
-        <h2 className="mb-10">Политика обработки персональных данных</h2>
+      <div className="container mx-auto px-4">
+        <h2 className="text-2xl lg:text-4xl mb-5 lg:mb-10">
+          Политика обработки персональных данных
+        </h2>
         <Disclosure>
           {({ open }) => (
             <>

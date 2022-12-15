@@ -2,6 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = {
+  images: {
+    formats: ['image/webp', 'image/jpeg'],
+  },
+};
+
+module.exports = nextConfig;

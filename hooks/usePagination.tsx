@@ -1,7 +1,12 @@
 import { useState } from 'react';
 
-export const usePagination = ({ contentPerPage, count }) => {
-  const [page, setPage] = useState(1);
+interface Props {
+  contentPerPage: number;
+  count: number;
+}
+
+export const usePagination = ({ contentPerPage, count }: Props) => {
+  const [page, setPage] = useState<number>(1);
   // общее количество страниц (всего элементов/контента на каждой странице)
   const pageCount = Math.ceil(count / contentPerPage);
   // индекс последнего элемента текущей страницы
@@ -10,7 +15,7 @@ export const usePagination = ({ contentPerPage, count }) => {
   const firstContentIndex = lastContentIndex - contentPerPage;
 
   // изменить страницу в зависимости от направления вперед или назад
-  const changePage = (direction) => {
+  const changePage = (direction: boolean) => {
     setPage((state) => {
       // двигаться вперед
       if (direction) {

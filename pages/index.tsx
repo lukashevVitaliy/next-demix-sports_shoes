@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import CatalogMain from '../components/catalog-main';
 import Layout from '../components/layout';
 import SliderMainBanner from '../components/sliders/slider-main-banner';
@@ -7,104 +6,21 @@ import SliderTehnologyDemix from '../components/sliders/slider-tehnology-demix';
 import Product from '../models/Product';
 import Review from '../models/Review';
 import db from '../utils/db';
+import { IProducts, IReviews } from '../utils/models';
 
 interface IProps {
-  products: {
-    _id: string | undefined;
-    slug: string;
-    name: string;
-    category: string;
-    stockAvailability: boolean;
-    novelty: boolean;
-    discount: string | undefined;
-    rating: string | undefined;
-    nameColor: string;
-    colorSheme1: string;
-    colorSheme2?: string;
-    images: string[];
-    sizesColors: {
-      size: number;
-      countInStock: number;
-    }[];
-    priceNew: number;
-    priceOld: number;
-    currency: string;
-    description?: {
-      title_1?: string | undefined;
-      text_1?: string | undefined;
-      title_2?: string | undefined;
-      text_2?: string | undefined;
-      title_3?: string | undefined;
-      text_3?: string | undefined;
-      title_4?: string | undefined;
-      text_4?: string | undefined;
-      title_5?: string | undefined;
-      text_5?: string | undefined;
-      title_6?: string | undefined;
-      text_6?: string | undefined;
-      title_7?: string | undefined;
-      text_7?: string | undefined;
-      title_8?: string | undefined;
-      text_8?: string | undefined;
-      title_9?: string | undefined;
-      text_9?: string | undefined;
-      title_10?: string | undefined;
-      text_10?: string | undefined;
-    };
-    gender: string | undefined;
-    sportType?: string | undefined;
-    coverage?: string | undefined;
-    typeOfTraining?: string | undefined;
-    anatomicalInsole?: string | undefined;
-    reflectiveDetails?: string | undefined;
-    differenceSole?: string | undefined;
-    typeOfPronation?: string | undefined;
-    reinforcedBumper?: string | undefined;
-    season?: string | undefined;
-    warrantyPeriod?: string | undefined;
-    closure?: string | undefined;
-    feature?: string | undefined;
-    antibacteriaImpregnation?: string | undefined;
-    protectionFromMoisture?: string | undefined;
-    materialUpper?: string | undefined;
-    materialLining?: string | undefined;
-    materialSole?: string | undefined;
-    countryOfManufacture?: string | undefined;
-    enrblast?: boolean;
-    cushfoam?: boolean;
-    flexzone360?: boolean;
-  }[];
-  reviews: {
-    _id: string;
-    slug: string;
-    name: string;
-    aboutProduct: string;
-    advantage: string;
-    disadvantages: string;
-    nameUser: string;
-    userCity: string;
-    impression: string;
-    reliability: string;
-    functionality: string;
-    quality: string;
-    photoMatching: string;
-    recommend: boolean;
-    discommend: boolean;
-    periodOfUseUser: string;
-    frequencyOfUseUser: string;
-    createdAt: string;
-  }[];
+  products: IProducts[];
+  reviews: IReviews[];
 }
 
-const HomePage: FC<IProps> = ({ products, reviews }) => {
+const HomePage = ({ products, reviews }: IProps) => {
   const newShoes = products.filter((x) => x.novelty === true);
-  // const femaleShoes = products.filter((x) => x.gender === 'Женщины');
 
   return (
     <Layout title="Home">
       <SliderMainBanner />
       <CatalogMain />
-      <SliderNewShoes newShoes={newShoes} reviews={reviews} />
+      <SliderNewShoes products={newShoes} reviews={reviews} />
       <SliderTehnologyDemix />
     </Layout>
   );

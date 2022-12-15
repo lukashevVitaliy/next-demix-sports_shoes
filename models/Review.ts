@@ -1,25 +1,7 @@
 import mongoose from 'mongoose';
+import { IReviews } from '../utils/models';
 
-interface IReview {
-  slug: string;
-  name: string;
-  aboutProduct: string;
-  advantage: string;
-  disadvantages: string;
-  nameUser: string;
-  userCity: string;
-  impression: string;
-  reliability: string;
-  functionality: string;
-  quality: string;
-  photoMatching: string;
-  recommend: boolean;
-  discommend: boolean;
-  periodOfUseUser: string;
-  frequencyOfUseUser: string;
-  policyData: boolean;
-  timestamps: boolean;
-}
+type IReview = Exclude<keyof IReviews, 'id'>;
 
 const reviewSchema = new mongoose.Schema<IReview>(
   {
@@ -30,11 +12,11 @@ const reviewSchema = new mongoose.Schema<IReview>(
     disadvantages: { type: String, required: true },
     nameUser: { type: String, required: true },
     userCity: { type: String, required: true },
-    impression: { type: String, required: true },
-    reliability: { type: String, required: true },
-    functionality: { type: String, required: true },
-    quality: { type: String, required: true },
-    photoMatching: { type: String, required: true },
+    impression: { type: Number, required: true },
+    reliability: { type: Number, required: true },
+    functionality: { type: Number, required: true },
+    quality: { type: Number, required: true },
+    photoMatching: { type: Number, required: true },
     recommend: { type: Boolean, required: true },
     discommend: { type: Boolean, required: true },
     periodOfUseUser: { type: String, required: true },

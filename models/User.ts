@@ -1,14 +1,6 @@
 import mongoose from 'mongoose';
 
-interface IUser {
-  name: string;
-  email: string;
-  password: string;
-  isAdmin: boolean;
-  timestamps: boolean;
-}
-
-const userSchema = new mongoose.Schema<IUser>(
+const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },

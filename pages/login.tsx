@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 import Layout from '../components/layout';
@@ -14,7 +13,7 @@ interface Inputs {
   redirect: boolean;
 }
 
-const LoginPage: NextPage = () => {
+const LoginPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const { redirect } = router.query;

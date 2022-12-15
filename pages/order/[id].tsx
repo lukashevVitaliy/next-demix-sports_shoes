@@ -6,6 +6,40 @@ import { getError } from '../../utils/error';
 import Link from 'next/link';
 import Image from 'next/image';
 
+interface IOrder {
+  user: Object;
+  ordersItems: {
+    _id: string;
+    imageItem: string;
+    name: string;
+    nameColor: string;
+    activeSizes: number;
+    quantity: number;
+    priceNew: number;
+    priceOld: number;
+    gender: string;
+    currency: string;
+    slug: string;
+  }[];
+  shippingAddress: {
+    _id: string;
+    fullName: string;
+    address: string;
+    city: string;
+    postalCode: string;
+    country: string;
+  };
+  paymentMethod: string;
+  itemsPrice: number;
+  shippingPrice: number;
+  taxPrice: number;
+  totalPrice: number;
+  isPaid: boolean;
+  isDelivered: boolean;
+  paidAt: boolean;
+  deliveredAt: boolean;
+}
+
 const theadTable = [
   { title: 'Фото' },
   { title: 'Название' },
@@ -69,7 +103,7 @@ const OrderItemPage = () => {
     isDelivered,
     paidAt,
     deliveredAt,
-  } = order;
+  }: IOrder = order;
 
   return (
     <Layout title={`Заказ № ${orderId}`}>
@@ -106,27 +140,27 @@ const OrderItemPage = () => {
               </div>
               <div className="border border-gray-200 shadow-md rounded py-2 px-4 pb-1 hover:shadow-lime-400 hover:border-lime-400 hover:scale-[99%] transition-all">
                 <h5 className="text-base lg:text-xl">Ваш Заказ</h5>
-                <div className="">
-                  <table className="min-w-full grid md:hidden">
-                    <thead className="border-b-2 border-lime-400"></thead>
-                    <tbody>
-                      {ordersItems.map((item) => {
-                        let urlGender;
-                        if (item.gender === 'Мужчины') {
-                          urlGender = '/male-shoes/';
-                        } else if (item.gender === 'Женщины') {
-                          urlGender = '/female-shoes/';
-                        }
-                        return (
-                          <div
-                            key={item._id}
-                            className="border-b my-5 w-[320px] mx-auto"
-                          >
+                <div>
+                  {ordersItems.map((item) => {
+                    let urlGender;
+                    if (item.gender === 'Мужчины') {
+                      urlGender = '/male-shoes/';
+                    } else if (item.gender === 'Женщины') {
+                      urlGender = '/female-shoes/';
+                    }
+
+                    return (
+                      <div
+                        key={item._id}
+                        className="border-b md:border-hidden w-[320px] mx-auto"
+                      >
+                        <table className="min-w-full grid md:hidden text-sm my-2">
+                          <tbody className="mx-auto my-2">
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[0].title}
                               </td>
-                              <td className="flex justify-center">
+                              <td className="flex justify-center mb-2">
                                 <Link href={`${urlGender}${item.slug}`}>
                                   <a className="flex w-[100px]">
                                     <Image
@@ -143,7 +177,7 @@ const OrderItemPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-top pt-1 pr-5">
+                              <td className="text-gray-400 tracking-wider align-top pr-5">
                                 {theadTable[1].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -151,7 +185,7 @@ const OrderItemPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[2].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -159,7 +193,7 @@ const OrderItemPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[3].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -167,7 +201,7 @@ const OrderItemPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[4].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -175,7 +209,7 @@ const OrderItemPage = () => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="text-sm text-gray-400 tracking-wider uppercase align-middle pr-5">
+                              <td className="text-gray-400 tracking-wider align-middle pr-5">
                                 {theadTable[5].title}
                               </td>
                               <td className="text-gray-600 text-center">
@@ -199,11 +233,11 @@ const OrderItemPage = () => {
                                 }
                               </td>
                             </tr>
-                          </div>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                          </tbody>
+                        </table>
+                      </div>
+                    );
+                  })}
 
                   <table className="min-w-full invisible hidden md:visible md:inline-table mb-2">
                     <thead className="h-10 border-b-2 border-lime-400 text-sm text-gray-400 tracking-wider uppercase">

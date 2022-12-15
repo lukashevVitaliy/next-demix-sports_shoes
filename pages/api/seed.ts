@@ -3,9 +3,10 @@ import Review from '../../models/Review';
 import User from '../../models/User';
 import db from '../../utils/db';
 import { products } from '../../utils/products';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 // определяем функцию обработчика
-const handler = async (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await db.connect();
 
   // импортируем полизователя из модели пользователя
@@ -18,7 +19,7 @@ const handler = async (req, res) => {
   // удаляем все предыдущие товары в пользовательской коллекции
   await Product.deleteMany();
   // добавить товары
-  await Product.insertMany(products.shoes);
+  await Product.insertMany(products.products);
 
   // импортируем товары из модели products
   // удаляем все предыдущие товары в пользовательской коллекции

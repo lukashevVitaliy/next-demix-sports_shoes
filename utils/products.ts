@@ -1,7 +1,6 @@
-import { Product } from './models';
 var bcrypt = require('bcryptjs');
 
-export const products: Product = {
+export const products = {
   users: [
     {
       name: 'Виталий',
@@ -17,7 +16,7 @@ export const products: Product = {
     },
   ],
   reviews: [],
-  shoes: [
+  products: [
     {
       id: '01_ohra',
       slug: 'Кроссовки высокие мужские Unity Mid 2_ohra',
