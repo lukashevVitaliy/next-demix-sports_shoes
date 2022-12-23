@@ -6,16 +6,17 @@ import { GiShoppingCart } from 'react-icons/gi';
 import SocialLink from '../social-link';
 import { Store } from '../../utils/store';
 import Dropdownlink from '../dropdownlink';
-import Cookies from 'js-cookie';
+const Cookies = require('js-cookie');
 
 export default function HeaderLevel_1() {
   const { status, data: session } = useSession();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const [cartItemsCount, setCartItemsCount] = useState(0);
+
   useEffect(() => {
     setCartItemsCount(
-      cart.cartItems.reduce((a: number, c: number): number => a + c.quantity, 0)
+      cart.cartItems.reduce((a, c) => a + Number(c.quantity), 0)
     );
   }, [cart.cartItems]);
 

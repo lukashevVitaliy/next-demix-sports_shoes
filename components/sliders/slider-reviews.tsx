@@ -1,28 +1,50 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FreeMode, Keyboard, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { BsChevronCompactLeft } from 'react-icons/bs';
 import { BsChevronCompactRight } from 'react-icons/bs';
 import CardReview from './card-review';
-import { IReviews } from '../../utils/models';
+import { IReviews } from '../../types/models';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/keyboard';
 import 'swiper/css/navigation';
 
-interface AppendIReviews extends IReviews {
-  _id?: string;
-}
+const breakPoints = {
+  320: {
+    slidesPerView: 1,
+  },
+  768: {
+    slidesPerView: 2,
+  },
+  1280: {
+    slidesPerView: 3,
+  },
+  1536: {
+    slidesPerView: 4,
+  },
+};
+
+const naviGation = {
+  nextEl: '.slider-reviews-button-next',
+  prevEl: '.slider-reviews-button-prev',
+};
+
+const keyBoard = {
+  enabled: true,
+  onlyInViewport: true,
+  pageUpDown: true,
+};
 
 interface IPropsReview {
-  reviews: AppendIReviews[];
-  reviewsItems: AppendIReviews[];
+  reviews: IReviews[];
+  reviewsItems: IReviews[];
 }
 
-export default function SliderReviews({ reviewsItems, reviews }: IPropsReview) {
+const SliderReviews = memo(({ reviewsItems, reviews }: IPropsReview) => {
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 relative overflow-x-auto">
       {reviews.length === 0 ? (
         <h5 className="text-lime-500">Отзывов пока нет...</h5>
       ) : (
@@ -31,30 +53,10 @@ export default function SliderReviews({ reviewsItems, reviews }: IPropsReview) {
           spaceBetween={0}
           slidesPerView={4}
           freeMode={false}
-          navigation={{
-            nextEl: '.slider-reviews-button-next',
-            prevEl: '.slider-reviews-button-prev',
-          }}
-          keyboard={{
-            enabled: true,
-            onlyInViewport: true,
-            pageUpDown: true,
-          }}
+          navigation={naviGation}
+          keyboard={keyBoard}
           loop={true}
-          breakpoints={{
-            320: {
-              slidesPerView: 1,
-            },
-            768: {
-              slidesPerView: 2,
-            },
-            1280: {
-              slidesPerView: 3,
-            },
-            1536: {
-              slidesPerView: 4,
-            },
-          }}
+          breakpoints={breakPoints}
           className="slider-reviews"
         >
           <div className="slider-reviews-button-prev absolute top-1/2 -left-[10px] z-10 -translate-y-1/2">
@@ -107,4 +109,7 @@ export default function SliderReviews({ reviewsItems, reviews }: IPropsReview) {
       )}
     </div>
   );
-}
+});
+
+SliderReviews.displayName = 'SliderReviews';
+export default SliderReviews;

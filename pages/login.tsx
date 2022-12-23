@@ -20,6 +20,7 @@ const LoginPage = () => {
   // проверка авторизации пользователя при входе
   useEffect(() => {
     if (session?.user) {
+      // @ts-ignore
       router.push(redirect || '/');
     }
   }, [router, session, redirect]);
@@ -37,7 +38,9 @@ const LoginPage = () => {
         email,
         password,
       });
+      // @ts-ignore
       if (result.error) {
+        // @ts-ignore
         toast.error(result.error);
       }
     } catch (err) {

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Layout from '../components/layout';
 import { getError } from '../utils/error';
 import Link from 'next/link';
+import { ActionTypes, State, Action } from '../types/order-history';
 
 const theadTable = [
   { title: '№' },
@@ -13,30 +14,22 @@ const theadTable = [
   { title: 'Заказ' },
 ];
 
-interface HistoryOrders {
-  _id: string;
-  createdAt: string;
-  isDelivered: boolean;
-  isPaid: boolean;
-  deliveredAt: string;
-  paidAt: string;
-  totalPrice: number;
-}
+const initialState: State = {
+  loading: true,
+  orders: [],
+  error: null,
+};
 
-const FETCH_REQUEST = 'FETCH_REQUEST';
-const FETCH_SUCCESS = 'FETCH_SUCCESS';
-const FETCH_FAIL = 'FETCH_FAIL';
-
-const reducer = (state, action) => {
+const reducer = (state = initialState, action: Action): State => {
   switch (action.type) {
-    case FETCH_REQUEST: {
-      return { ...state, loading: true, error: '' };
+    case ActionTypes.FETCH_REQUEST: {
+      return { ...state, loading: true, error: null, orders: [] };
     }
-    case FETCH_SUCCESS: {
-      return { ...state, loading: false, order: action.payload, error: false };
+    case ActionTypes.FETCH_SUCCESS: {
+      return { ...state, loading: false, error: null, orders: action.payload };
     }
-    case FETCH_FAIL: {
-      return { ...state, loading: false, error: action.payload };
+    case ActionTypes.FETCH_FAIL: {
+      return { ...state, loading: false, error: action.payload, orders: [] };
     }
     default: {
       return state;
@@ -45,11 +38,10 @@ const reducer = (state, action) => {
 };
 
 const OrderHistoryPage = () => {
-  const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
-    loading: true,
-    order: {},
-    error: '',
-  });
+  const [{ loading, error, orders }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -74,7 +66,7 @@ const OrderHistoryPage = () => {
           <div className="alert-error">{error}</div>
         ) : (
           <div>
-            {orders.map((order: HistoryOrders) => (
+            {orders.map((order) => (
               <div
                 key={order._id}
                 className="border-b md:border-hidden w-[320px] mx-auto"
@@ -156,7 +148,7 @@ const OrderHistoryPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order: HistoryOrders) => (
+                {orders.map((order) => (
                   <tr key={order._id} className="border-b">
                     <td className="p-5">{order._id.substring(20, 24)}</td>
                     <td className="p-5">{order.createdAt.substring(0, 10)}</td>

@@ -19,6 +19,7 @@ export const usePagination = ({ contentPerPage, count }: Props) => {
     setPage((state) => {
       // двигаться вперед
       if (direction) {
+        // eslint-disable-next-line no-irregular-whitespace
         // если страница последняя, ​​ничего не делать
         if (state === pageCount) {
           return state;

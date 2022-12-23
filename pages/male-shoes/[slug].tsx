@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { memo, useContext, useMemo, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { Disclosure, RadioGroup, Transition } from '@headlessui/react';
@@ -16,35 +16,18 @@ import ModalReview from '../../components/modal/modal-review';
 import Review from '../../models/Review';
 import { enumerate } from '../../components/utils';
 import Button from '../../components/button';
-import { IProducts, IReviews } from '../../utils/models';
-
-interface AppendIProducts extends IProducts {
-  _id?: string;
-}
-interface AppendIReviews extends IReviews {
-  _id?: string;
-}
+import { IProducts, IReviews } from '../../types/models';
 
 interface IProps {
-  product: AppendIProducts;
-  reviews: AppendIReviews[];
+  product: IProducts;
+  reviews: IReviews[];
 }
 
-const MaleShoesItemPage = ({ product, reviews }: IProps) => {
+const MaleShoesItemPage = memo(({ product, reviews }: IProps) => {
   const [activeSizes, setActiveSizes] = useState<boolean>(false);
   const { state, dispatch } = useContext(Store);
   const [modalReview, setModalReview] = useState<boolean>(false);
   const router = useRouter();
-
-  if (!product) {
-    return (
-      <Layout title="Товар не найден...">
-        <div className="container mx-auto px-4">
-          <h5>Товар не найден...</h5>discommenddiscommend
-        </div>
-      </Layout>
-    );
-  }
 
   const {
     _id,
@@ -80,16 +63,26 @@ const MaleShoesItemPage = ({ product, reviews }: IProps) => {
     enrblast,
     cushfoam,
     flexzone360,
-  }: AppendIProducts = product;
+  } = product;
 
-  const reviewsItems = reviews.filter((item) => item.slug === slug);
+  const reviewsItems = useMemo(
+    () => reviews.filter((item) => item.slug === slug),
+    [reviews, slug]
+  );
+
+  if (!product) {
+    return (
+      <Layout title="Товар не найден...">
+        <div className="container mx-auto px-4">
+          <h5>Товар не найден...</h5>discommenddiscommend
+        </div>
+      </Layout>
+    );
+  }
 
   const addToCartHandler = async () => {
-    const existItem = state.cart.cartItems.find(
-      (x: any) => x.slug === product.slug
-    );
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-    const imageItem = images[0];
+    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+    const quantity = existItem ? Number(existItem.quantity) + 1 : 1;
 
     if (!activeSizes) {
       return toast.info('Выберите размер обуви...');
@@ -114,7 +107,8 @@ const MaleShoesItemPage = ({ product, reviews }: IProps) => {
           slug,
           name,
           nameColor,
-          imageItem,
+          rating,
+          images,
           sizesColors,
           priceNew,
           priceOld,
@@ -143,7 +137,7 @@ const MaleShoesItemPage = ({ product, reviews }: IProps) => {
           <div className="col-span-2 flex justify-center">
             <SliderItemShoes images={images} />
           </div>
-          <div className="">
+          <div>
             <h3 className="text-xl xl:text-2xl 2xl:text-3xl text-center uppercase mb-2">
               {name}
             </h3>
@@ -660,11 +654,7 @@ const MaleShoesItemPage = ({ product, reviews }: IProps) => {
         </div>
         <h5 className="my-10 text-center">Отзывы покупателей</h5>
         {reviewsItems.length > 0 ? (
-          <SliderReviews
-            className="relative overflow-x-auto"
-            reviewsItems={reviewsItems}
-            reviews={reviews}
-          />
+          <SliderReviews reviewsItems={reviewsItems} reviews={reviews} />
         ) : (
           <h5 className="text-gray-400">Отзывов пока нет...</h5>
         )}
@@ -684,8 +674,9 @@ const MaleShoesItemPage = ({ product, reviews }: IProps) => {
       </div>
     </Layout>
   );
-};
+});
 
+MaleShoesItemPage.displayName = 'MaleShoesItemPage';
 export default MaleShoesItemPage;
 
 export async function getServerSideProps(context: any) {

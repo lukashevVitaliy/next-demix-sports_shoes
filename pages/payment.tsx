@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import Cookies from 'js-cookie';
+const Cookies = require('js-cookie');
 
 import ChekoutWizard from '../components/chekout-wizard';
 import Layout from '../components/layout';
@@ -15,7 +15,7 @@ const PaymentPage = () => {
   const { paymentMethod } = cart;
   const router = useRouter();
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedPaymentMethod) {
       return toast.error('Способ оплаты не выбран !!!');

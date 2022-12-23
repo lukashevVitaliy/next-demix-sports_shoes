@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { Disclosure, RadioGroup, Transition } from '@headlessui/react';
@@ -16,8 +16,9 @@ import {
   IPeriodOfUse,
   IFrequencyOfUse,
   IModalProps,
-  ISubmitForm,
+  // ISubmitForm,
 } from './modal-interface';
+import { IReviews } from '../../types/models';
 
 const periodOfUse: IPeriodOfUse[] = [
   { id: '1p', period: 'Меньше месяца' },
@@ -30,7 +31,7 @@ const frequencyOfUse: IFrequencyOfUse[] = [
   { id: '3f', frequency: 'Пару раз в месяц' },
 ];
 
-const ModalReview = ({ slug, name, active, onClose }: IModalProps) => {
+const ModalReview = memo(({ slug, name, active, onClose }: IModalProps) => {
   const [periodOfUseUser, setPeriodOfUseUser] = useState(false);
   const [frequencyOfUseUser, setFrequencyOfUseUser] = useState(false);
   const [impression, setImpression] = useState(false);
@@ -47,7 +48,7 @@ const ModalReview = ({ slug, name, active, onClose }: IModalProps) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<IReviews>();
 
   const submitHundler = async ({
     aboutProduct,
@@ -55,7 +56,7 @@ const ModalReview = ({ slug, name, active, onClose }: IModalProps) => {
     disadvantages,
     nameUser,
     userCity,
-  }: ISubmitForm) => {
+  }: IReviews) => {
     try {
       if (
         slug &&
@@ -578,6 +579,7 @@ const ModalReview = ({ slug, name, active, onClose }: IModalProps) => {
       </form>
     </Modal>
   );
-};
+});
 
+ModalReview.displayName = 'ModalReview';
 export default ModalReview;

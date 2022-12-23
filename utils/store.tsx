@@ -1,6 +1,6 @@
 import React, { FC, createContext, useReducer } from 'react';
-import Cookies from 'js-cookie';
-import { ActionTypes, Children, IStore, Action } from './types/store-types';
+const Cookies = require('js-cookie');
+import { ActionTypes, Children, IStore, Action } from '../types/store-types';
 
 // ===== STATE =====
 const initialState: IStore = {
@@ -12,9 +12,14 @@ const initialState: IStore = {
   searchItem: '',
 };
 
-export const Store = createContext({
+interface IContext {
+  state: IStore;
+  dispatch: React.Dispatch<Action>;
+}
+
+export const Store = createContext<IContext>({
   state: initialState,
-  action: ActionTypes,
+  dispatch: () => {},
 });
 
 const reducer = (state = initialState, action: Action): IStore => {
@@ -44,9 +49,9 @@ const reducer = (state = initialState, action: Action): IStore => {
     case ActionTypes.CART_RESET: {
       return {
         ...state,
-        cart: { cartItems: [] },
-        shippingAdress: { location: {} },
-        paymentMethod: '',
+        cart: { cartItems: [], shippingAddress: {}, paymentMethod: '' },
+        // shippingAddress: { location: {} },
+        // paymentMethod: '',
       };
     }
 
@@ -62,7 +67,7 @@ const reducer = (state = initialState, action: Action): IStore => {
         ...state,
         cart: {
           ...state.cart,
-          shippingAddress: { ...state.shippingAddress, ...action.payload },
+          shippingAddress: { ...state.cart.shippingAddress, ...action.payload },
         },
       };
     }

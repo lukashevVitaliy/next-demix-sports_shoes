@@ -10,6 +10,12 @@ import 'swiper/css/keyboard';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+const keyBoard = {
+  enabled: true,
+  onlyInViewport: true,
+  pageUpDown: true,
+};
+
 export default function SliderMainBanner() {
   return (
     <>
@@ -22,11 +28,7 @@ export default function SliderMainBanner() {
         }}
         // speed={3000}
         freeMode={false}
-        keyboard={{
-          enabled: true,
-          onlyInViewport: true,
-          pageUpDown: true,
-        }}
+        keyboard={keyBoard}
         pagination={{ clickable: true }}
         loop={true}
         className="slider-main-banner relative"

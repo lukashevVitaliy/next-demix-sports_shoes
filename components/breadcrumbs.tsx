@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { memo } from 'react';
 
 interface Props {
   path: string;
@@ -7,7 +7,7 @@ interface Props {
   title2?: string;
 }
 
-const Breadcrumbs = ({ path, title, title2 }: Props) => {
+const Breadcrumbs = memo(({ path, title, title2 }: Props) => {
   return (
     <div className="container mx-auto px-4">
       <ul className="flex mb-5 text-xs sm:text-sm text-gray-600 font-light italic list-none">
@@ -27,6 +27,7 @@ const Breadcrumbs = ({ path, title, title2 }: Props) => {
       </ul>
     </div>
   );
-};
+});
 
+Breadcrumbs.displayName = 'Breadcrumbs';
 export default Breadcrumbs;

@@ -1,3 +1,4 @@
+import React, { memo } from 'react';
 import CatalogMain from '../components/catalog-main';
 import Layout from '../components/layout';
 import SliderMainBanner from '../components/sliders/slider-main-banner';
@@ -6,14 +7,14 @@ import SliderTehnologyDemix from '../components/sliders/slider-tehnology-demix';
 import Product from '../models/Product';
 import Review from '../models/Review';
 import db from '../utils/db';
-import { IProducts, IReviews } from '../utils/models';
+import { IProducts, IReviews } from '../types/models';
 
 interface IProps {
   products: IProducts[];
   reviews: IReviews[];
 }
 
-const HomePage = ({ products, reviews }: IProps) => {
+const HomePage = memo(({ products, reviews }: IProps) => {
   const newShoes = products.filter((x) => x.novelty === true);
 
   return (
@@ -24,8 +25,9 @@ const HomePage = ({ products, reviews }: IProps) => {
       <SliderTehnologyDemix />
     </Layout>
   );
-};
+});
 
+HomePage.displayName = 'HomePage';
 export default HomePage;
 
 export async function getServerSideProps() {

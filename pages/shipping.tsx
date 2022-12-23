@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Layout from '../components/layout';
-import Cookies from 'js-cookie';
+const Cookies = require('js-cookie');
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
@@ -8,8 +8,12 @@ import CheckoutWizard from '../components/chekout-wizard';
 import { Store } from '../utils/store';
 import Button from '../components/button';
 
-interface Props {
-  [key: string]: string;
+interface ShippingProps {
+  fullName: string | undefined;
+  address: string | undefined;
+  city: string | undefined;
+  postalCode: string | undefined;
+  country: string | undefined;
 }
 
 const ShippingPage = () => {
@@ -18,7 +22,7 @@ const ShippingPage = () => {
     register,
     formState: { errors },
     setValue,
-  } = useForm();
+  } = useForm<ShippingProps>();
 
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
@@ -46,7 +50,7 @@ const ShippingPage = () => {
     city,
     postalCode,
     country,
-  }: Props) => {
+  }: ShippingProps) => {
     dispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
       payload: { fullName, address, city, postalCode, country },

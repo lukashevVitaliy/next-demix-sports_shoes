@@ -1,15 +1,41 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FreeMode, Keyboard, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { BsChevronCompactLeft } from 'react-icons/bs';
 import { BsChevronCompactRight } from 'react-icons/bs';
 import CardProducts from '../card-products';
-import { IProducts, IReviews } from '../../utils/models';
+import { IProducts, IReviews } from '../../types/models';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/keyboard';
 import 'swiper/css/navigation';
+
+const naviGation = {
+  nextEl: '.slider-new-shoes-button-next',
+  prevEl: '.slider-new-shoes-button-prev',
+};
+
+const keyBoard = {
+  enabled: true,
+  onlyInViewport: true,
+  pageUpDown: true,
+};
+
+const breakPoints = {
+  320: {
+    slidesPerView: 1,
+  },
+  768: {
+    slidesPerView: 2,
+  },
+  1024: {
+    slidesPerView: 3,
+  },
+  1536: {
+    slidesPerView: 4,
+  },
+};
 
 interface AppendIProducts extends IProducts {
   _id?: string;
@@ -20,7 +46,7 @@ interface IProps {
   reviews: IReviews[];
 }
 
-const SliderNewShoes = ({ products, reviews }: IProps) => {
+const SliderNewShoes = memo(({ products, reviews }: IProps) => {
   return (
     <div className="container mx-auto px-4">
       <h2 className="text-xl md:text-3xl lg:text-4xl text-center">
@@ -31,30 +57,10 @@ const SliderNewShoes = ({ products, reviews }: IProps) => {
         spaceBetween={0}
         slidesPerView={4}
         freeMode={false}
-        navigation={{
-          nextEl: '.slider-new-shoes-button-next',
-          prevEl: '.slider-new-shoes-button-prev',
-        }}
-        keyboard={{
-          enabled: true,
-          onlyInViewport: true,
-          pageUpDown: true,
-        }}
+        navigation={naviGation}
+        keyboard={keyBoard}
         loop={true}
-        breakpoints={{
-          320: {
-            slidesPerView: 1,
-          },
-          768: {
-            slidesPerView: 2,
-          },
-          1024: {
-            slidesPerView: 3,
-          },
-          1536: {
-            slidesPerView: 4,
-          },
-        }}
+        breakpoints={breakPoints}
         className="slider-new-shoes relative"
       >
         <div className="slider-new-shoes-button-prev absolute top-1/2 left-0 z-10 -translate-y-1/2">
@@ -74,6 +80,7 @@ const SliderNewShoes = ({ products, reviews }: IProps) => {
       </Swiper>
     </div>
   );
-};
+});
 
+SliderNewShoes.displayName = 'SliderNewShoes';
 export default SliderNewShoes;

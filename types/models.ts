@@ -1,5 +1,6 @@
 export interface IReviews {
-  id: string;
+  _id?: string | undefined;
+  id?: string | undefined;
   slug: string;
   name: string;
   aboutProduct: string;
@@ -21,16 +22,17 @@ export interface IReviews {
 }
 
 export interface IProducts {
-  id: string;
+  _id?: string | undefined;
+  id?: string | undefined;
   slug: string;
   name: string;
-  category: string;
-  stockAvailability: boolean;
-  novelty: boolean;
-  discount: string | undefined;
+  category?: string | undefined;
+  stockAvailability?: boolean;
+  novelty?: boolean;
+  discount?: string | undefined;
   rating: string;
   nameColor: string;
-  colorSheme1: string;
+  colorSheme1?: string;
   colorSheme2?: string;
   images: string[];
   sizesColors: {
@@ -62,7 +64,7 @@ export interface IProducts {
     title_10?: string | undefined;
     text_10?: string | undefined;
   };
-  gender: string | undefined;
+  gender: string;
   sportType?: string | undefined;
   coverage?: string | undefined;
   typeOfTraining?: string | undefined;
@@ -84,4 +86,6 @@ export interface IProducts {
   enrblast?: boolean;
   cushfoam?: boolean;
   flexzone360?: boolean;
+  quantity?: number | undefined;
+  activeSizes?: boolean | number | undefined;
 }

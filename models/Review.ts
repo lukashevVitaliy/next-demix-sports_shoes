@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
-import { IReviews } from '../utils/models';
 
-type IReview = Exclude<keyof IReviews, 'id'>;
-
-const reviewSchema = new mongoose.Schema<IReview>(
+const reviewSchema = new mongoose.Schema(
   {
     slug: { type: String, required: true },
     name: { type: String, required: true },

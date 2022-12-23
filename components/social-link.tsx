@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -6,7 +6,7 @@ interface IStyle {
   hover: string;
 }
 
-export default function SocialLink({ hover }: IStyle) {
+const SocialLink = memo(({ hover }: IStyle) => {
   return (
     <div className="flex items-center justify-between w-36">
       <Link href="https://vk.com/">
@@ -53,4 +53,7 @@ export default function SocialLink({ hover }: IStyle) {
       </Link>
     </div>
   );
-}
+});
+
+SocialLink.displayName = 'SocialLink';
+export default SocialLink;

@@ -13,6 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await db.connect();
   const newOrder = new Order({
     ...req.body,
+    // @ts-ignore
     user: user._id,
   });
 

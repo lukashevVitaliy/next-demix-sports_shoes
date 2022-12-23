@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCards } from 'swiper';
 import Image from 'next/image';
@@ -10,15 +10,10 @@ interface Images {
   images: string[];
 }
 
-const SliderItemShoes = ({ images }: Images) => {
+const SliderItemShoes = memo(({ images }: Images) => {
   return (
     <div className="w-2/3 mb-5 z-0">
-      <Swiper
-        effect={'cards'}
-        grabCursor={true}
-        modules={[EffectCards]}
-        className=""
-      >
+      <Swiper effect={'cards'} grabCursor={true} modules={[EffectCards]}>
         {images &&
           images.map((image) => (
             <SwiperSlide key={image}>
@@ -44,6 +39,7 @@ const SliderItemShoes = ({ images }: Images) => {
       </Swiper>
     </div>
   );
-};
+});
 
+SliderItemShoes.displayName = 'SliderItemShoes';
 export default SliderItemShoes;

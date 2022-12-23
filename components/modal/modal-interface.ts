@@ -13,11 +13,3 @@ export interface IModalProps {
   active: boolean;
   onClose: () => void;
 }
-
-export interface ISubmitForm {
-  aboutProduct: string | undefined;
-  advantage: string | undefined;
-  disadvantages: string | undefined;
-  nameUser: string | undefined;
-  userCity: string | undefined;
-}

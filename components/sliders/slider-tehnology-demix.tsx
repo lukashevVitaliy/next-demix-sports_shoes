@@ -10,6 +10,16 @@ import 'swiper/css/free-mode';
 import 'swiper/css/keyboard';
 import 'swiper/css/navigation';
 
+const naviGation = {
+  nextEl: '.slider-tehnology-demix-button-next',
+  prevEl: '.slider-tehnology-demix-button-prev',
+};
+const keyBoard = {
+  enabled: true,
+  onlyInViewport: true,
+  pageUpDown: true,
+};
+
 export default function SliderTehnologyDemix() {
   return (
     <div className="container mx-auto px-4">
@@ -21,15 +31,8 @@ export default function SliderTehnologyDemix() {
         spaceBetween={0}
         slidesPerView={1}
         freeMode={false}
-        navigation={{
-          nextEl: '.slider-tehnology-demix-button-next',
-          prevEl: '.slider-tehnology-demix-button-prev',
-        }}
-        keyboard={{
-          enabled: true,
-          onlyInViewport: true,
-          pageUpDown: true,
-        }}
+        navigation={naviGation}
+        keyboard={keyBoard}
         loop={true}
         className="slider-tehnology-demix relative"
       >

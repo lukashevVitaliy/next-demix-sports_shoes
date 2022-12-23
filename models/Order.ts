@@ -1,43 +1,12 @@
 import mongoose from 'mongoose';
 
-interface IOrder {
-  user: Object;
-  ordersItems: {
-    imageItem: string;
-    name: string;
-    nameColor: string;
-    activeSizes: number;
-    quantity: number;
-    priceNew: number;
-    gender: string;
-    currency: string;
-    slug: string;
-  }[];
-  shippingAddress: {
-    fullName: string;
-    address: string;
-    city: string;
-    postalCode: string;
-    country: string;
-  };
-  paymentMethod: string;
-  itemsPrice: number;
-  shippingPrice: number;
-  taxPrice: number;
-  totalPrice: number;
-  isPaid: boolean;
-  isDelivered: boolean;
-  paidAt: any;
-  deliveredAt: any;
-}
-
-const orderSchema = new mongoose.Schema<IOrder>(
+const orderSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     ordersItems: [
       {
         slug: { type: String, required: true, unique: true },
-        imageItem: { type: String, required: true },
+        images: { type: [String], required: true },
         name: { type: String, required: true },
         nameColor: { type: String, required: true },
         activeSizes: { type: Number, required: true },

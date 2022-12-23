@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 interface IProps {
   title: string;
@@ -6,7 +6,7 @@ interface IProps {
   onClick?: () => void;
 }
 
-const Button = ({ title, onClick, addClass }: IProps) => {
+const Button = memo(({ title, onClick, addClass }: IProps) => {
   return (
     <button
       className={`block mx-auto mt-10 py-2 w-1/2 bg-black/80 ring-2 ring-lime-400 rounded-lg shadow text-white text-xs font-bold tracking-wider uppercase hover:text-lime-400 hover:shadow-lg hover:shadow-lime-400 transition-all ${addClass}`}
@@ -15,6 +15,7 @@ const Button = ({ title, onClick, addClass }: IProps) => {
       {title}
     </button>
   );
-};
+});
 
+Button.displayName = 'Button';
 export default Button;

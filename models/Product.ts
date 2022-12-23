@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
-import { IProducts } from '../utils/models';
 
-type IProduct = Exclude<keyof IProducts, 'id'>;
-
-const productSchema = new mongoose.Schema<IProduct>(
+const productSchema = new mongoose.Schema(
   {
     slug: { type: String, required: true, unique: true },
     name: { type: String, required: true },

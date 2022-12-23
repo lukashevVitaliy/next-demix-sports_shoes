@@ -1,15 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { memo } from 'react';
 import { enumerate } from './utils';
-import { IReviews, IProducts } from '../utils/models';
+import { IReviews, IProducts } from '../types/models';
 
 interface IProps {
   product: IProducts;
   reviews: IReviews[];
 }
 
-const CardProducts = ({ product, reviews }: IProps) => {
+const CardProducts = memo(({ product, reviews }: IProps) => {
   const {
     slug,
     name,
@@ -92,6 +92,7 @@ const CardProducts = ({ product, reviews }: IProps) => {
       </Link>
     </div>
   );
-};
+});
 
+CardProducts.displayName = 'CardProducts';
 export default CardProducts;

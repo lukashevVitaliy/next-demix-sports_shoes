@@ -10,6 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   const { user } = session;
   await db.connect();
+  // @ts-ignore
   const orders = await Order.find({ user: user._id });
   await db.disconnect();
   res.send(orders);
